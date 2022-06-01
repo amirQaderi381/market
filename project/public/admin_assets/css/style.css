@@ -1,0 +1,72 @@
+@font-face {
+    font-family: vazir;
+    src: url(../fonts/vazir/vazir.eot) format(eot), url(../fonts/vazir/vazir.ttf) format(ttf), url(../fonts/vazir/vazir.woff) format(woff),
+}
+
+* {
+    direction: rtl;
+    text-align: right;
+    font-family: vazir;
+}
+
+textarea:focus,
+select.form-control:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+    box-shadow: inset 0 -1px 0 #ddd;
+}
+
+.bg-gray {
+    background-color: #404E67;
+    color: #ffff;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.form-control:focus {
+    border: 1px solid #ced4da;
+}
+
+.bg-custom-yellow {
+    background: -webkit-gradient(linear, left top, right top, from(#feb798), to(#fe9365));
+    background: linear-gradient(to right, #feb798, #fe9365);
+}
+
+.bg-custom-green {
+    background: linear-gradient(to right, #0df3a3, #0ac282);
+}
+
+.bg-custom-pink {
+    background: linear-gradient(to right, #fe909d, #fe5d78);
+}
+
+.bg-custom-blue {
+    background: linear-gradient(to right, #01dbdf, #01a9ac);
+}
+
+.font-size-12 {
+    font-size: 12px;
+}
+
+.width-16-rem {
+    width: 16rem;
+}
+
+.max-width-16-rem {
+    max-width: 16rem;
+}
+
+.max-height-2rem {
+    max-height: 2rem;
+}
