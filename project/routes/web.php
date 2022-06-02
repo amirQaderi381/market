@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\Market\CommentController;
 use App\Http\Controllers\Admin\Market\CategoryController;
 use App\Http\Controllers\Admin\Market\DeliveryController;
 use App\Http\Controllers\Admin\Market\DisCountController;
-
+use App\Http\Controllers\Admin\Market\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +92,16 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/common-discount/create', [DisCountController::class, 'commonDiscountCreate'])->name('admin.market.discount.common.discount.create');
             Route::get('/amazing-sale', [DisCountController::class, 'amazingSale'])->name('admin.market.discount.amazing.sale');
             Route::get('/amazing-sale-create', [DisCountController::class, 'amazingSaleCreate'])->name('admin.market.discount.amazing.sale.create');
+        });
+
+        Route::prefix('order')->group(function () {
+
+            Route::get('/', [OrderController::class, 'index'])->name('admin.market.order.index');
+            Route::get('/new-orders', [OrderController::class, 'newOrders'])->name('admin.market.order.new.orders');
+            Route::get('/sending', [OrderController::class, 'sending'])->name('admin.market.order.sending');
+            Route::get('/unpaid', [OrderController::class, 'unpaid'])->name('admin.market.order.unpaid');
+            Route::get('/canceled', [OrderController::class, 'canceled'])->name('admin.market.order.canceled');
+            Route::get('/returned', [OrderController::class, 'returned'])->name('admin.market.order.returned');
         });
     });
 });
