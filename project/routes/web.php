@@ -91,7 +91,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/common-discount', [DisCountController::class, 'commonDiscount'])->name('admin.market.discount.common.discount');
             Route::get('/common-discount/create', [DisCountController::class, 'commonDiscountCreate'])->name('admin.market.discount.common.discount.create');
             Route::get('/amazing-sale', [DisCountController::class, 'amazingSale'])->name('admin.market.discount.amazing.sale');
-            Route::delete('/amazing-sale-create', [DisCountController::class, 'amazingSaleCreate'])->name('admin.market.discount.amazing.sale.create');
+            Route::get('/amazing-sale-create', [DisCountController::class, 'amazingSaleCreate'])->name('admin.market.discount.amazing.sale.create');
         });
     });
 });
