@@ -83,19 +83,14 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
         //discount
 
-        Route::prefix('discount')->namespace('Discount')->group(function () {
+        Route::prefix('discount')->group(function () {
 
-            //copan
-
-            Route::prefix('copan')->group(function () {
-
-                Route::get('/', [CopanController::class, 'index'])->name('admin.market.discount.copan.index');
-                Route::get('/create', [CopanController::class, 'create'])->name('admin.market.discount.copan.create');
-                Route::post('/store', [CopanController::class, 'store'])->name('admin.market.discount.copan.store');
-                Route::get('/edit/{id}', [CopanController::class, 'edit'])->name('admin.market.discount.copan.edit');
-                Route::put('/update/{id}', [CopanController::class, 'update'])->name('admin.market.discount.copan.update');
-                Route::delete('/destroy/{id}', [CopanController::class, 'destroy'])->name('admin.market.discount.copan.destroy');
-            });
+            Route::get('/copan', [DisCountController::class, 'copan'])->name('admin.market.discount.copan');
+            Route::get('/copan-create', [DisCountController::class, 'copanCreate'])->name('admin.market.discount.copan.create');
+            Route::get('/common-discount', [DisCountController::class, 'commonDiscount'])->name('admin.market.discount.common.discount');
+            Route::get('/common-discount/create', [DisCountController::class, 'commonDiscountCreate'])->name('admin.market.discount.common.discount.create');
+            Route::get('/amazing-sale', [DisCountController::class, 'amazingSale'])->name('admin.market.discount.amazing.sale');
+            Route::delete('/amazing-sale-create', [DisCountController::class, 'amazingSaleCreate'])->name('admin.market.discount.amazing.sale.create');
         });
     });
 });
