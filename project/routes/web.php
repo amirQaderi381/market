@@ -93,5 +93,15 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/amazing-sale', [DisCountController::class, 'amazingSale'])->name('admin.market.discount.amazing.sale');
             Route::get('/amazing-sale-create', [DisCountController::class, 'amazingSaleCreate'])->name('admin.market.discount.amazing.sale.create');
         });
+
+        Route::prefix('order')->group(function () {
+
+            Route::get('/', [OrderController::class, 'index'])->name('admin.market.order.index');
+            Route::get('/new-orders', [OrderController::class, 'index'])->name('admin.market.order.index');
+            Route::get('/sending', [OrderController::class, 'index'])->name('admin.market.order.index');
+            Route::get('/unpaid', [OrderController::class, 'index'])->name('admin.market.order.index');
+            Route::get('/canceled', [OrderController::class, 'index'])->name('admin.market.order.index');
+            Route::get('/returned', [OrderController::class, 'index'])->name('admin.market.order.index');
+        });
     });
 });
