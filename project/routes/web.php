@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminDashbordController;
 use App\Http\Controllers\Admin\Market\CommentController;
 use App\Http\Controllers\Admin\Market\CategoryController;
 use App\Http\Controllers\Admin\Market\DeliveryController;
+use App\Http\Controllers\Admin\Market\DisCountController;
 use App\Http\Controllers\Admin\Market\Discount\CopanController;
 
 /*
