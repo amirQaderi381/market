@@ -21,7 +21,8 @@
                 </section>
 
                 <section class="d-flex justify-content-between align-items-center mt-4 mb-3 pb-2 border-bottom">
-                    <a href="{{ route('admin.market.discount.common.sale.create') }}" class="btn btn-info btn-sm"> ایجاد
+                    <a href="{{ route('admin.market.discount.common.discount.create') }}" class="btn btn-info btn-sm">
+                        ایجاد
                         تخفیف عمومی
                         جدید</a>
                     <div>
