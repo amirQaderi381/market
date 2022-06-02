@@ -94,5 +94,4 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::delete('/amazing-sale-create', [DisCountController::class, 'amazingSaleCreate'])->name('admin.market.discount.amazing.sale.create');
         });
     });
-    //end
 });
