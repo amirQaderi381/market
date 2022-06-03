@@ -36,4 +36,20 @@ class OrderController extends Controller
     {
         return view('admin.market.order.returned');
     }
+    public function show()
+    {
+        return view('admin.market.order.returned');
+    }
+    public function changeSendStatus()
+    {
+        return view('admin.market.order.returned');
+    }
+    public function changeOrderStatus()
+    {
+        return view('admin.market.order.returned');
+    }
+    public function cancelOrder()
+    {
+        return view('admin.market.order.returned');
+    }
 }
