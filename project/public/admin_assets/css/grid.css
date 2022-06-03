@@ -372,3 +372,14 @@ button:hover {
         width: 100%;
     }
 }
+
+.order-operation{
+    position: absolute;
+    left: 3%;
+    width:12rem;
+    background-color: #ffff;
+    color: #000;
+    box-shadow: 0 1px 20px 0 rgba(70, 90, 100, 0.08);
+    height: auto;
+    z-index: 100;
+}
