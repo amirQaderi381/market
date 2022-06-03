@@ -67,16 +67,20 @@
                                             <i class="fas fa-tools"></i> عملیات
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item text-right" href="#">
+                                            <a class="dropdown-item text-right"
+                                                href="{{ route('admin.market.order.show') }}">
                                                 <i class="fas fa-images"></i> مشاهده فاکتور
                                             </a>
-                                            <a class="dropdown-item text-right" href="#">
+                                            <a class="dropdown-item text-right"
+                                                href="{{ route('admin.market.order.changeSendStatus') }}">
                                                 <i class="fas fa-list-ul"></i> تفییر وضعیت ارسال
                                             </a>
-                                            <a class="dropdown-item text-right" href="#">
+                                            <a class="dropdown-item text-right"
+                                                href="{{ route('admin.market.order.changeOrderStatus') }}">
                                                 <i class="fas fa-edit"></i> تغییر وضعیت سفارش
                                             </a>
-                                            <a class="dropdown-item text-right" href="#">
+                                            <a class="dropdown-item text-right"
+                                                href="{{ route('admin.market.order.cancelOrder') }}">
                                                 <i class="fas fa-window-close"></i> باطل کردن سفارش
                                             </a>
                                         </div>
