@@ -14,7 +14,7 @@ class OrderController extends Controller
 
     public function newOrders()
     {
-        return view('admin.market.order.new.orders');
+        return view('admin.market.order.newOrders');
     }
 
     public function sending()
@@ -38,18 +38,18 @@ class OrderController extends Controller
     }
     public function show()
     {
-        return view('admin.market.order.returned');
+        return view('admin.market.order.show');
     }
     public function changeSendStatus()
     {
-        return view('admin.market.order.returned');
+        return view('admin.market.order.changeSendStatus');
     }
     public function changeOrderStatus()
     {
-        return view('admin.market.order.returned');
+        return view('admin.market.order.changeOrderStatus');
     }
     public function cancelOrder()
     {
-        return view('admin.market.order.returned');
+        return view('admin.market.order.cancelOrder');
     }
 }
