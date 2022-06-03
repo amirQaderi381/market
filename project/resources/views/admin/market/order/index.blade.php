@@ -61,26 +61,27 @@
                                 <td>پیک موتوری</td>
                                 <td>درحال ارسال</td>
                                 <td class="text-left">
-                                    <button type="submit" class="btn btn-success btn-sm operation-order-btn">
-                                        <i class="fas fa-cogs"></i> عملیات
-                                    </button>
+                                    <div class="dropdown">
+                                        <a href="#" class="btn btn-success btn-sm dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-tools"></i> عملیات
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-images"></i> مشاهده فاکتور
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-list-ul"></i> تفییر وضعیت ارسال
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-edit"></i> تغییر وضعیت سفارش
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-window-close"></i> باطل کردن سفارش
+                                            </a>
+                                        </div>
+                                    </div>
                                 </td>
-                                <section class="order-operation rounded d-none">
-                                    <section class="list-group rounded">
-                                        <a href="#" class="list-group-item list-group-item-action order-operation-link">
-                                            <i class="fas fa-cog"></i> مشاهده فاکتور
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action order-operation-link">
-                                            <i class="fas fa-user"></i> تغییر وضعیت ارسال
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action order-operation-link">
-                                            <i class="far fa-envelope"></i> تغییر وضعیت سفارش
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action order-operation-link">
-                                            <i class="fas fa-lock"></i> باطل کردن سفارش
-                                        </a>
-                                    </section>
-                                </section>
                             </tr>
                         </tbody>
                     </table>
