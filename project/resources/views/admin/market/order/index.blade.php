@@ -61,26 +61,23 @@
                                 <td>پیک موتوری</td>
                                 <td>درحال ارسال</td>
                                 <td class="text-left">
-                                    <button type="submit" class="btn btn-success btn-sm">
+                                    <button type="submit" class="btn btn-success btn-sm operation-order-btn">
                                         <i class="fas fa-cogs"></i> عملیات
                                     </button>
                                 </td>
-                                <section class="order-operation rounded">
+                                <section class="order-operation rounded d-none">
                                     <section class="list-group rounded">
-                                        <a href="#" class="list-group-item list-group-item-action header-profile-link">
-                                            <i class="fas fa-cog"></i> تنظیمات
+                                        <a href="#" class="list-group-item list-group-item-action order-operation-link">
+                                            <i class="fas fa-cog"></i> مشاهده فاکتور
                                         </a>
-                                        <a href="#" class="list-group-item list-group-item-action header-profile-link">
-                                            <i class="fas fa-user"></i> کاربر
+                                        <a href="#" class="list-group-item list-group-item-action order-operation-link">
+                                            <i class="fas fa-user"></i> تغییر وضعیت ارسال
                                         </a>
-                                        <a href="#" class="list-group-item list-group-item-action header-profile-link">
-                                            <i class="far fa-envelope"></i> پیام ها
+                                        <a href="#" class="list-group-item list-group-item-action order-operation-link">
+                                            <i class="far fa-envelope"></i> تغییر وضعیت سفارش
                                         </a>
-                                        <a href="#" class="list-group-item list-group-item-action header-profile-link">
-                                            <i class="fas fa-lock"></i> قفل صفحه
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action header-profile-link">
-                                            <i class="fas fa-sign-out-alt"></i> خروج
+                                        <a href="#" class="list-group-item list-group-item-action order-operation-link">
+                                            <i class="fas fa-lock"></i> باطل کردن سفارش
                                         </a>
                                     </section>
                                 </section>
