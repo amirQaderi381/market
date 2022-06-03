@@ -67,16 +67,52 @@
                                             <i class="fas fa-tools"></i> عملیات
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item text-right" href="#">
                                                 <i class="fas fa-images"></i> مشاهده فاکتور
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item text-right" href="#">
                                                 <i class="fas fa-list-ul"></i> تفییر وضعیت ارسال
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item text-right" href="#">
                                                 <i class="fas fa-edit"></i> تغییر وضعیت سفارش
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item text-right" href="#">
+                                                <i class="fas fa-window-close"></i> باطل کردن سفارش
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>1</th>
+                                <td>123456</td>
+                                <td>26000 تومان</td>
+                                <td>20000 تومان</td>
+                                <td>26000 تومان</td>
+                                <td><i class="fas fa-credit-card"></i> پرداخت شده</td>
+                                <td>آنلاین</td>
+                                <td>ملت</td>
+                                <td><i class="fas fa-clock"></i> درحال ارسال</td>
+                                <td>پیک موتوری</td>
+                                <td>درحال ارسال</td>
+                                <td class="text-left">
+                                    <div class="dropdown">
+                                        <a href="#" class="btn btn-success btn-sm dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-tools"></i> عملیات
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item text-right" href="#">
+                                                <i class="fas fa-images"></i> مشاهده فاکتور
+                                            </a>
+                                            <a class="dropdown-item text-right" href="#">
+                                                <i class="fas fa-list-ul"></i> تفییر وضعیت ارسال
+                                            </a>
+                                            <a class="dropdown-item text-right" href="#">
+                                                <i class="fas fa-edit"></i> تغییر وضعیت سفارش
+                                            </a>
+                                            <a class="dropdown-item text-right" href="#">
                                                 <i class="fas fa-window-close"></i> باطل کردن سفارش
                                             </a>
                                         </div>
