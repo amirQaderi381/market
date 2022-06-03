@@ -94,6 +94,8 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/amazing-sale-create', [DisCountController::class, 'amazingSaleCreate'])->name('admin.market.discount.amazing.sale.create');
         });
 
+        //order
+
         Route::prefix('order')->group(function () {
 
             Route::get('/', [OrderController::class, 'all'])->name('admin.market.order.all');
@@ -106,6 +108,17 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/change-send-status', [OrderController::class, 'changeSendStatus'])->name('admin.market.order.changeSendStatus');
             Route::get('/change-order-status', [OrderController::class, 'changeOrderStatus'])->name('admin.market.order.changeOrderStatus');
             Route::get('/cancel-order', [OrderController::class, 'cancelOrder'])->name('admin.market.order.cancelOrder');
+        });
+
+        //payment
+
+        Route::prefix('payment')->group(function () {
+            Route::get('/', [PaymentController::class, 'index'])->name('admin.market.payment.index');
+            Route::get('/create', [PaymentController::class, 'create'])->name('admin.market.payment.create');
+            Route::post('/store', [PaymentController::class, 'store'])->name('admin.market.payment.store');
+            Route::get('/edit/{id}', [PaymentController::class, 'edit'])->name('admin.market.payment.edit');
+            Route::put('/update/{id}', [PaymentController::class, 'update'])->name('admin.market.payment.update');
+            Route::delete('/destroy/{id}', [PaymentController::class, 'destroy'])->name('admin.market.payment.destroy');
         });
     });
 });
