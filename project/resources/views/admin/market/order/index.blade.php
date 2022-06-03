@@ -21,7 +21,7 @@
                 </section>
 
                 <section class="d-flex justify-content-between align-items-center mt-4 mb-3 pb-2 border-bottom">
-                    <a href="{{ route('admin.market.order.new.orders') }}" class="btn btn-info btn-sm"> ایجاد سفارش
+                    <a href="{{ route('admin.market.order.newOrders') }}" class="btn btn-info btn-sm"> ایجاد سفارش
                         جدید</a>
                     <div>
                         <input type="text" class="form-control form-control-sm max-width-16-rem" placeholder="جستجو">
