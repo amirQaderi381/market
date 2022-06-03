@@ -114,11 +114,10 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
         Route::prefix('payment')->group(function () {
             Route::get('/', [PaymentController::class, 'index'])->name('admin.market.payment.index');
-            Route::get('/create', [PaymentController::class, 'create'])->name('admin.market.payment.create');
-            Route::post('/store', [PaymentController::class, 'store'])->name('admin.market.payment.store');
-            Route::get('/edit/{id}', [PaymentController::class, 'edit'])->name('admin.market.payment.edit');
-            Route::put('/update/{id}', [PaymentController::class, 'update'])->name('admin.market.payment.update');
-            Route::delete('/destroy/{id}', [PaymentController::class, 'destroy'])->name('admin.market.payment.destroy');
+            Route::get('/online', [PaymentController::class, 'online'])->name('admin.market.payment.online');
+            Route::post('/offline', [PaymentController::class, 'offline'])->name('admin.market.payment.offline');
+            Route::get('/attendance', [PaymentController::class, 'attendance'])->name('admin.market.payment.attendance');
+            Route::put('/confirm', [PaymentController::class, 'confirm'])->name('admin.market.payment.confirm');
         });
     });
 });
