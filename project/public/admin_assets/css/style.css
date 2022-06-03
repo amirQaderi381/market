@@ -67,6 +67,10 @@ input[type=number]:focus,
     max-width: 16rem;
 }
 
+.width-22-rem {
+    max-width: 22rem;
+}
+
 .max-height-2rem {
     max-height: 2rem;
 }
