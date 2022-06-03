@@ -116,9 +116,9 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
         Route::prefix('payment')->group(function () {
             Route::get('/', [PaymentController::class, 'index'])->name('admin.market.payment.index');
             Route::get('/online', [PaymentController::class, 'online'])->name('admin.market.payment.online');
-            Route::post('/offline', [PaymentController::class, 'offline'])->name('admin.market.payment.offline');
+            Route::get('/offline', [PaymentController::class, 'offline'])->name('admin.market.payment.offline');
             Route::get('/attendance', [PaymentController::class, 'attendance'])->name('admin.market.payment.attendance');
-            Route::put('/confirm', [PaymentController::class, 'confirm'])->name('admin.market.payment.confirm');
+            Route::get('/confirm', [PaymentController::class, 'confirm'])->name('admin.market.payment.confirm');
         });
     });
 });
