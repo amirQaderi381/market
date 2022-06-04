@@ -46,7 +46,7 @@
                                 <th>1</th>
                                 <td>نمایشگر </td>
                                 <td>کالای الکترونیکی</td>
-                                <td class="width-5-rem text-left">
+                                <td class="width-20-rem text-left">
                                     <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> ویژگی ها</a>
                                     <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
                                     <button class="btn btn-danger btn-sm" type="submit">
