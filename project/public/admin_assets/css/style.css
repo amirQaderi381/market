@@ -63,6 +63,10 @@ input[type=number]:focus,
     width: 16rem;
 }
 
+.width-20-rem {
+    width: 20rem;
+}
+
 .max-width-16-rem {
     max-width: 16rem;
 }
