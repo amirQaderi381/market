@@ -24,7 +24,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        return view('admin.content.comment.create');
+        //
     }
 
     /**
@@ -44,9 +44,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return view('admin.content.comment.show');
     }
 
     /**
