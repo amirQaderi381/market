@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Market\BrandController;
 use App\Http\Controllers\Admin\Market\OrderController;
 use App\Http\Controllers\Admin\Market\StoreController;
 use App\Http\Controllers\Admin\AdminDashbordController;
+use App\Http\Controllers\Admin\User\CustomerController;
 use App\Http\Controllers\Admin\Market\CommentController;
 use App\Http\Controllers\Admin\Market\GalleryController;
 use App\Http\Controllers\Admin\Market\PaymentController;
@@ -261,6 +262,18 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/edit/{id}', [AdminUserController::class, 'edit'])->name('admin.user.admin-user.edit');
             Route::put('/update/{id}', [AdminUserController::class, 'update'])->name('admin.user.admin-user.update');
             Route::delete('/destroy/{id}', [AdminUserController::class, 'destroy'])->name('admin.user.admin-user.destroy');
+        });
+
+        //customer
+
+        Route::prefix('customer')->group(function () {
+
+            Route::get('/', [CustomerController::class, 'index'])->name('admin.user.customer.index');
+            Route::get('/create', [CustomerController::class, 'create'])->name('admin.user.customer.create');
+            Route::post('/store', [CustomerController::class, 'store'])->name('admin.user.customer.store');
+            Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('admin.user.customer.edit');
+            Route::put('/update/{id}', [CustomerController::class, 'update'])->name('admin.user.customer.update');
+            Route::delete('/destroy/{id}', [CustomerController::class, 'destroy'])->name('admin.user.customer.destroy');
         });
     });
 });
