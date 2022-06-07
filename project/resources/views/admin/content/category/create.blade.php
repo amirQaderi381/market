@@ -22,7 +22,7 @@
                 </section>
 
                 <section class="mt-4 mb-3 pb-2 border-bottom">
-                    <a href="{{ route('admin.market.category.index') }}" class="btn btn-info btn-sm">بازگشت</a>
+                    <a href="{{ route('admin.content.category.index') }}" class="btn btn-info btn-sm">بازگشت</a>
                 </section>
 
                 <section>
