@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->decimal('height', 10, 1)->comment('cm unit');
             $table->decimal('price', 20, 3);
             $table->tinyInteger('status')->default(0);
-            $table->tinyInteger('marketable')->default(1)->comment('0 => marketable , 1=>not marketable');
+            $table->tinyInteger('marketable')->default(1)->comment('1 => marketable , 0=>not marketable');
             $table->string('tags');
             $table->tinyInteger('sold_number')->default(0);
             $table->tinyInteger('frozen_number')->default(0);
