@@ -52,7 +52,7 @@
                                     <td>
                                         <img src="{{asset($postCategory->description)}}" alt="" width="50" height="50">
                                     </td>
-                                    <td>{{($postCategory->status == 0) ? 'فعال' : 'غیر فعال'}}</td>
+                                    <td>{{($postCategory->status == 1) ? 'فعال' : 'غیر فعال'}}</td>
                                     <td>{{$postCategory->tags}}</td>
                                     <td class="width-16-rem text-left">
 
