@@ -33,52 +33,39 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">نام دسته بندی</th>
-                                <th scope="col">دسته والد</th>
+                                <th scope="col">نوضیحات</th>
+                                <th scope="col">اسلاگ</th>
+                                <th scope="col">تصویر</th>
+                                <th scope="col">وضعیت</th>
+                                <th scope="col">تگ ها</th>
                                 <th scope="col" class="max-width-16-rem text-center"><i class="fas fa-cogs"></i> تنظیمات
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>نمایشگر</td>
-                                <td>کالای الکترونیکی</td>
-                                <td class="width-16-rem text-left">
-                                    <button type="submit" class="btn btn-primary btn-sm">
-                                        <i class="fas fa-edit"></i> ویرایش
-                                    </button>
+                            @foreach ($postCategories as $postCategory)
+                                <tr>
+                                    <th>1</th>
+                                    <td>{{$postCategory->name}}</td>
+                                    <td>{{$postCategory->description}}</td>
+                                    <td>{{$postCategory->slug}}</td>
+                                    <td>
+                                        <img src="{{asset($postCategory->description)}}" alt="" width="50" height="50">
+                                    </td>
+                                    <td>{{($postCategory->status == 0) ? 'فعال' : 'غیر فعال'}}</td>
+                                    <td>{{$postCategory->tags}}</td>
+                                    <td class="width-16-rem text-left">
 
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i> حذف
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>2</th>
-                                <td>نمایشگر</td>
-                                <td>کالای الکترونیکی</td>
-                                <td class="width-16-rem text-left">
-                                    <button type="submit" class="btn btn-primary btn-sm">
-                                        <i class="fas fa-edit"></i> ویرایش
-                                    </button>
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i> حذف
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>3</th>
-                                <td>نمایشگر</td>
-                                <td>کالای الکترونیکی</td>
-                                <td class="width-16-rem text-left">
-                                    <button type="submit" class="btn btn-primary btn-sm">
-                                        <i class="fas fa-edit"></i> ویرایش
-                                    </button>
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i> حذف
-                                    </button>
-                                </td>
-                            </tr>
+                                        <a href="{{route('admin.content.category.edit',['id'=>$postCategory->id])}}" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-edit"></i> ویرایش
+                                        </a>
+
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash-alt"></i> حذف
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </section>
