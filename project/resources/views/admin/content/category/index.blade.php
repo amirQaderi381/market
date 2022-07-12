@@ -52,17 +52,25 @@
                                     <td>
                                         <img src="{{asset($postCategory->description)}}" alt="" width="50" height="50">
                                     </td>
-                                    <td>{{($postCategory->status == 1) ? 'فعال' : 'غیر فعال'}}</td>
+                                    <td>
+                                        <label>
+                                            <input type="checkbox" name="" @if($postCategory->status === 1) checked @endif>
+                                        </label>
+                                    </td>
                                     <td>{{$postCategory->tags}}</td>
                                     <td class="width-16-rem text-left">
 
-                                        <a href="{{route('admin.content.category.edit',['id'=>$postCategory->id])}}" class="btn btn-primary btn-sm">
+                                        <a href="{{route('admin.content.category.edit',[$postCategory->id])}}" class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i> ویرایش
                                         </a>
 
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash-alt"></i> حذف
-                                        </button>
+                                        <form class="d-inline" action="{{route('admin.content.category.destroy',[$postCategory->id])}}" method="POST">
+                                            @csrf
+                                            {{method_field('delete')}}
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash-alt"></i> حذف
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
