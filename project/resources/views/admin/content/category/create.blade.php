@@ -26,18 +26,35 @@
                 </section>
 
                 <section>
-                    <form action="#">
+                    <form action="{{route('admin.content.category.store')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="">نام دسته</label>
-                                <input type="text" class="form-control form-control-sm">
+                                <label for="name">نام دسته</label>
+                                <input type="text" class="form-control form-control-sm" name="name" id="name">
                             </div>
+
                             <div class="form-group col-md-6">
-                                <label for="">دسته والد</label>
-                                <select id="" class="form-control form-control-sm">
-                                    <option selected>دسته را انتخاب کنید...</option>
-                                    <option>وسایل الکترونیکی</option>
+                                <label for="tags">تگ ها</label>
+                                <input type="text" class="form-control form-control-sm" name="tags" id="tags">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="status">وضعیت</label>
+                                <select id="status" class="form-control form-control-sm">
+                                    <option selected>غیر فعال</option>
+                                    <option>فعال</option>
                                 </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="image">تصویر</label>
+                                <input type="file" class="form-control form-control-sm" name="image" id="image">
+                            </div>
+
+                            <div class="form-group col-12">
+                                <label for="description">نوضیحات</label>
+                                <textarea class="form-control form-control-sm" name="description" id="description" rows="4"></textarea>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary btn-sm px-5">ثبت</button>
@@ -46,4 +63,11 @@
             </section>
         </section>
     </div>
+@endsection
+
+@section('script')
+<script src="{{asset('admin_assets/ckeditor/ckeditor.js')}}"></script>
+<script>
+    CKEDITOR.replace('description')
+</script>
 @endsection
