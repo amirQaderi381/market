@@ -51,9 +51,9 @@
 
                             <div class="form-group col-md-6">
                                 <label for="status">وضعیت</label>
-                                <select id="status" class="form-control form-control-sm">
-                                    <option value="0" @if(old('status') == 0 ) selected @endif>غیر فعال</option>
-                                    <option value="1" @if(old('status') == 1 ) selected @endif >فعال</option>
+                                <select id="status" class="form-control form-control-sm" name="status">
+                                    <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>غیر فعال</option>
+                                    <option value="1" {{ old('status') == 1 ? 'selected' : '' }} >فعال</option>
                                 </select>
                             </div>
 
