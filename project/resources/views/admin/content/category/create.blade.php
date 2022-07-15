@@ -31,19 +31,29 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="name">نام دسته</label>
-                                <input type="text" class="form-control form-control-sm" name="name" id="name">
+                                <input type="text" class="form-control form-control-sm" name="name" id="name" value="{{old('name')}}">
+                                @error('name')
+                                    <span class="alert alert-danger">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="tags">تگ ها</label>
-                                <input type="text" class="form-control form-control-sm" name="tags" id="tags">
+                                <input type="text" class="form-control form-control-sm" name="tags" id="tags" value="{{old('tags')}}">
+                                @error('tags')
+                                    <span class="alert alert-danger">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="status">وضعیت</label>
                                 <select id="status" class="form-control form-control-sm">
-                                    <option selected>غیر فعال</option>
-                                    <option>فعال</option>
+                                    <option value="0" @if(old('status') == 0 ) selected @endif>غیر فعال</option>
+                                    <option value="1" @if(old('status') == 1 ) selected @endif >فعال</option>
                                 </select>
                             </div>
 
@@ -53,8 +63,13 @@
                             </div>
 
                             <div class="form-group col-12">
-                                <label for="description">نوضیحات</label>
-                                <textarea class="form-control form-control-sm" name="description" id="description" rows="4"></textarea>
+                                <label for="description">توضیحات</label>
+                                <textarea class="form-control form-control-sm" name="description" id="description" rows="4" >{{old('description')}}</textarea>
+                                @error('description')
+                                    <span class="alert alert-danger">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary btn-sm px-5">ثبت</button>
