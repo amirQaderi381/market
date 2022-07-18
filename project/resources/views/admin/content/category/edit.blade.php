@@ -106,7 +106,7 @@
         }
 
         select_tags.select2({
-           placeholder:'لطفا تگ ها را انتخاب کنید',
+           placeholder:'لطفا تگ ها را وارد کنید',
            tags:true,
            data:default_data
         });
