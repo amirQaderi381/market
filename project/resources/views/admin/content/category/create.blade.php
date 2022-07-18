@@ -96,18 +96,29 @@
 
      $(document).ready(function(){
 
-        let input_tags = $('#tags');
+        let tags_input = $('#tags');
         let select_tags = $('#select_tags');
+        let default_tags = tags_input.val();
+        let default_data=null;
+
+        if(tags_input.val() !== null && tags_input.val().length > 0)
+        {
+           default_data=default_tags.split(',');
+        }
+
         select_tags.select2({
             placeholder:'لطفا تگ ها را وارد کنید',
-            tags:true
+            tags:true,
+            data:default_data
         });
+
+        select_tags.children('option').attr('selected', true).trigger('change');
 
         $('#form').submit(function(){
             if(select_tags.val() !== null && select_tags.val().length > 0)
             {
                let selected_source=select_tags.val().join(',');
-               input_tags.val(selected_source);
+               tags_input.val(selected_source);
             }
         })
 
