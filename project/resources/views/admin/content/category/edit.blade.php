@@ -26,7 +26,7 @@
                 </section>
 
                 <section>
-                    <form action="{{route('admin.content.category.update',[$postCategory->id])}}" method="POST" enctype="multipart/form-data">
+                    <form id="form" action="{{route('admin.content.category.update',[$postCategory->id])}}" method="POST" enctype="multipart/form-data">
 
                         @csrf
                         {{method_field('put')}}
@@ -45,6 +45,7 @@
                             <div class="form-group col-md-6">
                                 <label for="tags">تگ ها</label>
                                 <input type="text" class="form-control form-control-sm" name="tags" id="tags" value="{{old('tags',$postCategory->tags)}}">
+                                <select class="select2 form-control form-control-sm" id="select_tags" multiple></select>
                                 @error('tags')
                                     <span class="alert alert-danger">
                                         <strong>{{$message}}</strong>
@@ -90,4 +91,36 @@
 <script>
     CKEDITOR.replace('description')
 </script>
+<script>
+
+    $(document).ready(function(){
+
+        let tags_input = $('#tags');
+        let select_tags = $('#select_tags');
+        let default_tags=tags_input.val();
+        let default_data=null;
+
+        if(default_tags !== null && default_tags.length > 0)
+        {
+            default_data = default_tags.split(',');
+        }
+
+        select_tags.select2({
+           placeholder:'لطفا تگ ها را انتخاب کنید',
+           tags:true,
+           data:default_data
+        });
+
+        select_tags.children('option').attr('selected',true).trigger('change');
+
+        $('#form').submit(function(){
+            if(select_tags.val() !== null && select_tags.val().length > 0)
+            {
+                let selectedsource=select_tags.val().join(',');
+                tags_input.val(selectedsource);
+            }
+        })
+    })
+</script>
 @endsection
+
