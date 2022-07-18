@@ -26,25 +26,31 @@
                 </section>
 
                 <section>
-                    <form action="{{route('admin.content.category.store')}}" method="POST" enctype="multipart/form-data">
+                    <form id="form" action="{{ route('admin.content.category.store') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="name">نام دسته</label>
-                                <input type="text" class="form-control form-control-sm" name="name" id="name" value="{{old('name')}}">
+                                <input type="text" class="form-control form-control-sm" name="name" id="name"
+                                    value="{{ old('name') }}">
                                 @error('name')
                                     <span class="alert alert-danger">
-                                        <strong>{{$message}}</strong>
+                                        <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="tags">تگ ها</label>
-                                <input type="text" class="form-control form-control-sm" name="tags" id="tags" value="{{old('tags')}}">
+                                <input type="hidden" class="form-control form-control-sm" name="tags" id="tags"
+                                    value="{{ old('tags') }}">
+                                <select class="select2 form-control form-control-sm" id="select_tags" multiple>
+
+                                </select>
                                 @error('tags')
                                     <span class="alert alert-danger">
-                                        <strong>{{$message}}</strong>
+                                        <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -53,7 +59,7 @@
                                 <label for="status">وضعیت</label>
                                 <select id="status" class="form-control form-control-sm" name="status">
                                     <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>غیر فعال</option>
-                                    <option value="1" {{ old('status') == 1 ? 'selected' : '' }} >فعال</option>
+                                    <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>فعال</option>
                                 </select>
                             </div>
 
@@ -64,10 +70,10 @@
 
                             <div class="form-group col-12">
                                 <label for="description">توضیحات</label>
-                                <textarea class="form-control form-control-sm" name="description" id="description" rows="4" >{{old('description')}}</textarea>
+                                <textarea class="form-control form-control-sm" name="description" id="description" rows="4">{{ old('description') }}</textarea>
                                 @error('description')
                                     <span class="alert alert-danger">
-                                        <strong>{{$message}}</strong>
+                                        <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -81,8 +87,30 @@
 @endsection
 
 @section('script')
-<script src="{{asset('admin_assets/ckeditor/ckeditor.js')}}"></script>
-<script>
-    CKEDITOR.replace('description')
-</script>
+    <script src="{{ asset('admin_assets/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace('description')
+    </script>
+
+    <script>
+
+     $(document).ready(function(){
+
+        let input_tags = $('#tags');
+        let select_tags = $('#select_tags');
+        select_tags.select2({
+            placeholder:'لطفا تگ ها را وارد کنید',
+            tags:true
+        });
+
+        $('#form').submit(function(){
+            if(select_tags.val() !== null && select_tags.val().length > 0)
+            {
+               let selected_source=select_tags.val().join(',');
+               input_tags.val(selected_source);
+            }
+        })
+
+     })
+    </script>
 @endsection
