@@ -46,27 +46,34 @@
                             @foreach ($postCategories as $postCategory)
                                 <tr>
                                     <th>1</th>
-                                    <td>{{$postCategory->name}}</td>
-                                    <td>{{$postCategory->description}}</td>
-                                    <td>{{$postCategory->slug}}</td>
+                                    <td>{{ $postCategory->name }}</td>
+                                    <td>{{ $postCategory->description }}</td>
+                                    <td>{{ $postCategory->slug }}</td>
                                     <td>
-                                        <img src="{{asset($postCategory->description)}}" alt="" width="50" height="50">
+                                        <img src="{{ asset($postCategory->description) }}" alt="" width="50"
+                                            height="50">
                                     </td>
                                     <td>
                                         <label>
-                                            <input type="checkbox" name="" @if($postCategory->status === 1) checked @endif>
+                                            <input id="{{ $postCategory->id }}"
+                                                data-url="{{ route('admin.content.category.status', $postCategory->id) }}"
+                                                type="checkbox" name=""
+                                                @if ($postCategory->status === 1) checked @endif>
                                         </label>
                                     </td>
-                                    <td>{{$postCategory->tags}}</td>
+                                    <td>{{ $postCategory->tags }}</td>
                                     <td class="width-16-rem text-left">
 
-                                        <a href="{{route('admin.content.category.edit',[$postCategory->id])}}" class="btn btn-primary btn-sm">
+                                        <a href="{{ route('admin.content.category.edit', [$postCategory->id]) }}"
+                                            class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i> ویرایش
                                         </a>
 
-                                        <form class="d-inline" action="{{route('admin.content.category.destroy',[$postCategory->id])}}" method="POST">
+                                        <form class="d-inline"
+                                            action="{{ route('admin.content.category.destroy', [$postCategory->id]) }}"
+                                            method="POST">
                                             @csrf
-                                            {{method_field('delete')}}
+                                            {{ method_field('delete') }}
                                             <button type="submit" class="btn btn-danger btn-sm">
                                                 <i class="fas fa-trash-alt"></i> حذف
                                             </button>
@@ -80,4 +87,30 @@
             </section>
         </section>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        let status_input = $('#' + {{ $postCategory->id }});
+        let url = status_input.attr('data-url')
+        let elementValue = !status_input.prop('checked'); // return ture/false
+
+        status_input.change(function(id) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function(response) {
+                    if (response.status) {
+                        if (response.checked) {
+                            status_input.prop('checked', true)
+                        } else {
+                            status_input.prop('checked', false)
+                        }
+                    } else {
+                        status_input.prop('checked', elementValue);
+                    }
+                }
+            })
+        })
+    </script>
 @endsection
