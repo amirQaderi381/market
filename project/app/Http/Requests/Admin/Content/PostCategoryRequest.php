@@ -52,16 +52,4 @@ class PostCategoryRequest extends FormRequest
 
     }
 
-    public function attributes()
-    {
-        return [
-
-            'name'=>'نام دسته',
-            'description'=>'توضیحات',
-            'status'=>'وضعیت',
-            'image'=>'تصویر',
-            'tags'=>'تگ ها',
-
-        ];
-    }
 }
