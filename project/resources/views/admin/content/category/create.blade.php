@@ -30,32 +30,30 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 my-2">
                                 <label for="name">نام دسته</label>
                                 <input type="text" class="form-control form-control-sm" name="name" id="name"
                                     value="{{ old('name') }}">
                                 @error('name')
-                                    <span class="alert alert-danger">
+                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <label for="tags">تگ ها</label>
+                            <div class="form-group col-md-6 my-2">
+                                <label for="tags">برچسب ها</label>
                                 <input type="hidden" class="form-control form-control-sm" name="tags" id="tags"
                                     value="{{ old('tags') }}">
-                                <select class="select2 form-control form-control-sm" id="select_tags" multiple>
-
-                                </select>
+                                <select class="select2 form-control form-control-sm" id="select_tags" multiple></select>
                                 @error('tags')
-                                    <span class="alert alert-danger">
+                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 my-2">
                                 <label for="status">وضعیت</label>
                                 <select id="status" class="form-control form-control-sm" name="status">
                                     <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>غیر فعال</option>
@@ -63,16 +61,21 @@
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 my-2">
                                 <label for="image">تصویر</label>
                                 <input type="file" class="form-control form-control-sm" name="image" id="image">
+                                @error('image')
+                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
-                            <div class="form-group col-12">
+                            <div class="form-group col-12 my-2">
                                 <label for="description">توضیحات</label>
                                 <textarea class="form-control form-control-sm" name="description" id="description" rows="4">{{ old('description') }}</textarea>
                                 @error('description')
-                                    <span class="alert alert-danger">
+                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -93,35 +96,32 @@
     </script>
 
     <script>
+        $(document).ready(function() {
 
-     $(document).ready(function(){
+            let tags_input = $('#tags');
+            let select_tags = $('#select_tags');
+            let default_tags = tags_input.val();
+            let default_data = null;
 
-        let tags_input = $('#tags');
-        let select_tags = $('#select_tags');
-        let default_tags = tags_input.val();
-        let default_data=null;
-
-        if(tags_input.val() !== null && tags_input.val().length > 0)
-        {
-           default_data=default_tags.split(',');
-        }
-
-        select_tags.select2({
-            placeholder:'لطفا تگ ها را وارد کنید',
-            tags:true,
-            data:default_data
-        });
-
-        select_tags.children('option').attr('selected', true).trigger('change');
-
-        $('#form').submit(function(){
-            if(select_tags.val() !== null && select_tags.val().length > 0)
-            {
-               let selected_source=select_tags.val().join(',');
-               tags_input.val(selected_source);
+            if (tags_input.val() !== null && tags_input.val().length > 0) {
+                default_data = default_tags.split(',');
             }
-        })
 
-     })
+            select_tags.select2({
+                placeholder: 'لطفا تگ ها را وارد کنید',
+                tags: true,
+                data: default_data
+            });
+
+            select_tags.children('option').attr('selected', true).trigger('change');
+
+            $('#form').submit(function() {
+                if (select_tags.val() !== null && select_tags.val().length > 0) {
+                    let selected_source = select_tags.val().join(',');
+                    tags_input.val(selected_source);
+                }
+            })
+
+        })
     </script>
 @endsection
