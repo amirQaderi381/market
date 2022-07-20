@@ -55,10 +55,8 @@
                                     </td>
                                     <td>
                                         <label>
-                                            <input id="{{ $postCategory->id }}"
-                                                data-url="{{ route('admin.content.category.status', $postCategory->id) }}"
-                                                type="checkbox" name=""
-                                                @if ($postCategory->status === 1) checked @endif>
+                                            <input id="{{ $postCategory->id }}" data-url="{{ route('admin.content.category.status', $postCategory->id) }}"
+                                            type="checkbox" @if ($postCategory->status === 1) checked @endif>
                                         </label>
                                     </td>
                                     <td>{{ $postCategory->tags }}</td>
