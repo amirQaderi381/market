@@ -55,8 +55,9 @@
                                     </td>
                                     <td>
                                         <label>
-                                            <input id="{{ $postCategory->id }}" data-url="{{ route('admin.content.category.status', $postCategory->id) }}"
-                                            type="checkbox" @if ($postCategory->status === 1) checked @endif>
+                                            <input id="{{ $postCategory->id }}"
+                                                data-url="{{ route('admin.content.category.status', $postCategory->id) }}"
+                                                type="checkbox" @if ($postCategory->status === 1) checked @endif>
                                         </label>
                                     </td>
                                     <td>{{ $postCategory->tags }}</td>
@@ -100,15 +101,55 @@
                 success: function(response) {
                     if (response.status) {
                         if (response.checked) {
-                            status_input.prop('checked', true)
+                            status_input.prop('checked', true);
+                            successToast('دسته بندی با موفقیت فعال شد')
+
                         } else {
-                            status_input.prop('checked', false)
+                            status_input.prop('checked', false);
+                            successToast('دسته بندی با موفقیت غیر فعال شد')
                         }
                     } else {
                         status_input.prop('checked', elementValue);
+                        errorToast('عملیات ویرایش با خطا مواجه شد');
                     }
+                },
+                error: function() {
+                    status_input.prop('checked', elementValue);
+                    errorToast('ارتباط برقرار نشد');
                 }
-            })
+            });
+
+            function successToast(message) {
+                let successToastTags = '<section class="toast" data-delay="5000">\n' +
+                    '<section class="toast-body py-3 d-flex bg-success text-white">\n' +
+                    '<strong class="ml-auto">' + message + '</strong>\n' +
+                    '<button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
+                    '<span aria-hidden="true">&times;</span>\n' +
+                    ' </button>\n' +
+                    '</section>\n' +
+                    '</section>\n';
+
+                $('.toast-wrapper').append(successToastTags);
+                $('.toast').toast('show').delay(5500).queue(function() {
+                    $(this).remove();
+                });
+            };
+
+            function errorToast(message) {
+                let errorToastTags = '<section class="toast" data-delay="5000">\n' +
+                    '<section class="toast-body py-3 d-flex bg-danger text-white">\n' +
+                    '<strong class="ml-auto">' + message + '</strong>\n' +
+                    '<button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
+                    '<span aria-hidden="true">&times;</span>\n' +
+                    ' </button>\n' +
+                    '</section>\n' +
+                    '</section>\n';
+
+                $('.toast-wrapper').append(errorToastTags);
+                $('.toast').toast('show').delay(5500).queue(function() {
+                    $(this).remove();
+                });
+            }
         })
     </script>
 @endsection
