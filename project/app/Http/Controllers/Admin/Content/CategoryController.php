@@ -79,7 +79,7 @@ class CategoryController extends Controller
     {
         $inputs = $request->all();
         $postCategory->update($inputs);
-        return redirect()->route('admin.content.category.index');
+        return redirect()->route('admin.content.category.index')->with('swal-success','دسته بندی با موفقیت ویرایش شد');
     }
 
     /**
