@@ -56,6 +56,7 @@
                                     <td>
                                         <label>
                                             <input id="{{ $postCategory->id }}"
+                                                onchange="changeStatus({{ $postCategory->id }})"
                                                 data-url="{{ route('admin.content.category.status', $postCategory->id) }}"
                                                 type="checkbox" @if ($postCategory->status === 1) checked @endif>
                                         </label>
@@ -73,7 +74,7 @@
                                             method="POST">
                                             @csrf
                                             {{ method_field('delete') }}
-                                            <button type="submit" class="btn btn-danger btn-sm">
+                                            <button type="submit" class="btn btn-danger btn-sm delete">
                                                 <i class="fas fa-trash-alt"></i> حذف
                                             </button>
                                         </form>
@@ -89,12 +90,13 @@
 @endsection
 
 @section('script')
-    <script>
-        let status_input = $('#' + {{ $postCategory->id }});
-        let url = status_input.attr('data-url')
-        let elementValue = !status_input.prop('checked'); // return ture/false
+    <script type="text/javascript">
+        function changeStatus(id) {
 
-        status_input.change(function(id) {
+            let status_input = $('#' + id);
+            let url = status_input.attr('data-url')
+            let elementValue = !status_input.prop('checked'); // return ture/false
+
             $.ajax({
                 url: url,
                 type: 'GET',
@@ -110,7 +112,7 @@
                         }
                     } else {
                         status_input.prop('checked', elementValue);
-                        errorToast('عملیات ویرایش با خطا مواجه شد');
+                        errorToast('هنگام ویرایش مشکلی بوجود امده است');
                     }
                 },
                 error: function() {
@@ -120,7 +122,7 @@
             });
 
             function successToast(message) {
-                let successToastTags = '<section class="toast" data-delay="5000">\n' +
+                let successToastTag = '<section class="toast" data-delay="5000">\n' +
                     '<section class="toast-body py-3 d-flex bg-success text-white">\n' +
                     '<strong class="ml-auto">' + message + '</strong>\n' +
                     '<button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
@@ -129,10 +131,10 @@
                     '</section>\n' +
                     '</section>\n';
 
-                $('.toast-wrapper').append(successToastTags);
+                $('.toast-wrapper').append(successToastTag);
                 $('.toast').toast('show').delay(5500).queue(function() {
                     $(this).remove();
-                });
+                })
             };
 
             function errorToast(message) {
@@ -150,6 +152,9 @@
                     $(this).remove();
                 });
             }
-        })
+
+        }
     </script>
+
+    @include('admin.alerts.sweetalert.confirm-delete', ['className' => 'delete']);
 @endsection
