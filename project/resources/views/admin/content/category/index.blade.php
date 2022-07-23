@@ -91,8 +91,8 @@
 
 @section('script')
     <script type="text/javascript">
-        function changeStatus(id) {
 
+        function changeStatus(id) {
             let status_input = $('#' + id);
             let url = status_input.attr('data-url')
             let elementValue = !status_input.prop('checked'); // return ture/false
