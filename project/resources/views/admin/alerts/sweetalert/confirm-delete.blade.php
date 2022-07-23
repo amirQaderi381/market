@@ -18,8 +18,6 @@
                 buttonsStyling : false,
             })
 
-
-
             swalWithBootstrap.fire({
                 title: 'آیا از حذف داده مطمعن هستید‌؟',
                 text: 'شما میتوانید درخواست خود را لغو نمایید',
@@ -28,6 +26,7 @@
                 confirmButtonText: 'بله داده حذف شود!',
                 cancelButtonText: 'خیر درخواست لغو شود!',
                 reverseButtons: true
+
             }).then((result) => {
 
                 if (result.value == true) {
@@ -39,7 +38,7 @@
                         title: 'لغو درخواست',
                         text: 'درخواست شما لغو شد',
                         icon: 'error',
-                        confirmButtonText: 'یاشه'
+                        confirmButtonText: 'باشه'
                     })
                 }
             })
