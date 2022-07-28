@@ -90,6 +90,7 @@
 @endsection
 
 @section('script')
+
     <script type="text/javascript">
 
         function changeStatus(id) {
@@ -156,5 +157,6 @@
         }
     </script>
 
-    @include('admin.alerts.sweetalert.confirm-delete', ['className' => 'delete']);
+    @include('admin.alerts.sweetalert.confirm-delete', ['className' => 'delete'])
+
 @endsection
