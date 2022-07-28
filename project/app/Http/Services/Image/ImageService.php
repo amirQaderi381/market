@@ -85,5 +85,6 @@ class ImageService extends ImageToolsService
         $image['currentImage'] = Config::get('image.default-current-index-image');
 
         return $image;
+
     }
 }
