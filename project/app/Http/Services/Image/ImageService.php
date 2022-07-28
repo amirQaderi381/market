@@ -85,6 +85,46 @@ class ImageService extends ImageToolsService
         $image['currentImage'] = Config::get('image.default-current-index-image');
 
         return $image;
+    }
 
+    public function DeleteImage($imagePath)
+    {
+        if(file_exists($imagePath))
+        {
+            unlink($imagePath);
+        }
+    }
+
+    public function DeleteIndex($images)
+    {
+        $directory = public_path($images['directory']);
+        $this->deleteDirectoryAndFiles($directory);
+    }
+
+    public function deleteDirectoryAndFiles($directory)
+    {
+        if(!is_dir($directory))
+        {
+            return false;
+        }
+        else
+        {
+            $files = glob($directory.DIRECTORY_SEPARATOR.'*'.GLOB_MARK);
+
+            foreach($files as $file)
+            {
+                if(is_dir($file))
+                {
+                    $this->deleteDirectoryAndFiles($file);
+
+                }else
+                {
+                    unlink($file);
+                }
+            }
+
+            $result = rmdir($directory);
+            return $result;
+        }
     }
 }
