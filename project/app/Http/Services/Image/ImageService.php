@@ -5,6 +5,7 @@ namespace App\Http\Services\Image;
 use Illuminate\Support\Facades\Config;
 use Intervention\Image\Facades\Image;
 
+
 class ImageService extends ImageToolsService
 {
     public function save($image)
@@ -67,7 +68,7 @@ class ImageService extends ImageToolsService
 
             // save image
 
-            $result = Image::create($image->getRealPath())->fit($imageSize['width'],$imageSize['height'])
+            $result = Image::make($image->getRealPath())->fit($imageSize['width'],$imageSize['height'])
             ->save(public_path($this->getImageAddress()),null,$this->getImageFormat());
 
             if($result)
@@ -80,11 +81,11 @@ class ImageService extends ImageToolsService
             }
         }
 
-        $image['indexArray'] = $indexArray;
-        $image['directory'] = $this->getFinalImageDirectory();
-        $image['currentImage'] = Config::get('image.default-current-index-image');
+        $images['indexArray'] = $indexArray;
+        $images['directory'] = $this->getFinalImageDirectory();
+        $images['currentImage'] = Config::get('image.default_current_index_image');
 
-        return $image;
+        return $images;
     }
 
     public function DeleteImage($imagePath)
