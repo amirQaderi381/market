@@ -30,6 +30,7 @@ class ImageCacheService
             $img = Image::cache(function($image) use ($imagePath , $width ,$height){
                 return $image->make($imagePath)->fit($width , $height);
             },Config::get('image.image-cache-life-time'),true);
+
             return $img->response();
 
         }else{
