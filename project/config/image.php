@@ -42,4 +42,31 @@ return [
 
     'default_current_index_image' => 'medium',
 
+    // cache sizes
+
+    'cache_image_sizes' => [
+
+        'large' => [
+
+            'width'=>800,
+            'height'=>600
+        ],
+
+        'medium' => [
+
+            'width' => 400,
+            'height' =>300
+        ],
+
+        'small' => [
+
+            'width' => 80,
+            'height' =>60
+        ]
+    ],
+
+    'default_current_cache_image' => 'medium',
+    'image-cache-life-time' => 10,
+    'image_not_found' => ''
+
 ];
