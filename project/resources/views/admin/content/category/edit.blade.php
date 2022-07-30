@@ -68,7 +68,30 @@
 
                             <div class="form-group col-md-6">
                                 <label for="image">تصویر</label>
-                                <input type="file" class="form-control form-control-sm" name="image" id="image">
+                                <input type="file" class="form-control form-control-sm mb-3" name="image" id="image">
+                                @error('image')
+                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <section class="row">
+                                    @php
+                                        $number = 1;
+                                    @endphp
+                                    @foreach ($postCategory->image['indexArray'] as $key => $value)
+                                        <section class="col-md-{{ 6 / $number }}">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="currentImage" value="{{ $key }}" id="{{ $number }}" @if($postCategory->image['currentImage']==$key) checked @endif>
+                                                <label for="{{ $number }}" class="form-check-label mx-2">
+                                                    <img src="{{ asset($value) }}" class="w-100" alt="">
+                                                </label>
+                                            </div>
+                                        </section>
+                                        @php
+                                            $number++;
+                                        @endphp
+                                    @endforeach
+                                </section>
                             </div>
 
                             <div class="form-group col-12">
