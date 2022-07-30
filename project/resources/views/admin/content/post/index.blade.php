@@ -42,19 +42,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>چگونه از باطری موبایل نگهداری کینم؟</td>
-                                <td>اقتصادی</td>
-                                <td><img src="{{ asset('admin_assets/images/avatar-2.jpg') }}" alt=""
-                                        class="max-height-2rem"></td>
-                                <td class="width-16-rem text-left">
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-alt"></i>
-                                        حذف</button>
-                                </td>
-                            </tr>
-
+                            @foreach ($posts as $key=>$post)
+                                <tr>
+                                    <th>{{ $key+=1 }}</th>
+                                    <td>{{ $post->title }}</td>
+                                    <td>{{ $post->postCategory->name}}</td>
+                                    <td>
+                                        {{-- <img src="{{ asset($post->image['indexArray'][$post->imag['currentImage']]) }}" alt="" class="max-height-2rem"> --}}
+                                    </td>
+                                    <td class="width-16-rem text-left">
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>
+                                            ویرایش</a>
+                                        <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-alt"></i>
+                                            حذف</button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </section>
