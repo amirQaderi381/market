@@ -110,7 +110,7 @@ class ImageService extends ImageToolsService
         }
         else
         {
-            $files = glob($directory.DIRECTORY_SEPARATOR.'*'.GLOB_MARK);
+            $files = glob($directory . DIRECTORY_SEPARATOR . '*', GLOB_MARK);
 
             foreach($files as $file)
             {
