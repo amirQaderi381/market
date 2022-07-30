@@ -108,24 +108,19 @@ class ImageService extends ImageToolsService
         {
             return false;
         }
-        else
+
+        $files = glob($directory . DIRECTORY_SEPARATOR . '*', GLOB_MARK);
+        foreach($files as $file)
         {
-            $files = glob($directory . DIRECTORY_SEPARATOR . '*', GLOB_MARK);
-
-            foreach($files as $file)
+            if(is_dir($file))
             {
-                if(is_dir($file))
-                {
-                    $this->deleteDirectoryAndFiles($file);
-
-                }else
-                {
-                    unlink($file);
-                }
+                $this->deleteDirectoryAndFiles($file);
             }
-
-            $result = rmdir($directory);
-            return $result;
+            else{
+                unlink($file);
+            }
         }
+        $result = rmdir($directory);
+        return $result;
     }
 }
