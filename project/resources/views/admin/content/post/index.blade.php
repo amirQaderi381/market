@@ -18,9 +18,7 @@
         <section class="col-12">
             <section class="main-body-container">
                 <section class="main-body-container-header">
-                    <h5>
-                        پست ها
-                    </h5>
+                    <h5>پست ها</h5>
                 </section>
 
                 <section class="d-flex justify-content-between align-items-center mt-4 mb-3 border-bottom pb-2">
