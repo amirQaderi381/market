@@ -57,6 +57,26 @@
                             </section>
 
                             <section class="col-12 col-md-6">
+                                <section class="form-group">
+                                    <label for="status">وضعیت</label>
+                                    <select class="form-control form-control-sm" name="status" id="status">
+                                        <option value="0">غیر فعال</option>
+                                        <option value="1">فعال</option>
+                                    </select>
+                                </section>
+                            </section>
+
+                            <section class="col-12 col-md-6">
+                                <section class="form-group">
+                                    <label for="commentable">امکان درج کامنت</label>
+                                    <select class="form-control form-control-sm" name="commentable" id="commentable">
+                                        <option value="0">غیر فعال</option>
+                                        <option value="1">فعال</option>
+                                    </select>
+                                </section>
+                            </section>
+
+                            <section class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="">تاریخ انتشار</label>
                                     <input type="text" class="form-control form-control-sm">
@@ -68,15 +88,16 @@
                                     <label for="">متن پست</label>
                                     <textarea name="body" id="body" class="form-control form-control-sm" rows="6"></textarea>
                                 </div>
-                            </section <section class="col-12">
-                            <button class="btn btn-primary btn-sm">ثبت</button>
+                            </section>
+                            <section class="col-12">
+                                <button class="btn btn-primary btn-sm px-5">ثبت</button>
+                            </section>
                         </section>
+                    </form>
                 </section>
-                </form>
-            </section>
 
+            </section>
         </section>
-    </section>
     </section>
 @endsection
 
