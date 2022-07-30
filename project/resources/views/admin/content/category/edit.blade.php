@@ -18,7 +18,7 @@
         <section class="col-12">
             <section class="main-body-container">
                 <section class="main-body-container-header">
-                    <h5>ویرایس دسته بندی</h5>
+                    <h5>ویرایش دسته بندی</h5>
                 </section>
 
                 <section class="mt-4 mb-3 pb-2 border-bottom">
