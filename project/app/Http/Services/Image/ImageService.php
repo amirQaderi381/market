@@ -96,7 +96,7 @@ class ImageService extends ImageToolsService
         }
     }
 
-    public function DeleteIndex($images)
+    public function deleteIndex($images)
     {
         $directory = public_path($images['directory']);
         $this->deleteDirectoryAndFiles($directory);
