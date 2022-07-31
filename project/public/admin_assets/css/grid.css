@@ -1,4 +1,4 @@
-.header {
+.header-main {
     position: fixed;
     top: 0;
     right: 0;
@@ -10,15 +10,15 @@
     z-index: 1050;
 }
 
-.header .sidebar-header {
+.header-main .sidebar-header {
     flex: 0 0 14rem;
 }
 
-.header .sidebar-header .logo {
+.header-main .sidebar-header .logo {
     max-height: 3.5rem;
 }
 
-.header .body-header {
+.header-main .body-header {
     background-color: #FFFFFF;
     width: calc(100% - 14rem);
 }
@@ -150,7 +150,7 @@
 }
 
 @media only screen and (max-width:767.98px) {
-    .header {
+    .header-main {
         display: block;
     }
     .sidebar-header {
