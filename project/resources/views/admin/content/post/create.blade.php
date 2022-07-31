@@ -2,6 +2,7 @@
 
 @section('head-tag')
     <title>ایجاد پست</title>
+    <link rel="stylesheet" href="{{ asset('admin_assets/datepicker/persian-datepicker.min.css') }}">
 @endsection
 
 @section('content')
@@ -123,8 +124,9 @@
                             <section class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="published_at">تاریخ انتشار</label>
-                                    <input type="text" class="form-control form-control-sm" name="published_at"
-                                        value="{{ old('published_at') }}">
+                                    <input type="text" class="form-control form-control-sm d-none" id="published_at"
+                                        name="published_at" value="{{ old('published_at') }}">
+                                    <input type="text" class="form-control form-control-sm" id="published_at_view">
                                 </div>
                                 @error('published_at')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
@@ -193,10 +195,22 @@
 
 @section('script')
     <script src="{{ asset('admin_assets/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('admin_assets/datepicker/persian-date.min.js') }}"></script>
+    <script src="{{ asset('admin_assets/datepicker/persian-datepicker.min.js') }}"></script>
 
     <script>
         CKEDITOR.replace('body');
         CKEDITOR.replace('summary');
+    </script>
+
+    <script>
+       $(document).ready(function(){
+
+        $('#published_at_view').persianDatepicker({
+            format: 'YYYY/MM/DD',
+            altField: '#published_at'
+            });
+       })
     </script>
 
     <script>
@@ -216,6 +230,8 @@
                 tags: true,
                 data: default_data
             })
+
+            select_tags.children('option').attr('selected', true).trigger('change');
 
             $('#form').submit(function() {
                 if (select_tags.val() !== null && select_tags.val().length > 0) {
