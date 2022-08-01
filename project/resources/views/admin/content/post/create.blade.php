@@ -33,7 +33,7 @@
                     <form action="{{ route('admin.content.post.store') }}" method="POST" id="#form">
                         @csrf
                         <section class="row">
-                            <section class="col-12 col-md-6">
+                            <section class="col-12 col-md-6 my-2">
                                 <div class="form-group">
                                     <label for="title">عنوان پست</label>
                                     <input type="text" class="form-control form-control-sm" name="title"
@@ -48,7 +48,7 @@
                                 @enderror
                             </section>
 
-                            <section class="col-12 col-md-6">
+                            <section class="col-12 col-md-6 my-2">
                                 <div class="form-group">
                                     <label for="category_id">انتخاب دسته</label>
                                     <select name="category_id" id="category_id" class="form-control form-control-sm">
@@ -69,7 +69,7 @@
                                 @enderror
                             </section>
 
-                            <section class="col-12 col-md-6">
+                            <section class="col-12 col-md-6 my-2">
                                 <div class="form-group">
                                     <label for="image">تصویر </label>
                                     <input type="file" class="form-control form-control-sm" name="image">
@@ -83,7 +83,7 @@
                                 @enderror
                             </section>
 
-                            <section class="col-12 col-md-6">
+                            <section class="col-12 col-md-6 my-2">
                                 <section class="form-group">
                                     <label for="status">وضعیت</label>
                                     <select class="form-control form-control-sm" name="status" id="status">
@@ -102,7 +102,7 @@
                                 @enderror
                             </section>
 
-                            <section class="col-12 col-md-6">
+                            <section class="col-12 col-md-6 my-2">
                                 <section class="form-group">
                                     <label for="commentable">امکان درج کامنت</label>
                                     <select class="form-control form-control-sm" name="commentable" id="commentable">
@@ -121,7 +121,7 @@
                                 @enderror
                             </section>
 
-                            <section class="col-12 col-md-6">
+                            <section class="col-12 col-md-6 my-2">
                                 <div class="form-group">
                                     <label for="published_at">تاریخ انتشار</label>
                                     <input type="text" class="form-control form-control-sm d-none" id="published_at"
@@ -137,7 +137,7 @@
                                 @enderror
                             </section>
 
-                            <section class="col-12">
+                            <section class="col-12 my-2">
                                 <div class="form-group">
                                     <label for="tags">برچسب ها</label>
                                     <input type="text" class="form-control form-control-sm d-none" name="tags"
@@ -153,7 +153,7 @@
                                 @enderror
                             </section>
 
-                            <section class="col-12">
+                            <section class="col-12 my-2">
                                 <div class="form-group">
                                     <label for="summary">خلاصه پست</label>
                                     <textarea name="summary" id="summary" class="form-control form-control-sm" rows="6">{{ old('summary') }}</textarea>
@@ -167,7 +167,7 @@
                                 @enderror
                             </section>
 
-                            <section class="col-12">
+                            <section class="col-12 my-2">
                                 <div class="form-group">
                                     <label for="">متن پست</label>
                                     <textarea name="body" id="body" class="form-control form-control-sm" rows="6">{{ old('body') }}</textarea>
