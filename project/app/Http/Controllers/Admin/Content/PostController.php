@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Content;
 use App\Models\Content\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Content\PostRequest;
 use App\Models\Content\PostCategory;
 
 class PostController extends Controller
@@ -37,7 +38,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         dd($request->all());
     }
