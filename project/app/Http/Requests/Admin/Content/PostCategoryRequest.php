@@ -28,24 +28,22 @@ class PostCategoryRequest extends FormRequest
         {
             return [
 
-                'name'=>'required|min:2|max:120',
-                'description'=>'required|min:5|max:500',
-                'slug'=>'nullable',
-                'image'=>'required',
+                'name'=>'required|min:2|max:120|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
+                'description'=>'required|min:5|max:500|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي.,><\/;\n\r& ]+$/u',
+                'image'=>'required|image|mimes:png,jpg,jpeg,gif',
                 'status'=>'required|numeric|in:0,1',
-                'tags'=>'required'
+                'tags'=>'required|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u'
             ];
 
         }else
         {
             return [
 
-                'name'=>'required|min:2|max:120',
-                'description'=>'required|min:5|max:500',
-                'slug'=>'nullable',
-                'image'=>'',
+                'name'=>'required|min:2|max:120|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
+                'description'=>'required|min:5|max:500|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي.,><\/;\n\r& ]+$/u',
+                'image'=>'image|mimes:png,jpg,jpeg,gif',
                 'status'=>'required|numeric|in:0,1',
-                'tags'=>'required'
+                'tags'=>'required|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u'
             ];
 
         }
