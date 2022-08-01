@@ -33,8 +33,8 @@ class PostRequest extends FormRequest
                 'body'=>'required|min:5|max:600|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي.,><\/;\n\r& ]+$/u',
                 'image'=>'required|image|mimes:png,jpg,jpeg,gif',
                 'status'=>'required|numeric|in:0,1',
-                'commentable'=>'required|numeric|in:0,1',
                 'tags'=>'required|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
+                'commentable'=>'required|numeric|in:0,1',
                 'published_at' => 'required|numeric'
             ];
 

@@ -40,7 +40,8 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        dd($request->all());
+        $inputs = $request->all();
+        dd($inputs);
     }
 
     /**
