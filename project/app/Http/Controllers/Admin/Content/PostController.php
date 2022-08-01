@@ -6,6 +6,7 @@ use App\Models\Content\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Content\PostRequest;
+use App\Http\Services\Image\ImageService;
 use App\Models\Content\PostCategory;
 
 class PostController extends Controller
@@ -38,10 +39,33 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostRequest $request)
+    public function store(PostRequest $request , ImageService $imageService)
     {
         $inputs = $request->all();
-        dd($inputs);
+
+        //fix timestamp
+        $realTimestamp = substr($request->published_at,0,10);
+        $inputs['published_at'] = date('Y-m-d H:i:s',(int)$realTimestamp);
+
+        if($request->hasFile('image'))
+        {
+           $imageService->setExclusiveDirectory('images'.DIRECTORY_SEPARATOR.'post');
+           $result=$imageService->createIndexAndSave($request->image);
+
+           if($result == false)
+           {
+             return redirect()->route('admin.content.post.index')->with('swal-error','آپلود تصویر با خطا مواجه شد');
+
+           }
+           $inputs['image'] = $result;
+        }
+
+        $inputs['author_id'] = 1;
+
+        $post=Post::create($inputs);
+        return redirect()->route('admin.content.post.index')->with('swal-success',' پست جدید شما با موفقیت ثبت شد');
+
+
     }
 
     /**
