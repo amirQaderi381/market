@@ -137,7 +137,7 @@ input[type=number]:focus,
 }
 /* admin posts */
 .alert_required{
-	color: #ff50a1 !important;
+	color: #ffff !important;
   }
   .switch {
 	position: relative;
