@@ -30,10 +30,10 @@
                 </section>
 
                 <section>
-                    <form action="{{ route('admin.content.post.store') }}" method="POST" id="#form">
+                    <form action="{{ route('admin.content.post.store') }}" method="POST" id="form" enctype="multipart/form-data">
                         @csrf
                         <section class="row">
-                            <section class="col-12 col-md-6 my-2">
+                            <section class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="title">عنوان پست</label>
                                     <input type="text" class="form-control form-control-sm" name="title"
