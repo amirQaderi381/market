@@ -46,14 +46,12 @@
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->postCategory->name}}</td>
                                     <td>
-                                        <img src="{{ asset($post->image['indexArray'][$post->image['currentImage']]) }}" alt="" width="100"
-                                            height="50">
+                                        <img src="{{ asset($post->image['indexArray'][$post->image['currentImage']]) }}" alt="" width="100" height="50">
                                     </td>
                                     <td class="width-16-rem text-left">
                                         <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>
                                             ویرایش</a>
-                                        <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-alt"></i>
-                                            حذف</button>
+                                        <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-alt"></i> حذف</button>
                                     </td>
                                 </tr>
                             @endforeach
