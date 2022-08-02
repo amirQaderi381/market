@@ -37,6 +37,7 @@
                                 <th>دسته</th>
                                 <th>تصویر</th>
                                 <th>وضعیت</th>
+                                <th>امکان درج کامنت</th>
                                 <th class="max-width-16-rem text-center"><i class="fa fa-cogs"></i> تنظیمات</th>
                             </tr>
                         </thead>
@@ -52,10 +53,17 @@
                                     </td>
                                     <td>
                                         <label>
-                                            <input id="{{ $post->id }}"
-                                                onchange="changeStatus({{ $post->id }})"
+                                            <input id="{{ $post->id }}" onchange="changeStatus({{ $post->id }})"
                                                 data-url="{{ route('admin.content.post.status', $post->id) }}"
                                                 type="checkbox" @if ($post->status === 1) checked @endif>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input id="commentable{{ $post->id }}"
+                                                onchange="changeCommentable({{ $post->id }})"
+                                                data-url="{{ route('admin.content.post.commentable', $post->id) }}"
+                                                type="checkbox" @if ($post->commentable === 1) checked @endif>
                                         </label>
                                     </td>
                                     <td class="width-16-rem text-left">
@@ -90,22 +98,127 @@
                     if (response.status) {
                         if (response.checked) {
                             input_status.prop('checked', true);
+                            successToast('پست با موفقیت فعال شد');
 
                         } else {
 
                             input_status.prop('checked', false);
+                            successToast('پست با موفقیت غیر فعال شد');
                         }
 
-                    }else{
+                    } else {
 
                         input_status.prop('checked', elementValue);
+                        errorToast('هنگام ویرایش مشکلی بوجود امده است');
                     }
                 },
                 error: function() {
 
                     input_status.prop('checked', elementValue);
+                    errorToast('ارتباط برقرار نشد');
                 }
             })
+        }
+
+        function successToast(message) {
+            let successToastElements = ' <section class="toast" data-delay="5000">\n' +
+                '<section class="toast-body py-3 d-flex bg-success text-white">\n' +
+                '<strong class="ml-auto">' + message + '</strong>\n' +
+                ' <button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
+                '  <span aria-hidden="true">&times;</span>' +
+                ' </button>\n' +
+                ' </section>\n' +
+                '</section>\n';
+
+            $('.toast-wrapper').append(successToastElements);
+            $('.toast').toast('show').delay(5500).queue(function() {
+                $(this).remove();
+            });
+        }
+
+        function errorToast(message) {
+            let errorToastElements = ' <section class="toast" data-delay="5000">\n' +
+                '<section class="toast-body py-3 d-flex bg-danger text-white">\n' +
+                '<strong class="ml-auto">' + message + '</strong>\n' +
+                ' <button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
+                '  <span aria-hidden="true">&times;</span>\n' +
+                ' </button>\n' +
+                ' </section>\n' +
+                '</section>\n';
+
+            $('.toast-wrapper').append(errorToastElements);
+            $('.toast').toast('show').delay(5500).queue(function() {
+                $(this).remove();
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+        function changeCommentable(id) {
+
+            let element = $('#commentable' + id);
+            let url = element.attr('data-url');
+            let elementValue = !element.prop('checked');
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function(response) {
+                    if (response.status) {
+                        if (response.checked) {
+                            element.prop('checked', true);
+                            successToast('امکان درج کامنت با موفقیت فعال شد');
+
+                        } else {
+
+                            element.prop('checked', false);
+                            successToast('امکان درج کامنت با موفقیت غیر فعال شد');
+                        }
+
+                    } else {
+
+                        element.prop('checked', elementValue);
+                        errorToast('هنگام ویرایش مشکلی بوجود امده است');
+                    }
+                },
+                error: function() {
+
+                    element.prop('checked', elementValue);
+                    errorToast('ارتباط برقرار نشد');
+                }
+            })
+        }
+
+        function successToast(message) {
+            let successToastElements = ' <section class="toast" data-delay="5000">\n' +
+                '<section class="toast-body py-3 d-flex bg-success text-white">\n' +
+                '<strong class="ml-auto">' + message + '</strong>\n' +
+                ' <button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
+                '  <span aria-hidden="true">&times;</span>' +
+                ' </button>\n' +
+                ' </section>\n' +
+                '</section>\n';
+
+            $('.toast-wrapper').append(successToastElements);
+            $('.toast').toast('show').delay(5500).queue(function() {
+                $(this).remove();
+            });
+        }
+
+        function errorToast(message) {
+            let errorToastElements = ' <section class="toast" data-delay="5000">\n' +
+                '<section class="toast-body py-3 d-flex bg-danger text-white">\n' +
+                '<strong class="ml-auto">' + message + '</strong>\n' +
+                ' <button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
+                '  <span aria-hidden="true">&times;</span>\n' +
+                ' </button>\n' +
+                ' </section>\n' +
+                '</section>\n';
+
+            $('.toast-wrapper').append(errorToastElements);
+            $('.toast').toast('show').delay(5500).queue(function() {
+                $(this).remove();
+            });
         }
     </script>
 @endsection
