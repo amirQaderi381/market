@@ -112,4 +112,26 @@ class PostController extends Controller
     {
         //
     }
+
+    public function status(Post $post)
+    {
+        $post->status = $post->status == 0 ?  1 : 0;
+        $result = $post->save();
+
+        if($result)
+        {
+            if($post->status == 0)
+            {
+               return response()->json(['status' => true , 'checked' => false]);
+
+            }else{
+
+                return response()->json(['status' => true , 'checked' => true]);
+            }
+
+        }else{
+
+            return response()->json(['status' => false]);
+        }
+    }
 }
