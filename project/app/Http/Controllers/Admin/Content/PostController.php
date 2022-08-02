@@ -134,4 +134,26 @@ class PostController extends Controller
             return response()->json(['status' => false]);
         }
     }
+
+    public function commentable(Post $post)
+    {
+        $post->commentable = $post->commentable == 0 ? 1 : 0;
+        $result=$post->save();
+
+        if($result)
+        {
+            if($post->commentable == 0)
+            {
+                return response()->json(['status'=>true , 'checked'=>false]);
+
+            }else{
+
+                return response()->json(['status'=>true , 'checked'=>true]);
+            }
+
+        }else{
+
+               return response()->json(['status'=>false]);
+        }
+    }
 }
