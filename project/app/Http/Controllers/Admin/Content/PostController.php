@@ -98,9 +98,37 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Post $post , ImageService $imageService)
     {
-        //
+        $inputs = $request->all();
+        if($request->hasFile('image'))
+        {
+           if(!empty($post->image))
+           {
+            $imageService->deleteIndex($post->image);
+           }
+           $imageService->setExclusiveDirectory('images'.DIRECTORY_SEPARATOR.'post');
+           $result= $imageService->createIndexAndSave($request->file('image'));
+           if($request == false)
+            {
+              return redirect()->route('admin.content.post.index')->with('swal-error','آپلود تصویر با خطا مواجه شد');
+            }
+            $inputs['image']=$result;
+
+        }else{
+
+            if(isset($inputs['currentImage']) && !empty($post->image))
+            {
+                $image=$post->image;
+                $image['currentImage'] = $inputs['currentImage'];
+                $inputs['image'] = $image;
+            }
+        }
+        $realTimestampFormat = substr($request->published_at,0,10);
+        $inputs['published_at'] = date('Y-m-d H:i:s',(int)$realTimestampFormat);
+        $post = $post->update($inputs);
+        return redirect()->route('admin.content.post.index')->with('swal-success','پست با موفقیت ویرایش شد');
+
     }
 
     /**
