@@ -36,22 +36,33 @@
                                 <th>عنوان پست</th>
                                 <th>دسته</th>
                                 <th>تصویر</th>
+                                <th>وضعیت</th>
                                 <th class="max-width-16-rem text-center"><i class="fa fa-cogs"></i> تنظیمات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($posts as $key=>$post)
+                            @foreach ($posts as $key => $post)
                                 <tr>
-                                    <th>{{ $key+=1 }}</th>
+                                    <th>{{ $key += 1 }}</th>
                                     <td>{{ $post->title }}</td>
-                                    <td>{{ $post->postCategory->name}}</td>
+                                    <td>{{ $post->postCategory->name }}</td>
                                     <td>
-                                        <img src="{{ asset($post->image['indexArray'][$post->image['currentImage']]) }}" alt="" width="100" height="50">
+                                        <img src="{{ asset($post->image['indexArray'][$post->image['currentImage']]) }}"
+                                            alt="" width="100" height="50">
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input id="{{ $post->id }}"
+                                                onchange="changeStatus({{ $post->id }})"
+                                                data-url="{{ route('admin.content.post.status', $post->id) }}"
+                                                type="checkbox" @if ($post->status === 1) checked @endif>
+                                        </label>
                                     </td>
                                     <td class="width-16-rem text-left">
                                         <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>
                                             ویرایش</a>
-                                        <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-alt"></i> حذف</button>
+                                        <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-alt"></i>
+                                            حذف</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -62,4 +73,39 @@
             </section>
         </section>
     </section>
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        function changeStatus(id) {
+
+            let input_status = $('#' + id);
+            let url = input_status.attr('data-url');
+            let elementValue = !input_status.prop('checked');
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function(response) {
+                    if (response.status) {
+                        if (response.checked) {
+                            input_status.prop('checked', true);
+
+                        } else {
+
+                            input_status.prop('checked', false);
+                        }
+
+                    }else{
+
+                        input_status.prop('checked', elementValue);
+                    }
+                },
+                error: function() {
+
+                    input_status.prop('checked', elementValue);
+                }
+            })
+        }
+    </script>
 @endsection
