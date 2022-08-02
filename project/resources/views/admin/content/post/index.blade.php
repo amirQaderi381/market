@@ -68,8 +68,10 @@
                                     </td>
                                     <td class="width-16-rem text-left">
                                         <a href="{{ route('admin.content.post.edit',$post->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
-                                        <form action="" class="d-inline">
-                                            <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-alt"></i> حذف</button>
+                                        <form action="{{ route('admin.content.post.destroy',$post->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            {{ method_field('delete') }}
+                                            <button class="btn btn-danger btn-sm delete" type="submit"><i class="fa fa-trash-alt"></i> حذف</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -221,4 +223,5 @@
             });
         }
     </script>
+    @include('admin.alerts.sweetalert.confirm-delete',['className'=>'delete'])
 @endsection
