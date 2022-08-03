@@ -27,20 +27,20 @@ class FaqRequest extends FormRequest
         {
             return [
 
-                'question'=>'required|min:5|max:300|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
+                'question'=>'required|min:5|max:300|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي.?, ]+$/u',
                 'answer'=>'required|min:2|max:500|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي.,><\/;\n\r& ]+$/u',
                 'status'=>'required|numeric|in:0,1',
-                'tags'=>'required|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
+                'tags'=>'required|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي.?, ]+$/u',
             ];
 
         }else{
 
             return [
 
-                'question'=>'required|min:5|max:300|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
+                'question'=>'required|min:5|max:300|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي.?, ]+$/u',
                 'answer'=>'required|min:2|max:500|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي.,><\/;\n\r& ]+$/u',
                 'status'=>'required|numeric|in:0,1',
-                'tags'=>'required|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
+                'tags'=>'required|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي.?, ]+$/u',
             ];
 
         }
