@@ -57,13 +57,17 @@
                                     </td>
                                     <td>{{ $faq->tags }}</td>
                                     <td class="width-16-rem text-left">
-                                        <a href="" class="btn btn-primary btn-sm">
+                                        <a href="{{ route('admin.content.faq.edit',$faq->id) }}" class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i> ویرایش
                                         </a>
 
-                                        <a href="" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash-alt"></i> حذف
-                                        </a>
+                                        <form action="{{ route('admin.content.faq.destroy',$faq->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            {{ method_field('delete') }}
+                                            <button type="submit" class="btn btn-danger btn-sm delete">
+                                                <i class="fas fa-trash-alt"></i> حذف
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -143,4 +147,5 @@
             }
         }
     </script>
+    @include('admin.alerts.sweetalert.confirm-delete',['className'=>'delete'])
 @endsection
