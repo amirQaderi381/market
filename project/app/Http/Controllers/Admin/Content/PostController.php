@@ -98,7 +98,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post , ImageService $imageService)
+    public function update(PostRequest $request, Post $post , ImageService $imageService)
     {
         $inputs = $request->all();
         if($request->hasFile('image'))
@@ -174,16 +174,16 @@ class PostController extends Controller
         {
             if($post->commentable == 0)
             {
-                return response()->json(['status'=>true , 'checked'=>false]);
+                return response()->json(['commentable'=>true , 'checked'=>false]);
 
             }else{
 
-                return response()->json(['status'=>true , 'checked'=>true]);
+                return response()->json(['commentable'=>true , 'checked'=>true]);
             }
 
         }else{
 
-               return response()->json(['status'=>false]);
+               return response()->json(['commentable'=>false]);
         }
     }
 }
