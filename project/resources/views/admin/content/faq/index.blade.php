@@ -36,7 +36,6 @@
                                 <th scope="col">خلاصه پاسخ</th>
                                 <th scope="col">اسلاگ</th>
                                 <th scope="col">وضعیت</th>
-                                <th scope="col">برچسب ها</th>
                                 <th scope="col" class="max-width-16-rem text-center"><i class="fas fa-cogs"></i> تنظیمات
                                 </th>
                             </tr>
@@ -55,7 +54,6 @@
                                                 @if ($faq->status === 1) checked @endif>
                                         </label>
                                     </td>
-                                    <td>{{ $faq->tags }}</td>
                                     <td class="width-16-rem text-left">
                                         <a href="{{ route('admin.content.faq.edit',$faq->id) }}" class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i> ویرایش

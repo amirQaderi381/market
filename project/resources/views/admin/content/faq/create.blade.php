@@ -43,6 +43,17 @@
                                     </span>
                                 @enderror
                             </div>
+                            <div class="col-12 my-2">
+                                <div class="form-group">
+                                    <label for="answer">پاسخ</label>
+                                    <textarea class="form-control form-control-sm" name="answer" id="body" rows="4">{{ old('answer') }}</textarea>
+                                </div>
+                                @error('answer')
+                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                             <div class="col-md-6 my-2">
                                 <div class="form-group">
                                     <label for="status">وضعیت</label>
@@ -67,18 +78,6 @@
                                     <select class="select2 form-control form-control-sm" id="select_tags" multiple></select>
                                 </div>
                                 @error('tags')
-                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-12 my-2">
-                                <div class="form-group">
-                                    <label for="answer">پاسخ</label>
-                                    <textarea class="form-control form-control-sm" name="answer" id="body" rows="4">{{ old('answer') }}</textarea>
-                                </div>
-                                @error('answer')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
