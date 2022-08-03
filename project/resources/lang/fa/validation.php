@@ -158,7 +158,9 @@ return [
         "category_id"               => "دسته بندی",
         'status'                    =>'وضعیت',
         'tags'                      =>'برچسب ها',
-        'summary'                   => 'خلاصه'
+        'summary'                   => 'خلاصه',
+        'question'                  =>'پرسش',
+        'answer'                    =>'پاسخ'
 
     ],
 ];
