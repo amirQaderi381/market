@@ -166,7 +166,7 @@
                 url: url,
                 type: 'GET',
                 success: function(response) {
-                    if (response.status) {
+                    if (response.commentable) {
                         if (response.checked) {
                             element.prop('checked', true);
                             successToast('امکان درج کامنت با موفقیت فعال شد');
