@@ -60,9 +60,9 @@ class FAQController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Faq $faq)
     {
-        //
+        return view('admin.content.faq.edit',compact('faq'));
     }
 
     /**
@@ -72,9 +72,12 @@ class FAQController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FaqRequest $request, Faq $faq)
     {
-        //
+        $inputs = $request->all();
+        $faq->update($inputs);
+        return redirect()->route('admin.content.faq.index')->with('swal-success',' پرسش با موفقیت ویرایش شد');
+
     }
 
     /**
