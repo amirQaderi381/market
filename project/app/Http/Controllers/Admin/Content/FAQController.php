@@ -86,9 +86,11 @@ class FAQController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Faq $faq)
     {
-        //
+        $faq->delete();
+        return redirect()->route('admin.content.faq.index')->with('swal-success',' پرسش با موفقیت حذف شد');
+
     }
 
     public function status(Faq $faq)
