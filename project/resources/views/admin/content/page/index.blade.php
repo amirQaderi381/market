@@ -33,58 +33,114 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">عنوان</th>
-                                <th scope="col">آدرس پیج</th>
+                                <th scope="col">اسلاگ</th>
+                                <th scope="col">وضعیت</th>
+                                <th scope="col">برچسب ها</th>
                                 <th scope="col" class="max-width-16-rem text-center"><i class="fas fa-cogs"></i> تنظیمات
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>درباره ما</td>
-                                <td>about</td>
-                                <td class="width-16-rem text-left">
-                                    <button type="submit" class="btn btn-primary btn-sm">
-                                        <i class="fas fa-edit"></i> ویرایش
-                                    </button>
+                            @foreach ($pages as $key => $page)
+                                <tr>
+                                    <th>{{ $key += 1 }}</th>
+                                    <td>{{ $page->title }}</td>
+                                    <td>{{ $page->slug }}</td>
+                                    <td>
+                                        <label>
+                                            <input id="{{ $page->id }}" onchange="changeStatus({{ $page->id }})"
+                                                data-url="{{ route('admin.content.page.status', $page->id) }}"
+                                                type="checkbox" @if ($page->status === 1) checked @endif>
+                                        </label>
+                                    </td>
+                                    <td>{{ $page->tags }}</td>
+                                    <td class="width-16-rem text-left">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-edit"></i> ویرایش
+                                        </button>
 
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i> حذف
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>2</th>
-                                <td>درباره ما</td>
-                                <td>about</td>
-                                <td class="width-16-rem text-left">
-                                    <button type="submit" class="btn btn-primary btn-sm">
-                                        <i class="fas fa-edit"></i> ویرایش
-                                    </button>
-
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i> حذف
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>3</th>
-                                <td>درباره ما</td>
-                                <td>about</td>
-                                <td class="width-16-rem text-left">
-                                    <button type="submit" class="btn btn-primary btn-sm">
-                                        <i class="fas fa-edit"></i> ویرایش
-                                    </button>
-
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i> حذف
-                                    </button>
-                                </td>
-                            </tr>
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash-alt"></i> حذف
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </section>
             </section>
         </section>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        function changeStatus(id) {
+            let element = $('#' + id);
+            let url = element.attr('data-url');
+            let elementValue = !element.prop('checked');
+
+            $.ajax({
+
+                type: 'GET',
+                url: url,
+                success: function(response) {
+
+                    if (response.status) {
+                        if (response.checked) {
+                            element.prop('checked', true);
+                            successToast('پیج با موفقیت فعال شد')
+
+                        } else {
+
+                            element.prop('checked', false);
+                            successToast('پیج با موفقیت غیر فعال شد')
+                        }
+
+                    } else {
+
+                        element.prop('checked', elementValue);
+                        errorToast('هنگام ویرایش مشکلی بوجود امده است');
+                    }
+                },
+                error: function() {
+
+                    element.prop('checked', elementValue);
+                    errorToast('ارتباط برقرار نشد');
+                }
+            })
+        }
+
+        function successToast(message) {
+            let successToastTag = '<section class="toast" data-delay="5000">\n' +
+                '<section class="toast-body py-3 d-flex bg-success text-white">\n' +
+                '<strong class="ml-auto">' + message + '</strong>\n' +
+                '<button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
+                '<span aria-hidden="true">&times;</span>\n' +
+                ' </button>\n' +
+                '</section>\n' +
+                '</section>\n';
+
+            $('.toast-wrapper').append(successToastTag);
+            $('.toast').toast('show').delay(5500).queue(function() {
+                $(this).remove();
+            })
+        };
+
+        function errorToast(message) {
+            let errorToastTags = '<section class="toast" data-delay="5000">\n' +
+                '<section class="toast-body py-3 d-flex bg-danger text-white">\n' +
+                '<strong class="ml-auto">' + message + '</strong>\n' +
+                '<button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
+                '<span aria-hidden="true">&times;</span>\n' +
+                ' </button>\n' +
+                '</section>\n' +
+                '</section>\n';
+
+            $('.toast-wrapper').append(errorToastTags);
+            $('.toast').toast('show').delay(5500).queue(function() {
+                $(this).remove();
+            });
+        }
+    </script>
 @endsection
