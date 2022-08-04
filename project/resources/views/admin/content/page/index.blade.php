@@ -55,13 +55,17 @@
                                     </td>
                                     <td>{{ $page->tags }}</td>
                                     <td class="width-16-rem text-left">
-                                        <button type="submit" class="btn btn-primary btn-sm">
+                                        <a href="{{ route('admin.content.page.edit',$page->id) }}" class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i> ویرایش
-                                        </button>
+                                        </a>
 
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash-alt"></i> حذف
-                                        </button>
+                                        <form action="{{ route('admin.content.page.destroy',$page->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            {{ method_field('delete') }}
+                                            <button type="submit" class="btn btn-danger btn-sm delete">
+                                                <i class="fas fa-trash-alt"></i> حذف
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -143,4 +147,5 @@
             });
         }
     </script>
+    @include('admin.alerts.sweetalert.confirm-delete',['className'=>'delete'])
 @endsection

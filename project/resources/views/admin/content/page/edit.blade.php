@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('head-tag')
-    <title>ایجاد پیج</title>
+    <title>ویرایش پیج</title>
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
             <li class="breadcrumb-item font-size-12"><a href="#">خانه</a></li>
             <li class="breadcrumb-item font-size-12"><a href="#"> بخش محتوی</a></li>
             <li class="breadcrumb-item font-size-12"><a href="#"> پیج ساز</a> </li>
-            <li class="breadcrumb-item font-size-12 active" aria-current="page"> ایجاد پیج </li>
+            <li class="breadcrumb-item font-size-12 active" aria-current="page"> ویرایش پیج </li>
         </ol>
     </nav>
 
@@ -18,7 +18,7 @@
         <section class="col-12">
             <section class="main-body-container">
                 <section class="main-body-container-header">
-                    <h5>ایجاد پیج</h5>
+                    <h5>ویرایش پیج</h5>
                 </section>
 
                 <section class="mt-4 mb-3 pb-2 border-bottom">
@@ -26,14 +26,15 @@
                 </section>
 
                 <section>
-                    <form action="{{ route('admin.content.page.store') }}" method="POST" id="form">
+                    <form action="{{ route('admin.content.page.update',$page->id) }}" method="POST" id="form">
                         @csrf
+                        {{ method_field('put') }}
                         <div class="form-row">
                             <div class="col-12 my-2">
                                 <div class="form-group">
                                     <label for="title">عنوان</label>
                                     <input type="text" class="form-control form-control-sm" name="title"
-                                        value="{{ old('title') }}">
+                                        value="{{ old('title',$page->title) }}">
                                 </div>
                                 @error('title')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
@@ -44,7 +45,7 @@
                             <div class="col-12 my-2">
                                 <div class="form-group">
                                     <label for="body">محتوی</label>
-                                    <textarea class="form-control form-control-sm" name="body" id="body" rows="4">{{ old('body') }}</textarea>
+                                    <textarea class="form-control form-control-sm" name="body" id="body" rows="4">{{ old('body',$page->body) }}</textarea>
                                 </div>
                                 @error('body')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
@@ -57,9 +58,9 @@
                                 <section class="form-group">
                                     <label for="status">وضعیت</label>
                                     <select class="form-control form-control-sm" name="status" id="status">
-                                        <option value="0" @if (old('status') == 0) selected @endif>غیر فعال
+                                        <option value="0" @if (old('status',$page->status) == 0) selected @endif>غیر فعال
                                         </option>
-                                        <option value="1" @if (old('status') == 1) selected @endif>فعال
+                                        <option value="1" @if (old('status',$page->status) == 1) selected @endif>فعال
                                         </option>
                                     </select>
                                 </section>
@@ -76,7 +77,7 @@
                                 <div class="form-group">
                                     <label for="tags">برچسب ها</label>
                                     <input type="hidden" class="form-control form-control-sm" name="tags"
-                                        id="tags" value="{{ old('tags') }}">
+                                        id="tags" value="{{ old('tags',$page->tags) }}">
                                     <select class="select2 form-control form-control-sm" id="select_tags" multiple></select>
                                 </div>
                                 @error('tags')
