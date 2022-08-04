@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Content;
 
-use App\Http\Controllers\Controller;
+use App\Models\Content\Page;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PageController extends Controller
 {
@@ -14,7 +15,8 @@ class PageController extends Controller
      */
     public function index()
     {
-        return view('admin.content.page.index');
+        $pages = Page::orderBy('created_at','desc')->simplePaginate(15);
+        return view('admin.content.page.index',compact('pages'));
     }
 
     /**
@@ -81,5 +83,26 @@ class PageController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function status(Page $page)
+    {
+       $page->status = $page->status == 0 ? 1 :0;
+       $result = $page->save();
+
+       if($result)
+       {
+          if($page->status == 0)
+          {
+             return response()->json(['status'=>true , 'checked'=>false]);
+
+          }else{
+
+             return response()->json(['status'=>true , 'checked'=>true]);
+          }
+
+       }else{
+            return response()->json(['status'=>false]);
+       }
     }
 }
