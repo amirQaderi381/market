@@ -243,6 +243,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/edit/{id}', [PageController::class, 'edit'])->name('admin.content.page.edit');
             Route::put('/update/{id}', [PageController::class, 'update'])->name('admin.content.page.update');
             Route::delete('/destroy/{id}', [PageController::class, 'destroy'])->name('admin.content.page.destroy');
+            Route::get('/status/{page}',[PageController::class,'status'])->name('admin.content.page.status');
         });
 
         //post
