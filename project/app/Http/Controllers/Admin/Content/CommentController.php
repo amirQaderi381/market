@@ -78,14 +78,14 @@ class CommentController extends Controller
         if($comment->parent_id == null)
         {
             $inputs = $request->all();
-        $inputs['parent_id'] = $comment->id;
-        $inputs['author_id'] = 1;
-        $inputs['commentable_id'] = $comment->commentable_id;
-        $inputs['commentable_type'] = $comment->commentable_type;
-        $inputs['approved'] = 1;
-        $inputs['status'] = 1;
-        Comment::create($inputs);
-        return redirect()->route('admin.content.comment.index')->with('swal-success','پاسخ شما با موفقیت ثبت شد');
+            $inputs['parent_id'] = $comment->id;
+            $inputs['author_id'] = 1;
+            $inputs['commentable_id'] = $comment->commentable_id;
+            $inputs['commentable_type'] = $comment->commentable_type;
+            $inputs['approved'] = 1;
+            $inputs['status'] = 1;
+            Comment::create($inputs);
+            return redirect()->route('admin.content.comment.index')->with('swal-success','پاسخ شما با موفقیت ثبت شد');
 
         }else{
 
