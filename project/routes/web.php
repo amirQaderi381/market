@@ -338,6 +338,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/edit/{id}', [SMSController::class, 'edit'])->name('admin.notify.sms.edit');
             Route::put('/update/{id}', [SMSController::class, 'update'])->name('admin.notify.sms.update');
             Route::delete('/destroy/{id}', [SMSController::class, 'destroy'])->name('admin.notify.sms.destroy');
+            Route::get('/status/{sms}', [SMSController::class, 'status'])->name('admin.notify.sms.status');
         });
     });
 
