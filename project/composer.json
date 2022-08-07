@@ -16,7 +16,8 @@
         "laravel/jetstream": "^2.8",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.5"
+        "livewire/livewire": "^2.5",
+        "morilog/jalali": "^3.4"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -27,6 +28,9 @@
         "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
+        "files": [
+            "app/Helpers/helper.php"
+        ],
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
