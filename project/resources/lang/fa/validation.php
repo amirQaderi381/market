@@ -160,7 +160,8 @@ return [
         'tags'                      =>'برچسب ها',
         'summary'                   => 'خلاصه',
         'question'                  =>'پرسش',
-        'answer'                    =>'پاسخ'
+        'answer'                    =>'پاسخ',
+        'subject'                   =>'عنوان ایمیل'
 
     ],
 ];
