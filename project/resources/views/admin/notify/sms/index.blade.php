@@ -48,7 +48,7 @@
                                     <th>{{ $key += 1 }}</th>
                                     <td>{{ $single_sms->title }}</td>
                                     <td>{{ $single_sms->body }}</td>
-                                    <td>{{ jalaliDate($single_sms->published_at) }}</td>
+                                    <td>{{ jalaliDate($single_sms->published_at,'H:i:s Y/m/d') }}</td>
                                     <td>
                                         <label>
                                             <input id="{{ $single_sms->id }}" onchange="changeStatus({{ $single_sms->id }})"
@@ -57,9 +57,14 @@
                                         </label>
                                     </td>
                                     <td class="width-16-rem text-left">
-                                        <a href="#" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
-                                        <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-alt"></i>
-                                            حذف</button>
+                                        <a href="{{ route('admin.notify.sms.edit',$single_sms->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
+                                        <form action="{{ route('admin.notify.sms.destroy', $single_sms->id) }}" method="post" class="d-inline">
+                                            @csrf
+                                            {{ method_field('delete') }}
+                                            <button class="btn btn-danger btn-sm delete" type="submit">
+                                                <i class="fa fa-trash-alt"></i> حذف
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

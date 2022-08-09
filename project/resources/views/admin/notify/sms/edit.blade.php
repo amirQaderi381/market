@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('head-tag')
-    <title>ایجاد اطلاعیه پیامکی</title>
+    <title>ویرایش اطلاعیه پیامکی</title>
     <link rel="stylesheet" href="{{ asset('admin_assets/datepicker/persian-datepicker.min.css') }}">
 @endsection
 
@@ -11,7 +11,7 @@
             <li class="breadcrumb-item font-size-12"> <a href="#">خانه</a></li>
             <li class="breadcrumb-item font-size-12"> <a href="#">اطلاع رسانی</a></li>
             <li class="breadcrumb-item font-size-12"> <a href="#">اطلاعیه پیامکی</a></li>
-            <li class="breadcrumb-item font-size-12 active" aria-current="page"> ایجاد اطلاعیه پیامکی</li>
+            <li class="breadcrumb-item font-size-12 active" aria-current="page"> ویرایش اطلاعیه پیامکی</li>
         </ol>
     </nav>
 
@@ -21,7 +21,7 @@
             <section class="main-body-container">
                 <section class="main-body-container-header">
                     <h5>
-                        ایجاد اطلاعیه پیامکی
+                        ویرایش اطلاعیه پیامکی
                     </h5>
                 </section>
 
@@ -30,14 +30,14 @@
                 </section>
 
                 <section>
-                    <form action="{{ route('admin.notify.sms.store') }}" method="post">
+                    <form action="{{ route('admin.notify.sms.update',$sms->id) }}" method="post">
                         @csrf
+                        {{ method_field('put') }}
                         <section class="row">
                             <section class="col-12 col-md-6 my-2">
                                 <div class="form-group">
                                     <label for="title">عنوان پیامک</label>
-                                    <input type="text" name="title" class="form-control form-control-sm"
-                                        value="{{ old('title') }}">
+                                    <input type="text" name="title" class="form-control form-control-sm" value="{{ old('title',$sms->title) }}">
                                 </div>
                                 @error('title')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
@@ -52,9 +52,8 @@
                             <section class="col-12 col-md-6 my-2">
                                 <div class="form-group">
                                     <label for="published_at"> تاریخ انتشار</label>
-                                    <input type="hidden" name="published_at" class="form-control form-control-sm"
-                                        id="published_at" value="{{ old('published_at') }}">
-                                    <input type="text" class="form-control form-control-sm" id="published_at_view">
+                                    <input type="hidden" name="published_at" class="form-control form-control-sm" id="published_at" value="{{ old('published_at',$sms->published_at) }}">
+                                    <input type="text" class="form-control form-control-sm" id="published_at_view" value="{{ old('published_at',$sms->published_at) }}">
                                 </div>
                                 @error('published_at')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
@@ -69,9 +68,9 @@
                                 <section class="form-group">
                                     <label for="status">وضعیت</label>
                                     <select class="form-control form-control-sm" name="status" id="status">
-                                        <option value="0" @if (old('status') == 0) selected @endif>غیر فعال
+                                        <option value="0" @if (old('status',$sms->status) == 0) selected @endif>غیر فعال
                                         </option>
-                                        <option value="1" @if (old('status') == 1) selected @endif>فعال
+                                        <option value="1" @if (old('status',$sms->status) == 1) selected @endif>فعال
                                         </option>
                                     </select>
                                 </section>
@@ -87,7 +86,7 @@
                             <section class="col-12 my-2">
                                 <div class="form-group">
                                     <label for="body">متن پیامک</label>
-                                    <textarea name="body" id="body" class="form-control form-control-sm" rows="6">{{ old('body') }}</textarea>
+                                    <textarea name="body" id="body" class="form-control form-control-sm" rows="6">{{ old('body',$sms->body) }}</textarea>
                                 </div>
                                 @error('body')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
@@ -114,7 +113,7 @@
     <script src="{{ asset('admin_assets/datepicker/persian-date.min.js') }}"></script>
     <script src="{{ asset('admin_assets/datepicker/persian-datepicker.min.js') }}"></script>
     <script>
-        $('#published_at_view').persianDatepicker({
+       $('#published_at_view').persianDatepicker({
             format: 'LLLL',
             altField: '#published_at',
             timePicker: {
