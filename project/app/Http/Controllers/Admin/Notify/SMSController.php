@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Notify;
 use App\Models\Notify\SMS;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Notify\SMSRequest;
 
 class SMSController extends Controller
 {
@@ -35,9 +36,13 @@ class SMSController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SMSRequest $request)
     {
-        //
+        $inputs = $request->all();
+        $realTimeStampFormat = date('Y/m/d H:i:s',(int)substr($request->published_at,0,10));
+        $inputs['published_at'] = $realTimeStampFormat;
+        SMS::create($inputs);
+        return redirect()->route('admin.notify.sms.index')->with('swal-success','پیامک جدبد با موفقیت ثبت شد');
     }
 
     /**
@@ -57,9 +62,9 @@ class SMSController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(SMS $sms)
     {
-        //
+        return view('admin.notify.sms.edit',compact('sms'));
     }
 
     /**
@@ -69,9 +74,13 @@ class SMSController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SMSRequest $request, SMS $sms)
     {
-        //
+        $inputs = $request->all();
+        $realTimeStampFormat = date('Y/m/d H:i:s',(int)substr($request->published_at,0,10));
+        $inputs['published_at'] = $realTimeStampFormat;
+        $sms->update($inputs);
+        return redirect()->route('admin.notify.sms.index')->with('swal-success','پیامک شما با موفقیت ویرایش شد');
     }
 
     /**
@@ -80,9 +89,10 @@ class SMSController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SMS $sms)
     {
-        //
+        $sms->delete();
+        return redirect()->route('admin.notify.sms.index')->with('swal-success','پیامک شما با موفقیت حذف شد');
     }
 
     public function status(SMS $sms)
