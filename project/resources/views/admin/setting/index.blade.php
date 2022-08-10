@@ -35,19 +35,28 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>نام سایت</th>
                             <th>عنوان سایت</th>
+                            <th>توضیحات سایت</th>
+                            <th>کلمات کلیدی سایت</th>
+                            <th>لوگو سایت</th>
+                            <th>آیکون سایت</th>
                             <th class="max-width-16-rem text-center"><i class="fa fa-cogs"></i> تنظیمات</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th>1</th>
-                            <td>فروشگاه من	</td>
-                            <td>فروشگاه من	</td>
-                            <td class="width-22-rem text-left">
-                                <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
-                                <button disabled class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-alt"></i> حذف</button>
+                            <td>{{ $setting->title }}</td>
+                            <td>{{ $setting->description }}</td>
+                            <td>{{ $setting->keywords }}</td>
+                            <td>
+                                <img src="{{ asset($setting->logo) }}" alt="" width="100" height="50">
+                            </td>
+                            <td>
+                                <img src="{{ asset($setting->icon) }}" alt="" width="100" height="50">
+                            </td>
+                            <td class="text-left">
+                                <a href="{{ route('admin.setting.edit',$setting->id) }}" class="btn btn-primary btn-sm px-3"><i class="fa fa-edit"></i> ویرایش</a>
                             </td>
                         </tr>
                     </tbody>
