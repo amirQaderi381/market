@@ -45,7 +45,7 @@ class EmailFileController extends Controller
           $fileService->setExclusiveDirectory('files'.DIRECTORY_SEPARATOR.'email-file');
           $fileService->setFileSize($request->file('file'));
           $fileSize = $fileService->getFileSize();
-          $result = $fileService->moveToPublic($request->file('file'));
+          $result = $fileService->moveToStorage($request->file('file'));
           $fileFormat = $fileService->getFileFormat();
        }
 
@@ -99,19 +99,18 @@ class EmailFileController extends Controller
         {
             if(!empty($file->file_path))
             {
-                $fileService->DeleteFile($file->file_path);
+                $fileService->DeleteFile($file->file_path,true);
             }
             $fileService->setExclusiveDirectory('files'.DIRECTORY_SEPARATOR.'email-file');
             $fileService->setFileSize($request->file('file'));
             $fileSize=$fileService->getFileSize();
-            $result=$fileService->moveToPublic($request->file('file'));
+            $result=$fileService->moveToStorage($request->file('file'));
             $fileFormat = $fileService->getFileFormat();
             if($result == false)
             {
                 return redirect()->route('admin.notify.email-file.index',$file->email->id)->with('swal-error','آپلود فایل با خطا مواجه شد');
             }
 
-            $inputs['public_mail_id'] = $file->email->id;
             $inputs['file_path'] = $result;
             $inputs['file_size'] = $fileSize;
             $inputs['file_type'] = $fileFormat;
