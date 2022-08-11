@@ -53,9 +53,9 @@ class FileToolsService
         return $this->fileSize;
     }
 
-    public function setFileSize($fileSize)
+    public function setFileSize($file)
     {
-        $this->fileName = $fileSize;
+        $this->fileSize = $file->getSize();
     }
 
     public function setCurrnetFileName()
