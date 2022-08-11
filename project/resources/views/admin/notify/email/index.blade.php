@@ -56,8 +56,13 @@
                                                 type="checkbox" @if ($email->status === 1) checked @endif>
                                         </label>
                                     </td>
-                                    <td class="width-16-rem text-left">
-                                        <a href="{{ route('admin.notify.email.edit',$email->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
+                                    <td class="max-width-16-rem text-left">
+                                        <a href="{{ route('admin.notify.email-file.index',$email->id) }}" class="btn btn-warning btn-sm">
+                                            <i class="fa fa-edit"></i> فایل های ضمیمه شده
+                                        </a>
+                                        <a href="{{ route('admin.notify.email.edit',$email->id) }}" class="btn btn-info btn-sm">
+                                            <i class="fa fa-edit"></i> ویرایش
+                                        </a>
                                         <form action="{{ route('admin.notify.email.destroy',$email->id) }}" method="post" class="d-inline">
                                             @csrf
                                             {{ method_field('delete') }}
