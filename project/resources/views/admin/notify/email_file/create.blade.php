@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('head-tag')
-    <title>ایجاد اطلاعیه ایمیلی</title>
+    <title>ایجاد فایل اطلاعیه ایمیلی</title>
     <link rel="stylesheet" href="{{ asset('admin_assets/datepicker/persian-datepicker.min.css') }}">
 @endsection
 
@@ -11,7 +11,7 @@
             <li class="breadcrumb-item font-size-12"> <a href="#">خانه</a></li>
             <li class="breadcrumb-item font-size-12"> <a href="#">اطلاع رسانی</a></li>
             <li class="breadcrumb-item font-size-12"> <a href="#">اطلاعیه ایمیلی</a></li>
-            <li class="breadcrumb-item font-size-12 active" aria-current="page"> ایجاد اطلاعیه ایمیلی</li>
+            <li class="breadcrumb-item font-size-12 active" aria-current="page"> ایجاد فایل اطلاعیه ایمیلی</li>
         </ol>
     </nav>
 
@@ -21,50 +21,30 @@
             <section class="main-body-container">
                 <section class="main-body-container-header">
                     <h5>
-                        ایجاد اطلاعیه ایمیلی
+                        ایجاد فایل اطلاعیه ایمیلی
                     </h5>
                 </section>
 
                 <section class="d-flex justify-content-between align-items-center mt-4 mb-3 border-bottom pb-2">
-                    <a href="{{ route('admin.notify.email.index') }}" class="btn btn-info btn-sm">بازگشت</a>
+                    <a href="{{ route('admin.notify.email-file.index',$email->id) }}" class="btn btn-info btn-sm">بازگشت</a>
                 </section>
 
                 <section>
-                    <form action="{{ route('admin.notify.email.store') }}" method="post">
+                    <form action="{{ route('admin.notify.email-file.store',$email->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <section class="row">
-                            <section class="col-12 col-md-6 my-2">
+                            <section class="col-12 my-2">
                                 <div class="form-group">
-                                    <label for="subject">عنوان ایمیل</label>
-                                    <input type="text" name="subject" class="form-control form-control-sm"
-                                        value="{{ old('subject') }}">
+                                    <label for="file">فایل</label>
+                                    <input type="file" class="form-control form-control-sm" name="file" id="file">
                                 </div>
-                                @error('subject')
-                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
+                                @error('file')
+                                        <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                             </section>
 
-
-                            <section class="col-12 col-md-6 my-2">
-                                <div class="form-group">
-                                    <label for="published_at"> تاریخ انتشار</label>
-                                    <input type="hidden" name="published_at" class="form-control form-control-sm"
-                                        id="published_at">
-                                    <input type="tedxt" class="form-control form-control-sm" id="published_at_view">
-                                </div>
-                                @error('published_at')
-                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
-
-                            </section>
 
                             <section class="col-12 my-2">
                                 <section class="form-group">
@@ -85,20 +65,6 @@
                                 @enderror
                             </section>
 
-                            <section class="col-12 my-2">
-                                <div class="form-group">
-                                    <label for="body">متن ایمیل</label>
-                                    <textarea name="body" id="body" class="form-control form-control-sm" rows="6">{{ old('body') }}</textarea>
-                                </div>
-                                @error('body')
-                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
-                            </section>
-
                             <section class="col-12">
                                 <button class="btn btn-primary btn-sm">ثبت</button>
                             </section>
@@ -109,24 +75,4 @@
             </section>
         </section>
     </section>
-@endsection
-@section('script')
-    <script src="{{ asset('admin_assets/ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ asset('admin_assets/datepicker/persian-date.min.js') }}"></script>
-    <script src="{{ asset('admin_assets/datepicker/persian-datepicker.min.js') }}"></script>
-    <script>
-        $('#published_at_view').persianDatepicker({
-            format: 'LLLL',
-            altField: '#published_at',
-            timePicker: {
-                enabled: true,
-                meridiem: {
-                    enabled: true
-                }
-            }
-        });
-    </script>
-    <script>
-        CKEDITOR.replace('body');
-    </script>
 @endsection
