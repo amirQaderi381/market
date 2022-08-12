@@ -75,7 +75,7 @@ class SettingController extends Controller
         {
             if(!empty($setting->icon))
             {
-                $imageService->deleteDirectoryAndFiles($setting->icon);
+                $imageService->DeleteImage($setting->icon);
             }
 
             $imageService->setExclusiveDirectory('images'.DIRECTORY_SEPARATOR.'setting');
