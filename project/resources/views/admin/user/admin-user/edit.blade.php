@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('head-tag')
-    <title>ایجاد کاربر ادمین</title>
+    <title>ویرایش کاربر ادمین</title>
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
             <li class="breadcrumb-item font-size-12"> <a href="#">خانه</a></li>
             <li class="breadcrumb-item font-size-12"> <a href="#">بخش کاربران</a></li>
             <li class="breadcrumb-item font-size-12"> <a href="#">کاربران ادمین</a></li>
-            <li class="breadcrumb-item font-size-12 active" aria-current="page"> ایجاد کاربر ادمین</li>
+            <li class="breadcrumb-item font-size-12 active" aria-current="page"> ویرایش کاربر ادمین</li>
         </ol>
     </nav>
 
@@ -20,7 +20,7 @@
             <section class="main-body-container">
                 <section class="main-body-container-header">
                     <h5>
-                        ایجاد کاربر ادمین
+                        ویرایش کاربر ادمین
                     </h5>
                 </section>
 
@@ -29,15 +29,15 @@
                 </section>
 
                 <section>
-                    <form action="{{ route('admin.user.admin-user.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.user.admin-user.update',$user->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
+                        {{ method_field('put') }}
                         <section class="row">
-
                             <section class="col-12 col-md-6 my-2">
                                 <div class="form-group">
                                     <label for="first_name">نام</label>
                                     <input type="text" name="first_name" class="form-control form-control-sm"
-                                        value="{{ old('first_name') }}">
+                                        value="{{ old('first_name',$user->first_name) }}">
                                 </div>
                                 @error('first_name')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <label for="last_name">نام خانوادگی</label>
                                     <input type="text" name="last_name" class="form-control form-control-sm"
-                                        value="{{ old('first_name') }}">
+                                        value="{{ old('last_name',$user->last_name) }}">
                                 </div>
                                 @error('last_name')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
@@ -61,64 +61,12 @@
                                     </span>
                                 @enderror
                             </section>
-                            <section class="col-12 col-md-6 my-2">
-                                <div class="form-group">
-                                    <label for="email">ایمیل</label>
-                                    <input type="text" name="email" class="form-control form-control-sm"
-                                        value="{{ old('email') }}">
-                                </div>
-                                @error('email')
-                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
-                            </section>
-                            <section class="col-12 col-md-6 my-2">
-                                <div class="form-group">
-                                    <label for="mobile"> شماره موبایل</label>
-                                    <input type="text" name="mobile" class="form-control form-control-sm"
-                                        value="{{ old('mobile') }}">
-                                </div>
-                                @error('mobile')
-                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
-                            </section>
-                            <section class="col-12 col-md-6 my-2">
-                                <div class="form-group">
-                                    <label for="password">کلمه عبور</label>
-                                    <input type="password" name="password" class="form-control form-control-sm">
-                                </div>
-                                @error('password')
-                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
-                            </section>
-                            <section class="col-12 col-md-6 my-2">
-                                <div class="form-group">
-                                    <label for="password_confirmation">تکرار کلمه عبور</label>
-                                    <input type="password" name="password_confirmation" class="form-control form-control-sm">
-                                </div>
-                                @error('password_confirmation')
-                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
-                            </section>
+
                             <section class="col-12 col-md-6 my-2">
                                 <div class="form-group">
                                     <label for="profile_photo_path">تصویر</label>
                                     <input type="file" name="profile_photo_path" class="form-control form-control-sm">
+                                    <img src="{{ asset($user->profile_photo_path) }}" class="w-50 rounded mt-3">
                                 </div>
                                 @error('profile_photo_path')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
@@ -133,9 +81,9 @@
                                 <section class="form-group">
                                     <label for="status">وضعیت کاربر</label>
                                     <select class="form-control form-control-sm" name="status" id="status">
-                                        <option value="0" @if (old('status') == 0) selected @endif>غیر فعال
+                                        <option value="0" @if (old('status',$user->status) == 0) selected @endif>غیر فعال
                                         </option>
-                                        <option value="1" @if (old('status') == 1) selected @endif>فعال
+                                        <option value="1" @if (old('status',$user->status) == 1) selected @endif>فعال
                                         </option>
                                     </select>
                                 </section>
@@ -152,9 +100,9 @@
                                 <section class="form-group">
                                     <label for="activation">وضعیت فعال سازی</label>
                                     <select class="form-control form-control-sm" name="activation" id="activation">
-                                        <option value="0" @if (old('activation') == 0) selected @endif>غیر فعال
+                                        <option value="0" @if (old('activation',$user->activation) == 0) selected @endif>غیر فعال
                                         </option>
-                                        <option value="1" @if (old('activation') == 1) selected @endif>فعال
+                                        <option value="1" @if (old('activation',$user->activation) == 1) selected @endif>فعال
                                         </option>
                                     </select>
                                 </section>
