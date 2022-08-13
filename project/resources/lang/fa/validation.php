@@ -161,7 +161,8 @@ return [
         'summary'                   => 'خلاصه',
         'question'                  =>'پرسش',
         'answer'                    =>'پاسخ',
-        'subject'                   =>'عنوان ایمیل'
+        'subject'                   =>'عنوان ایمیل',
+        'national_code'             =>'کدملی'
 
     ],
 ];
