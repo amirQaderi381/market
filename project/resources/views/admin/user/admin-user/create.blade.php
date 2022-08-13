@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <label for="last_name">نام خانوادگی</label>
                                     <input type="text" name="last_name" class="form-control form-control-sm"
-                                        value="{{ old('first_name') }}">
+                                        value="{{ old('last_name') }}">
                                 </div>
                                 @error('last_name')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
