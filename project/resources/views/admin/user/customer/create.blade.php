@@ -91,20 +91,6 @@
                             </section>
                             <section class="col-12 col-md-6 my-2">
                                 <div class="form-group">
-                                    <label for="national_code"> کد ملی</label>
-                                    <input type="text" name="national_code" class="form-control form-control-sm"
-                                        value="{{ old('national_code') }}">
-                                </div>
-                                @error('national_code')
-                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
-                            </section>
-                            <section class="col-12 col-md-6 my-2">
-                                <div class="form-group">
                                     <label for="password">کلمه عبور</label>
                                     <input type="password" name="password" class="form-control form-control-sm">
                                 </div>

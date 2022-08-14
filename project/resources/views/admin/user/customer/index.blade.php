@@ -53,7 +53,6 @@
                                     <td>{{ $customer->mobile }} </td>
                                     <td>{{ $customer->first_name }} </td>
                                     <td>{{ $customer->last_name }} </td>
-                                    <td>{{ $customer->national_code }}</td>
                                     <td>
                                         <label>
                                             <input id="{{ $customer->id }}-activation"
