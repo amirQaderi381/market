@@ -91,7 +91,7 @@ class TicketCategoryController extends Controller
         return redirect()->route('admin.ticket.category.index')->with('swal-success','دسته بندی شما با موفقیت حذف شد');
     }
 
-    public function status(ticketCategory $ticketCategory)
+    public function status(TicketCategory $ticketCategory)
     {
         $ticketCategory->status = $ticketCategory->status == 0 ?  1 : 0;
         $result = $ticketCategory->save();
