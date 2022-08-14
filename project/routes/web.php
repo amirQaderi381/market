@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\Market\PropertyController;
 use App\Http\Controllers\Admin\Setting\SettingController;
 use App\Http\Controllers\Admin\User\PermissionController;
 use App\Http\Controllers\Admin\Notify\EmailFileController;
+use App\Http\Controllers\Admin\Ticket\TicketAdminController;
 use App\Http\Controllers\Admin\Ticket\TicketCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketPriorityController;
 use App\Http\Controllers\Admin\Content\CommentController as ContentCommentController;
@@ -379,8 +380,8 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/status/{ticketCategory}', [TicketCategoryController::class, 'status'])->name('admin.ticket.category.status');
         });
 
-            //priority
-            Route::prefix('priority')->group(function(){
+        //priority
+        Route::prefix('priority')->group(function(){
             Route::get('/', [TicketPriorityController::class, 'index'])->name('admin.ticket.priority.index');
             Route::get('/create', [TicketPriorityController::class, 'create'])->name('admin.ticket.priority.create');
             Route::post('/store', [TicketPriorityController::class, 'store'])->name('admin.ticket.priority.store');
@@ -388,6 +389,12 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::put('/update/{ticketPriority}', [TicketPriorityController::class, 'update'])->name('admin.ticket.priority.update');
             Route::delete('/destroy/{ticketPriority}', [TicketPriorityController::class, 'destroy'])->name('admin.ticket.priority.destroy');
             Route::get('/status/{ticketPriority}', [TicketPriorityController::class, 'status'])->name('admin.ticket.priority.status');
+        });
+
+        //admin
+        Route::prefix('admin')->group(function(){
+            Route::get('/', [TicketAdminController::class, 'index'])->name('admin.ticket.admin.index');
+            Route::get('/set/{admin}', [TicketAdminController::class, 'set'])->name('admin.ticket.admin.set');
         });
 
         Route::get('/new-tickets', [TicketController::class, 'newTickets'])->name('admin.ticket.newTickets');
