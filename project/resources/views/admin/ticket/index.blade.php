@@ -58,7 +58,7 @@
                                         <a href="{{ route('admin.ticket.show',$ticket->id) }}" class="btn btn-info btn-sm">
                                             <i class="fa fa-eye"></i> مشاهده
                                         </a>
-                                        <a href="{{ route('admin.ticket.change',$ticket->id) }}" class="btn btn-{{ $ticket->status == 0 ? 'danger' : 'warning'}} btn-sm">
+                                        <a href="{{ route('admin.ticket.change',$ticket->id) }}" class="btn btn-{{ $ticket->status == 0 ? 'warning' : 'success'}} btn-sm">
                                             <i class="fa fa-check"></i> {{ $ticket->status == 0 ? 'بستن' : 'باز کردن'}}
                                         </a>
                                     </td>
