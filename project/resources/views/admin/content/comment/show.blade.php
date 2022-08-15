@@ -45,6 +45,13 @@
                                     <label for="body">پاسخ ادمین </label>
                                     <textarea class="form-control form-control-sm" rows="4" name="body"></textarea>
                                 </div>
+                                @error('body')
+                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                        <strong>
+                                            {{ $message }}
+                                        </strong>
+                                    </span>
+                                @enderror
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm px-5">ثبت</button>
                         </form>
