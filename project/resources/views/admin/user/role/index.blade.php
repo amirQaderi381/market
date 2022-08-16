@@ -36,69 +36,41 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">نام نقش</th>
+                                <th scope="col">توضیحات نقش</th>
                                 <th scope="col">دسترسی ها</th>
                                 <th scope="col" class="max-width-16-rem text-center"><i class="fas fa-cogs"></i> تنظیمات
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>پشتیبان فروش </td>
-                                <td>
-                                    <ol class="px-2">
-                                        <li>مشاهده سفارشات</li>
-                                        <li>مشاهده پرداخت ها</li>
-                                        <li>مشاهده تخفیف ها</li>
-                                    </ol>
-                                </td>
-                                <td class="width-20-rem text-left">
-                                    <a href="#" class="btn btn-success btn-sm"><i class="fas fa-user-graduate"></i> دسترسی
-                                        ها</a>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
-                                    <button class="btn btn-danger btn-sm" type="submit">
-                                        <i class="fa fa-trash-alt"></i> حذف
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>2</th>
-                                <td>پشتیبان فروش </td>
-                                <td>
-                                    <ol class="px-2">
-                                        <li>مشاهده سفارشات</li>
-                                        <li>مشاهده پرداخت ها</li>
-                                        <li>مشاهده تخفیف ها</li>
-                                    </ol>
-                                </td>
-                                <td class="width-20-rem text-left">
-                                    <a href="#" class="btn btn-success btn-sm"><i class="fas fa-user-graduate"></i> دسترسی
-                                        ها</a>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
-                                    <button class="btn btn-danger btn-sm" type="submit">
-                                        <i class="fa fa-trash-alt"></i> حذف
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>3</th>
-                                <td>پشتیبان فروش </td>
-                                <td>
-                                    <ol class="px-2">
-                                        <li>مشاهده سفارشات</li>
-                                        <li>مشاهده پرداخت ها</li>
-                                        <li>مشاهده تخفیف ها</li>
-                                    </ol>
-                                </td>
-                                <td class="width-20-rem text-left">
-                                    <a href="#" class="btn btn-success btn-sm"><i class="fas fa-user-graduate"></i> دسترسی
-                                        ها</a>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
-                                    <button class="btn btn-danger btn-sm" type="submit">
-                                        <i class="fa fa-trash-alt"></i> حذف
-                                    </button>
-                                </td>
-                            </tr>
+                            @foreach ($roles as $key => $role)
+                                <tr>
+                                    <th>{{ $key + 1 }}</th>
+                                    <td>{{ $role->name }}</td>
+                                    <td>{{ $role->description }}</td>
+                                    <td>
+                                        <ol class="px-2">
+                                            @if (empty($role->permissions()->get()->toArray()))
+                                                <span class="text-danger">برای این نقش هیچ سطح دسترسی تعریف نشده است</span>
+                                            @else
+                                                @foreach ($role->permissions as $permission)
+                                                    <li>{{ $permission->name }}</li>
+                                                @endforeach
+                                            @endif
+                                        </ol>
+                                    </td>
+                                    <td class="width-20-rem text-left">
+                                        <a href="#" class="btn btn-success btn-sm"><i
+                                                class="fas fa-user-graduate"></i> دسترسی
+                                            ها</a>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>
+                                            ویرایش</a>
+                                        <button class="btn btn-danger btn-sm" type="submit">
+                                            <i class="fa fa-trash-alt"></i> حذف
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </section>
