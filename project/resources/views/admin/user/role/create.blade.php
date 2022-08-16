@@ -29,106 +29,70 @@
                 </section>
 
                 <section class="pb-3">
-                    <form action="" method="">
+                    <form action="{{ route('admin.user.role.store') }}" method="post">
+                        @csrf
                         <section class="form-row align-items-center">
-
                             <section class="col-12 col-md-5">
                                 <div class="form-group">
-                                    <label for="">عنوان نقش</label>
-                                    <input type="text" class="form-control form-control-sm">
+                                    <label for="name">عنوان نقش</label>
+                                    <input type="text" name="name" class="form-control form-control-sm"
+                                        value="{{ old('name') }}">
                                 </div>
+                                @error('name')
+                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                        <strong>
+                                            {{ $message }}
+                                        </strong>
+                                    </span>
+                                @enderror
                             </section>
 
                             <section class="col-12 col-md-5">
                                 <div class="form-group">
-                                    <label for="">توضیح نقش</label>
-                                    <input type="text" class="form-control form-control-sm">
+                                    <label for="description">توضیح نقش</label>
+                                    <input type="text" name="description" class="form-control form-control-sm"
+                                        value="{{ old('description') }}">
                                 </div>
+                                @error('description')
+                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                        <strong>
+                                            {{ $message }}
+                                        </strong>
+                                    </span>
+                                @enderror
                             </section>
 
                             <section class="col-12 col-md-2 mt-md-2">
                                 <button class="btn btn-primary btn-sm">ثبت</button>
                             </section>
                         </section>
+                        <section class="col-12 pt-3">
+                            <section class="row border-top py-2">
+                                @foreach ($permissions as $key => $permission)
+                                    <section class="col-12 col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->id }}" id="{{ $permission->id }}" checked>
+                                            <label class="form-check-label mr-3 mt-1" for="{{ $permission->id }}">
+                                                {{ $permission->name }}
+                                            </label>
+                                        </div>
+                                        <div class="mt-2">
+                                            @error('permissions.'.$key)
+                                                <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                                    <strong>
+                                                        {{ $message }}
+                                                    </strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </section>
+                                @endforeach
+                            </section>
+                        </section>
                     </form>
                 </section>
 
-                <section class="col-12">
-                    <section class="row border-top py-2">
-                        <section class="col-12 col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check1" checked>
-                                <label class="form-check-label mr-3 mt-1" for="check1">
-                                    نمایش دسته جدید
-                                </label>
-                            </div>
-                        </section>
 
-                        <section class="col-12 col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check2" checked>
-                                <label class="form-check-label mr-3 mt-1" for="check2">
-                                    نمایش کالا جدید
-                                </label>
-                            </div>
-                        </section>
-
-                        <section class="col-12 col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check3" checked>
-                                <label class="form-check-label mr-3 mt-1" for="check3">
-                                    ایجاد دسته جدید
-                                </label>
-                            </div>
-                        </section>
-
-                        <section class="col-12 col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check4" checked>
-                                <label class="form-check-label mr-3" for="check4">
-                                    ایجاد کالا جدید
-                                </label>
-                            </div>
-                        </section>
-
-                        <section class="col-12 col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check5" checked>
-                                <label class="form-check-label mr-3" for="check5">
-                                    ویرایش دسته جدید
-                                </label>
-                            </div>
-                        </section>
-
-                        <section class="col-12 col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check6" checked>
-                                <label class="form-check-label mr-3" for="check6">
-                                    ویرایش کالا جدید
-                                </label>
-                            </div>
-                        </section>
-
-                        <section class="col-12 col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check7" checked>
-                                <label class="form-check-label mr-3" for="check7">
-                                    حذف دسته جدید
-                                </label>
-                            </div>
-                        </section>
-
-                        <section class="col-12 col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check8" checked>
-                                <label class="form-check-label mr-3" for="check8">
-                                    حذف کالا جدید
-                                </label>
-                            </div>
-                        </section>
-
-                    </section>
-                </section>
             </section>
         </section>
     </section>
