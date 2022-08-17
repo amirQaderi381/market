@@ -162,7 +162,10 @@ return [
         'question'                  =>'پرسش',
         'answer'                    =>'پاسخ',
         'subject'                   =>'عنوان ایمیل',
-        'national_code'             =>'کدملی'
+        'national_code'             =>'کدملی',
+        'amount'                    =>'هزینه',
+        'delivery_time'             =>'هزینه ارسال',
+        'delivery_time_unit'        =>'واحد زمان ارسال'
 
     ],
 ];
