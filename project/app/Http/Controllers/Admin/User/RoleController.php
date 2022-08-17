@@ -64,9 +64,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        return view('admin.user.role.edit',compact('role'));
     }
 
     /**
@@ -76,9 +76,13 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, Role $role)
     {
-        //
+        $inputs = $request->all();
+        $role->update($inputs);
+        return redirect()->route('admin.user.role.index')->with('swal-success', 'نقش  شما با موفقیت ویرایش شد');
+
+
     }
 
     /**
@@ -87,8 +91,26 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        $role->permissions()->sync([]);
+        return redirect()->route('admin.user.role.index')->with('swal-success', ' نقش  شما با موفقیت حذف شد');
+
+
+    }
+
+    public function permissionForm(Role $role)
+    {
+        $permissions = Permission::all();
+        return view('admin.user.role.permission-form',compact('role','permissions'));
+    }
+
+    public function permissionUpdate(RoleRequest $request , Role $role)
+    {
+       $inputs = $request->all();
+       $inputs['permissions'] =  $inputs['permissions'] ?? [];
+       $role->permissions()->sync($inputs['permissions']);
+       return redirect()->route('admin.user.role.index')->with('swal-success', 'دسترسی های نقش  شما با موفقیت ویرایش شد');
     }
 }
