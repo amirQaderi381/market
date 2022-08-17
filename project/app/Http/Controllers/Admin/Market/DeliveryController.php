@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Market;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Market\DeliveryRequest;
+use App\Models\Market\Delivery;
 use Illuminate\Http\Request;
 
 class DeliveryController extends Controller
@@ -14,7 +16,8 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        return view('admin.market.delivery.index');
+        $delivery_methods = Delivery::orderBy('created_at','desc')->simplePaginate(15);
+        return view('admin.market.delivery.index',compact('delivery_methods'));
     }
 
     /**
@@ -33,9 +36,11 @@ class DeliveryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DeliveryRequest $request)
     {
-        //
+        $inputs = $request->all();
+        Delivery::create($inputs);
+        return redirect()->route('admin.market.delivery.index')->with('swal-success','روش ارسال جدید با موفقیت ثبت شد');
     }
 
     /**
@@ -55,9 +60,9 @@ class DeliveryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Delivery $delivery)
     {
-        //
+        return view('admin.market.delivery.edit',compact('delivery'));
     }
 
     /**
@@ -67,9 +72,11 @@ class DeliveryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DeliveryRequest $request, Delivery $delivery)
     {
-        //
+        $inputs = $request->all();
+        $delivery->update($inputs);
+        return redirect()->route('admin.market.delivery.index')->with('swal-success','روش ارسال شما با موفقیت ویرایش شد');
     }
 
     /**
@@ -78,8 +85,31 @@ class DeliveryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Delivery $delivery)
     {
-        //
+        $delivery->delete();
+        return redirect()->route('admin.market.delivery.index')->with('swal-success','روش ارسال شما با موفقیت حذف شد');
+
+    }
+
+    public function status(Delivery $delivery)
+    {
+        $delivery->status = $delivery->status == 0 ? 1 : 0 ;
+        $result=$delivery->save();
+        if($result)
+        {
+            if($delivery->status == 0)
+            {
+                return response()->json(['status'=>'true' , 'checked'=>false]);
+
+            }else{
+
+                return response()->json(['status'=>'true' , 'checked'=>true]);
+            }
+
+        }else{
+
+            return response()->json(['status'=>'false']);
+        }
     }
 }
