@@ -17,11 +17,12 @@
         <section class="col-12">
             <section class="main-body-container">
                 <section class="main-body-container-header">
-                    <h5>دسته بندی</h5>
+                    <h5>دسته بندی {{ $productCategory->name }}</h5>
+
                 </section>
 
                 <section class="d-flex justify-content-between align-items-center mt-4 mb-3 pb-2 border-bottom">
-                    <a href="{{ route('admin.market.category.create') }}" class="btn btn-info btn-sm">ایجاد دسته بندی</a>
+                    <a href="{{ route('admin.market.category.index') }}" class="btn btn-info btn-sm">بازگشت</a>
                     <div>
                         <input type="text" class="form-control form-control-sm max-width-16-rem" placeholder="جستجو">
                     </div>
@@ -32,54 +33,34 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">نام دسته بندی</th>
-                                <th scope="col">دسته والد</th>
-                                <th scope="col">وضعیت</th>
-                                <th scope="col">وضعیت نمایش در منو</th>
+                                <th scope="col">توضیحات</th>
+                                <th scope="col">اسلاگ</th>
+                                <th scope="col">تصویر</th>
+                                <th scope="col"> برچسب ها</th>
                                 <th scope="col" class="max-width-16-rem text-center"><i class="fas fa-cogs"></i> تنظیمات
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                         @foreach($product_categories as $productCategory)
+
                             <tr>
-                                <th>{{ $loop->iteration }}</th>
-                                <td>{{ $productCategory->name }}</td>
-                                <td>{{ $productCategory->parent == null ? 'دسته اصلی' : $productCategory->parent->name }}</td>
-                                <td>
-                                    <label>
-                                        <input id="{{ $productCategory->id }}"
-                                            onchange="changeStatus({{ $productCategory->id }})"
-                                            data-url="{{ route('admin.market.category.status', $productCategory->id) }}"
-                                            type="checkbox" @if ($productCategory->status === 1) checked @endif>
-                                    </label>
-                                </td>
-                                <td>
-                                    <label>
-                                        <input id="show_in_menu_{{ $productCategory->id }}"
-                                            onchange="showInMenu({{ $productCategory->id }})"
-                                            data-url="{{ route('admin.market.category.show-in-menu', $productCategory->id) }}"
-                                            type="checkbox" @if ($productCategory->show_in_menu === 1) checked @endif>
-                                    </label>
-                                </td>
-                                <td class="max-width-16-rem text-left">
-                                    <a href="{{ route('admin.market.category.show',$productCategory->id) }}" class="btn btn-warning btn-sm">
-                                        <i class="fas fa-eye"></i> مشاهده
-                                    </a>
-                                    <a href="{{ route('admin.market.category.edit',$productCategory->id) }}" class="btn btn-primary btn-sm text-white">
+                                <th>1</th>
+                                <th>{{ $productCategory->description }}</th>
+                                <td>{{ $productCategory->slug }}</td>
+                                <td><img src="{{ asset($productCategory->image['indexArray'][$productCategory->image['currentImage']]) }}" alt="" width="100" height="50"></td>
+                                <td>{{ $productCategory->tags }}</td>
+                                <td class="width-16-rem text-left">
+
+                                    <a type="" class="btn btn-primary btn-sm text-white">
                                         <i class="fas fa-edit"></i> ویرایش
                                     </a>
 
-                                    <form action="{{ route('admin.market.category.destroy',$productCategory->id) }}" method="post" class="d-inline">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger btn-sm delete">
-                                            <i class="fas fa-trash-alt"></i> حذف
-                                        </button>
-                                    </form>
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i> حذف
+                                    </button>
                                 </td>
                             </tr>
-                         @endforeach
+
                         </tbody>
                     </table>
                 </section>
