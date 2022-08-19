@@ -37,8 +37,6 @@
                                 <th scope="col">اسلاگ</th>
                                 <th scope="col">تصویر</th>
                                 <th scope="col"> برچسب ها</th>
-                                <th scope="col" class="max-width-16-rem text-center"><i class="fas fa-cogs"></i> تنظیمات
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,16 +47,6 @@
                                 <td>{{ $productCategory->slug }}</td>
                                 <td><img src="{{ asset($productCategory->image['indexArray'][$productCategory->image['currentImage']]) }}" alt="" width="100" height="50"></td>
                                 <td>{{ $productCategory->tags }}</td>
-                                <td class="width-16-rem text-left">
-
-                                    <a type="" class="btn btn-primary btn-sm text-white">
-                                        <i class="fas fa-edit"></i> ویرایش
-                                    </a>
-
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i> حذف
-                                    </button>
-                                </td>
                             </tr>
 
                         </tbody>
