@@ -165,7 +165,10 @@ return [
         'national_code'             =>'کدملی',
         'amount'                    =>'هزینه',
         'delivery_time'             =>'هزینه ارسال',
-        'delivery_time_unit'        =>'واحد زمان ارسال'
+        'delivery_time_unit'        =>'واحد زمان ارسال',
+        'logo'                      =>'لوگو',
+        'original_name'             =>'نام اصلی برند',
+        'persian_name'              =>'نام فارسی یرند'
 
     ],
 ];
