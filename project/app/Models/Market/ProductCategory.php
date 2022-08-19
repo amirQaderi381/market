@@ -2,10 +2,11 @@
 
 namespace App\Models\Market;
 
-use Cviebrock\EloquentSluggable\Sluggable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Market\Product;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProductCategory extends Model
 {
@@ -32,5 +33,10 @@ class ProductCategory extends Model
     public function children()
     {
         return $this->hasMany($this,'parent_id')->with('children');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }
