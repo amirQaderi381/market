@@ -49,7 +49,7 @@
                                     <select id="" name="parent_id" class="form-control form-control-sm">
                                         <option value="" selected>دسته اصلی</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $loop->iteration }}"
+                                            <option value="{{ $category->id }}"
                                                 @if ($category->id == old('parent_id', $category->id)) selected @endif>{{ $category->name }}
                                             </option>
                                         @endforeach
