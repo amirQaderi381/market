@@ -167,8 +167,17 @@ return [
         'delivery_time'             =>'هزینه ارسال',
         'delivery_time_unit'        =>'واحد زمان ارسال',
         'logo'                      =>'لوگو',
+        'brand_id'                  =>'برند',
         'original_name'             =>'نام اصلی برند',
-        'persian_name'              =>'نام فارسی یرند'
+        'persian_name'              =>'نام فارسی یرند',
+        'parent_id'                 =>'دسته والد',
+        'weight'                    =>'وزن',
+        'length'                    =>'طول',
+        'width'                     =>'عرض',
+        'height'                    =>'ارتفاع',
+        'price'                     =>'قیمت',
+        'introduction'              =>'توضیحات',
+
 
     ],
 ];
