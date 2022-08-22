@@ -180,8 +180,8 @@ return [
         'meta_names.*'              =>'نام ویژگی',
         'meta_values.*'             =>'مقدار ویژگی',
         'color_name'                =>'نام رنگ',
-        'price_increase'            =>'افزایش قیمت'
-
+        'price_increase'            =>'افزایش قیمت',
+        'unit'                      =>'واحد اندازه گیری'
 
     ],
 ];
