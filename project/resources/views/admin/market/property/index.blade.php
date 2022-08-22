@@ -36,24 +36,32 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">نام فرم</th>
+                                <th scope="col">واحد اندازه گیری</th>
                                 <th scope="col">فرم والد</th>
                                 <th scope="col" class="max-width-16-rem text-center"><i class="fas fa-cogs"></i> تنظیمات
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($category_attributes as $category_attribute)
                             <tr>
-                                <th>1</th>
-                                <td>نمایشگر </td>
-                                <td>کالای الکترونیکی</td>
+                                <th>{{ $loop->iteration }}</th>
+                                <td>{{ $category_attribute->name }}</td>
+                                <td>{{ $category_attribute->unit }}</td>
+                                <td>{{ $category_attribute->category->name }}</td>
                                 <td class="width-20-rem text-left">
                                     <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> ویژگی ها</a>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
-                                    <button class="btn btn-danger btn-sm" type="submit">
-                                        <i class="fa fa-trash-alt"></i> حذف
-                                    </button>
+                                    <a href="{{ route('admin.market.property.edit',$category_attribute->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
+                                    <form action="{{ route('admin.market.property.destroy',$category_attribute->id) }}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-danger btn-sm delete" type="submit">
+                                            <i class="fa fa-trash-alt"></i> حذف
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </section>
@@ -61,4 +69,8 @@
             </section>
         </section>
     </section>
+@endsection
+
+@section('script')
+  @include('admin.alerts.sweetalert.confirm-delete', ['className' => 'delete'])
 @endsection

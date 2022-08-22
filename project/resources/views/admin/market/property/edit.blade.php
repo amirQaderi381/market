@@ -11,7 +11,7 @@
       <li class="breadcrumb-item font-size-12"> <a href="#">خانه</a></li>
       <li class="breadcrumb-item font-size-12"> <a href="#">بخش فروش</a></li>
       <li class="breadcrumb-item font-size-12"> <a href="#">فرم کالا</a></li>
-      <li class="breadcrumb-item font-size-12 active" aria-current="page"> ایجاد فرم کالا</li>
+      <li class="breadcrumb-item font-size-12 active" aria-current="page"> ویرایش فرم کالا</li>
     </ol>
   </nav>
 
@@ -21,7 +21,7 @@
         <section class="main-body-container">
             <section class="main-body-container-header">
                 <h5>
-                  ایجاد فرم کالا
+                  ویرایش فرم کالا
                 </h5>
             </section>
 
@@ -30,13 +30,14 @@
             </section>
 
             <section>
-                <form action="{{ route('admin.market.property.store') }}" method="post">
+                <form action="{{ route('admin.market.property.update',$categoryAttribute->id) }}" method="post">
                     @csrf
+                    @method('put')
                     <section class="row">
                         <section class="col-12 col-md-6 mb-2">
                             <div class="form-group">
                                 <label for="">نام فرم</label>
-                                <input type="text" name="name" value="{{ old('name') }}" class="form-control form-control-sm">
+                                <input type="text" name="name" value="{{ old('name',$categoryAttribute->name) }}" class="form-control form-control-sm">
                             </div>
                             @error('name')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
@@ -48,7 +49,7 @@
                         <section class="col-12 col-md-6 mb-2">
                             <div class="form-group">
                                 <label for="">واحد اندازه گیری</label>
-                                <input type="text" name="unit" value="{{ old('unit') }}" class="form-control form-control-sm">
+                                <input type="text" name="unit" value="{{ old('unit',$categoryAttribute->unit) }}" class="form-control form-control-sm">
                             </div>
                             @error('unit')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
@@ -63,7 +64,7 @@
                                 <select name="category_id" id="" class="form-control form-control-sm">
                                     <option value="">فرم را انتخاب کنید</option>
                                     @foreach($productCategories as $productCategory)
-                                    <option value="{{ $productCategory->id }}" @if(old('category_id') == $productCategory->id) selected @endif>{{ $productCategory->name }}</option>
+                                    <option value="{{ $productCategory->id }}" @if(old('category_id',$categoryAttribute->category_id) == $productCategory->id ) selected @endif>{{ $productCategory->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
