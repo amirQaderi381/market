@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\Ticket\TicketCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketPriorityController;
 use App\Http\Controllers\Admin\Content\CommentController as ContentCommentController;
 use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
+use App\Http\Controllers\Admin\Market\ProductColorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -159,6 +160,14 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::delete('/destroy/{product}', [ProductController::class, 'destroy'])->name('admin.market.product.destroy');
             Route::get('/status/{product}', [ProductController::class, 'status'])->name('admin.market.product.status');
             Route::get('/marketable/{product}', [ProductController::class, 'marketable'])->name('admin.market.product.marketable');
+
+            //colors
+
+            Route::get('/{product}', [ProductColorController::class, 'index'])->name('admin.market.color.index');
+            Route::get('{product}/create', [ProductColorController::class, 'create'])->name('admin.market.color.create');
+            Route::post('{product}/store', [ProductColorController::class, 'store'])->name('admin.market.color.store');
+            Route::delete('/destroy/{product}/{productColor}', [ProductColorController::class, 'destroy'])->name('admin.market.color.destroy');
+
 
             //gallery
 
