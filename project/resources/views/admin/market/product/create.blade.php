@@ -27,7 +27,8 @@
                 </section>
 
                 <section>
-                    <form action="{{ route('admin.market.product.store') }}" method="post" id="form" enctype="multipart/form-data">
+                    <form action="{{ route('admin.market.product.store') }}" method="post" id="form"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="form-row">
                             <div class="col-md-6 mb-2">
@@ -230,15 +231,31 @@
 
                             <div class="form-group col-12 border-top border-bottom py-3 mb-3">
                                 <div class="row">
-                                    <section class="col-6 col-md-3">
+                                    <section class="col-6 col-md-3 mb-2">
                                         <div class="form-group">
-                                            <input type="text" name="meta_names[]" class="form-control form-control-sm" placeholder="ویژگی">
+                                            <input type="text" name="meta_names[]"
+                                                class="form-control form-control-sm" placeholder="ویژگی">
                                         </div>
+                                        @error('meta_names.*')
+                                            <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                                <strong>
+                                                    {{ $message }}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </section>
-                                    <section class="col-6 col-md-3">
+                                    <section class="col-6 col-md-3 mb-2">
                                         <div class="form-group">
-                                            <input type="text" name="meta_values[]" class="form-control form-control-sm" placeholder="مقدار">
+                                            <input type="text" name="meta_values[]"
+                                                class="form-control form-control-sm" placeholder="مقدار">
                                         </div>
+                                        @error('meta_values.*')
+                                            <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                                <strong>
+                                                    {{ $message }}
+                                                </strong>
+                                            </span>
+                                        @enderror
                                     </section>
                                 </div>
                                 <div>
@@ -304,7 +321,7 @@
 
     <script>
         let element = $('.btn-copy');
-        element.on('click',function(){
+        element.on('click', function() {
             let element = $(this).parent().prev().clone(true);
             $(this).before(element)
         })
