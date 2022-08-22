@@ -4,6 +4,7 @@ namespace App\Models\Market;
 
 use App\Models\Market\Brand;
 use App\Models\Market\ProductMeta;
+use App\Models\Market\ProductColor;
 use App\Models\Market\ProductCategory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -43,5 +44,10 @@ class Product extends Model
     public function metas()
     {
         return $this->hasMany(ProductMeta::class);
+    }
+
+    public function colors()
+    {
+        return $this->hasMany(ProductColor::class);
     }
 }
