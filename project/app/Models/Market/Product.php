@@ -3,6 +3,7 @@
 namespace App\Models\Market;
 
 use App\Models\Market\Brand;
+use App\Models\Market\Gallery;
 use App\Models\Market\ProductMeta;
 use App\Models\Market\ProductColor;
 use App\Models\Market\ProductCategory;
@@ -49,5 +50,10 @@ class Product extends Model
     public function colors()
     {
         return $this->hasMany(ProductColor::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Gallery::class);
     }
 }

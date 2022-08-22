@@ -163,17 +163,18 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
             //colors
 
-            Route::get('/{product}', [ProductColorController::class, 'index'])->name('admin.market.color.index');
-            Route::get('{product}/create', [ProductColorController::class, 'create'])->name('admin.market.color.create');
-            Route::post('{product}/store', [ProductColorController::class, 'store'])->name('admin.market.color.store');
-            Route::delete('/destroy/{product}/{productColor}', [ProductColorController::class, 'destroy'])->name('admin.market.color.destroy');
+            Route::get('gallery/{product}', [GalleryController::class, 'index'])->name('admin.market.gallery.index');
+            Route::get('gallery/{product}/create', [GalleryController::class, 'create'])->name('admin.market.gallery.create');
+            Route::post('gallery/{product}/store', [GalleryController::class, 'store'])->name('admin.market.gallery.store');
+            Route::delete('gallery/destroy/{product}/{gallery}', [GalleryController::class, 'destroy'])->name('admin.market.gallery.destroy');
 
 
             //gallery
 
-            Route::get('/gallery', [GalleryController::class, 'index'])->name('admin.market.gallery.index');
-            Route::post('/gallery/store', [GalleryController::class, 'store'])->name('admin.market.gallery.store');
-            Route::delete('/gallery/destroy/{id}', [GalleryController::class, 'destroy'])->name('admin.market.gallery.destroy');
+            Route::get('/{product}', [ProductColorController::class, 'index'])->name('admin.market.color.index');
+            Route::get('{product}/create', [ProductColorController::class, 'create'])->name('admin.market.color.create');
+            Route::post('{product}/store', [ProductColorController::class, 'store'])->name('admin.market.color.store');
+            Route::delete('/destroy/{product}/{productColor}', [ProductColorController::class, 'destroy'])->name('admin.market.color.destroy');
         });
 
         //property
