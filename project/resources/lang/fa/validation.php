@@ -177,6 +177,10 @@ return [
         'height'                    =>'ارتفاع',
         'price'                     =>'قیمت',
         'introduction'              =>'توضیحات',
+        'meta_names.*'              =>'نام ویژگی',
+        'meta_values.*'             =>'مقدار ویژگی',
+        'color_name'                =>'نام رنگ',
+        'price_increase'            =>'افزایش قیمت'
 
 
     ],
