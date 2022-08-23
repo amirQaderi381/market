@@ -55,8 +55,8 @@
                                 <td>{{ $value->type == 0 ? 'ساده' : 'انتخابی' }}</td>
                                 <td class="width-20-rem text-left">
 
-                                    <a href="" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
-                                    <form action="" method="post" class="d-inline">
+                                    <a href="{{ route('admin.market.value.edit', ['categoryAttribute' => $categoryAttribute->id , 'value' => $value->id] ) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
+                                    <form action="{{ route('admin.market.value.destroy',['categoryAttribute' => $categoryAttribute->id , 'value' => $value->id]) }}" method="post" class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger btn-sm delete" type="submit">
