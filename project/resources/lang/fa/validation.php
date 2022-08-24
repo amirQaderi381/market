@@ -183,7 +183,11 @@ return [
         'price_increase'            =>'افزایش قیمت',
         'unit'                      =>'واحد اندازه گیری',
         'product_id'                =>'انتخاب محصول',
-        'value'                     =>'مقدار'
+        'value'                     =>'مقدار',
+        'receiver'                  =>'نام تحویل گیرنده',
+        'deliverer'                 =>'نام تحویل دهنده',
+        'marketable_number'          =>'تعداد قابل فروش',
+
 
     ],
 ];
