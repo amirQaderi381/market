@@ -3,6 +3,7 @@
 namespace App\Models\Market;
 
 use App\Models\Market\Brand;
+use App\Models\Market\Comment;
 use App\Models\Market\Gallery;
 use App\Models\Market\ProductMeta;
 use App\Models\Market\ProductColor;
@@ -55,5 +56,10 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(Gallery::class);
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }
