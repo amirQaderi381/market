@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User\Role;
 use App\Models\Market\Comment;
+use App\Models\Market\Payment;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Ticket\TicketAdmin;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -76,5 +77,10 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class,'author_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class,'author_id');
     }
 }

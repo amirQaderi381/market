@@ -2,33 +2,55 @@
 
 namespace App\Http\Controllers\Admin\Market;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Market\Payment;
+use App\Http\Controllers\Controller;
+use App\Models\Market\OnlinePayment;
 
 class PaymentController extends Controller
 {
     public function index()
     {
-        return view('admin.market.payment.index');
+        $payments = Payment::orderBy('created_at','desc')->simplePaginate(15);
+        return view('admin.market.payment.index',compact('payments'));
     }
 
     public function online()
     {
-        return view('admin.market.payment.index');
+        $payments = Payment::where('paymentable_type','App\Models\Market\OnlinePayment')->orderBy('created_at','desc')->simplePaginate(15);
+        return view('admin.market.payment.index',compact('payments'));
     }
 
     public function offline()
     {
-        return view('admin.market.payment.index');
+        $payments = Payment::where('paymentable_type','App\Models\Market\OfflinePayment')->orderBy('created_at','desc')->simplePaginate(15);
+        return view('admin.market.payment.index',compact('payments'));
     }
 
-    public function attendance()
+    public function cash()
     {
-        return view('admin.market.payment.index');
+        $payments = Payment::where('paymentable_type','App\Models\Market\CashPayment')->orderBy('created_at','desc')->simplePaginate(15);
+        return view('admin.market.payment.index',compact('payments'));
     }
 
-    public function confirm()
+    public function canceled(Payment $payment)
     {
-        return view('admin.market.payment.index');
+        $payment->status = 2;
+        $result=$payment->save();
+        return redirect()->route('admin.market.payment.index')->with('swal-success','تغییر شما با موفقیت ثیت شد');
     }
+
+    public function returned(Payment $payment)
+    {
+        $payment->status = 3;
+        $result=$payment->save();
+        return redirect()->route('admin.market.payment.index')->with('swal-success','تغییر شما با موفقیت ثیت شد');
+    }
+
+
+    public function show(Payment $payment)
+    {
+        return view('admin.market.payment.show',compact('payment'));
+    }
+
 }

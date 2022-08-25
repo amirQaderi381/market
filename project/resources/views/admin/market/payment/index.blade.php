@@ -42,27 +42,29 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($payments as $payment)
                             <tr>
-                                <th>1</th>
-                                <td>123456</td>
-                                <td>ملت</td>
-                                <td>امیر قادری</td>
-                                <td>تایید شده</td>
-                                <td>انلاین</td>
+                                <th>{{ $loop->iteration }}</th>
+                                <td>{{ $payment->paymentable->transaction_id ?? '_' }}</td>
+                                <td>{{ $payment->paymentable->gateway ?? '_' }}</td>
+                                <td>{{ $payment->user->fullName }}</td>
+                                <td>@if($payment->status == 0) پرداخت نشده @elseif ($payment->status == 1) پرداخت شده @elseif ($payment->status == 2) کنسل شده @else برگشت داده شده @endif</td>
+                                <td>@if($payment->type == 0) آنلاین @elseif ($payment->type == 1) آفلاین @else در محل @endif</td>
                                 <td class="width-22-rem text-left">
-                                    <a href="#" class="btn btn-info btn-sm">
+                                    <a href="{{ route('admin.market.payment.show', $payment->id ) }}" class="btn btn-info btn-sm">
                                         <i class="fas fa-eye"></i> مشاهده
                                     </a>
 
-                                    <a href="#" class="btn btn-warning btn-sm">
+                                    <a href="{{ route('admin.market.payment.canceled',$payment->id) }}" class="btn btn-warning btn-sm">
                                         باطل کردن
                                     </a>
 
-                                    <a href="#" class="btn btn-danger btn-sm">
+                                    <a href="{{ route('admin.market.payment.returned',$payment->id) }}" class="btn btn-danger btn-sm">
                                         <i class="fas fa-reply"></i> برگرداندن
                                     </a>
                                 </td>
                             </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </section>
