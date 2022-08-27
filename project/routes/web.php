@@ -21,7 +21,7 @@ use App\Http\Controllers\Admin\Market\ProductController;
 use App\Http\Controllers\Admin\User\AdminUserController;
 use App\Http\Controllers\Admin\Market\CategoryController;
 use App\Http\Controllers\Admin\Market\DeliveryController;
-use App\Http\Controllers\Admin\Market\DisCountController;
+use App\Http\Controllers\Admin\Market\DiscountController;
 use App\Http\Controllers\Admin\Market\PropertyController;
 use App\Http\Controllers\Admin\Setting\SettingController;
 use App\Http\Controllers\Admin\User\PermissionController;
@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\Market\PropertyValueController;
 use App\Http\Controllers\Admin\Ticket\TicketCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketPriorityController;
 use App\Http\Controllers\Admin\Content\CommentController as ContentCommentController;
+use App\Http\Controllers\Admin\Market\DiscountController as MarketDiscountController;
 use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
 
 /*
@@ -116,12 +117,16 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
         Route::prefix('discount')->group(function () {
 
-            Route::get('/copan', [DisCountController::class, 'copan'])->name('admin.market.discount.copan');
-            Route::get('/copan-create', [DisCountController::class, 'copanCreate'])->name('admin.market.discount.copan.create');
-            Route::get('/common-discount', [DisCountController::class, 'commonDiscount'])->name('admin.market.discount.common.discount');
-            Route::get('/common-discount/create', [DisCountController::class, 'commonDiscountCreate'])->name('admin.market.discount.common.discount.create');
-            Route::get('/amazing-sale', [DisCountController::class, 'amazingSale'])->name('admin.market.discount.amazing.sale');
-            Route::get('/amazing-sale-create', [DisCountController::class, 'amazingSaleCreate'])->name('admin.market.discount.amazing.sale.create');
+            Route::get('/copan', [DiscountController::class, 'copan'])->name('admin.market.discount.copan');
+            Route::get('/copan-create', [DiscountController::class, 'copanCreate'])->name('admin.market.discount.copan.create');
+            Route::get('/common-discount', [DiscountController::class, 'commonDiscount'])->name('admin.market.discount.common.discount');
+            Route::get('/common-discount/create', [DiscountController::class, 'commonDiscountCreate'])->name('admin.market.discount.common.discount.create');
+            Route::post('/common-discount/store', [DiscountController::class, 'commonDiscountStore'])->name('admin.market.discount.common.discount.store');
+            Route::get('/common-discount/edit/{commonDiscount}', [DiscountController::class, 'commonDiscountEdit'])->name('admin.market.discount.common.discount.edit');
+            Route::post('/common-discount/update/{commonDiscount}', [DiscountController::class, 'commonDiscountUpdate'])->name('admin.market.discount.common.discount.update');
+            Route::delete('/common-discount/destroy/{commonDiscount}', [DiscountController::class, 'commonDiscountDestroy'])->name('admin.market.discount.common.discount.destroy');
+            Route::get('/amazing-sale', [DiscountController::class, 'amazingSale'])->name('admin.market.discount.amazing.sale');
+            Route::get('/amazing-sale-create', [DiscountController::class, 'amazingSaleCreate'])->name('admin.market.discount.amazing.sale.create');
         });
 
         //order
