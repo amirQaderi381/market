@@ -29,6 +29,7 @@
                 <section>
                     <form action="{{ route('admin.market.discount.common.discount.update',$commonDiscount->id) }}" method="post">
                         @csrf
+                        @method('put')
                         <div class="form-row">
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
