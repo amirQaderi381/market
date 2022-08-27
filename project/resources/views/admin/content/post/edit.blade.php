@@ -148,9 +148,8 @@
                             <section class="col-12 col-md-6 my-2">
                                 <div class="form-group">
                                     <label for="published_at">تاریخ انتشار</label>
-                                    <input type="text" class="form-control form-control-sm d-none" id="published_at"
-                                        name="published_at" value="{{ old('published_at', $post->published_at) }}">
-                                    <input type="text" class="form-control form-control-sm" id="published_at_view">
+                                    <input type="text" class="form-control form-control-sm d-none" id="published_at" name="published_at">
+                                    <input type="text" class="form-control form-control-sm" id="published_at_view" value="{{ old('published_at', $post->published_at) }}">
                                 </div>
                                 @error('published_at')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
