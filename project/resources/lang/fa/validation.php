@@ -186,8 +186,10 @@ return [
         'value'                     =>'مقدار',
         'receiver'                  =>'نام تحویل گیرنده',
         'deliverer'                 =>'نام تحویل دهنده',
-        'marketable_number'          =>'تعداد قابل فروش',
-
+        'marketable_number'         =>'تعداد قابل فروش',
+        'percentage'                =>'درصد تخفیف',
+        'discount_ceiling'          =>'حداکثر تخفیف',
+        'minimal_order_amount'      =>'حداقل مبلغ خرید'
 
     ],
 ];
