@@ -45,27 +45,37 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($commonDiscounts as $commonDiscount)
                             <tr>
-                                <th>1</th>
-                                <td>15% </td>
-                                <td>26000 تومان </td>
-                                <td> میلاد با سعادت امام علی </td>
-                                <td> 24 اردیبهشت 1401 </td>
-                                <td> 31 اردیبهشت 1401 </td>
+                                <th>{{ $loop->iteration }}</th>
+                                <td>{{ $commonDiscount->percentage }}% </td>
+                                <td>{{ $commonDiscount->discount_ceiling }} تومان </td>
+                                <td>{{ $commonDiscount->title }}</td>
+                                <td>{{ jalaliDate($commonDiscount->start_date) }}</td>
+                                <td>{{  jalaliDate($commonDiscount->end_date) }}</td>
                                 <td class="width-16-rem text-left">
-                                    <button type="submit" class="btn btn-primary btn-sm">
+                                    <a href="{{ route('admin.market.discount.common.discount.edit',$commonDiscount->id) }}" class="btn btn-primary btn-sm">
                                         <i class="fas fa-edit"></i> ویرایش
-                                    </button>
+                                    </a>
 
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i> حذف
-                                    </button>
+                                    <form action="{{ route('admin.market.discount.common.discount.destroy',$commonDiscount->id) }}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger btn-sm delete">
+                                            <i class="fas fa-trash-alt"></i> حذف
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </section>
             </section>
         </section>
     </div>
+@endsection
+
+@section('script')
+  @include('admin.alerts.sweetalert.confirm-delete',['className'=>'delete'])
 @endsection
