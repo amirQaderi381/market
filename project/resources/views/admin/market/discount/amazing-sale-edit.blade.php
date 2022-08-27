@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('head-tag')
-    <title>افزودن به فروش شگفت انگیز</title>
+    <title>ویرایش فروش شگفت انگیز</title>
     <link rel="stylesheet" href="{{ asset('admin_assets/datepicker/persian-datepicker.min.css') }}">
 @endsection
 
@@ -11,7 +11,7 @@
             <li class="breadcrumb-item font-size-12"><a href="#">خانه</a></li>
             <li class="breadcrumb-item font-size-12"><a href="#"> بخش فروش</a></li>
             <li class="breadcrumb-item font-size-12"><a href="#"> فروش شگفت انگیز</a> </li>
-            <li class="breadcrumb-item font-size-12 active" aria-current="page"> افزودن به فروش شگفت انگیز</li>
+            <li class="breadcrumb-item font-size-12 active" aria-current="page"> ویرایش فروش شگفت انگیز</li>
         </ol>
     </nav>
 
@@ -19,7 +19,7 @@
         <section class="col-12">
             <section class="main-body-container">
                 <section class="main-body-container-header">
-                    <h5>افزودن به فروش شگفت انگیز</h5>
+                    <h5>ویرایش فروش شگفت انگیز</h5>
                 </section>
 
                 <section class="mt-4 mb-3 pb-2 border-bottom">
@@ -27,8 +27,9 @@
                 </section>
 
                 <section>
-                    <form action="{{ route('admin.market.discount.amazing.sale.store') }}" method="post">
+                    <form action="{{ route('admin.market.discount.amazing.sale.update',$amazingSale->id) }}" method="post">
                         @csrf
+                        @method('put')
                         <div class="form-row">
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
@@ -37,7 +38,7 @@
                                         <option value="" selected>کالا را انتخاب کنید...</option>
                                         @foreach ($products as $product)
                                             <option value="{{ $product->id }}"
-                                                @if (old('product_id') == $product->id) selected @endif>
+                                                @if (old('product_id',$amazingSale->product_id) == $product->id) selected @endif>
                                                 {{ $product->name }}
                                             </option>
                                         @endforeach
@@ -52,7 +53,7 @@
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
                                     <label for="">درصد تخفیف</label>
-                                    <input type="text" name="percentage" class="form-control form-control-sm mb-2" value="{{ old('percentage') }}">
+                                    <input type="text" name="percentage" class="form-control form-control-sm mb-2" value="{{ old('percentage',$amazingSale->percentage) }}">
                                 </div>
                                 @error('percentage')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
@@ -68,7 +69,7 @@
                                     <label for="start_date">تاریخ شروع</label>
                                     <input type="hidden" class="form-control form-control-sm" id="start_date"
                                         name="start_date">
-                                    <input type="text" class="form-control form-control-sm" id="start_date_view" value="{{ old('start_date') }}">
+                                    <input type="text" class="form-control form-control-sm" id="start_date_view" value="{{ old('start_date',$amazingSale->start_date) }}">
                                 </div>
                                 @error('start_date')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
@@ -84,7 +85,7 @@
                                     <label for="end_date">تاریخ پایان</label>
                                     <input type="hidden" class="form-control form-control-sm" id="end_date"
                                         name="end_date">
-                                    <input type="text" class="form-control form-control-sm" id="end_date_view"  value="{{ old('end_date') }}">
+                                    <input type="text" class="form-control form-control-sm" id="end_date_view"  value="{{ old('end_date',$amazingSale->end_date) }}">
                                 </div>
                                 @error('end_date')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
