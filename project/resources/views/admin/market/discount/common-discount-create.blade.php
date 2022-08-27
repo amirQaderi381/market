@@ -98,7 +98,7 @@
                                 @enderror
                             </div>
 
-                             <div class="form-group col-md-6">
+                            <div class="form-group col-md-6">
                                 <div class="form-group">
                                     <label for="end_date">تاریخ پایان</label>
                                     <input type="hidden" class="form-control form-control-sm" id="end_date"
@@ -112,7 +112,6 @@
                                         </strong>
                                     </span>
                                 @enderror
-
                             </div>
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
