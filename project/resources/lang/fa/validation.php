@@ -189,7 +189,12 @@ return [
         'marketable_number'         =>'تعداد قابل فروش',
         'percentage'                =>'درصد تخفیف',
         'discount_ceiling'          =>'حداکثر تخفیف',
-        'minimal_order_amount'      =>'حداقل مبلغ خرید'
+        'minimal_order_amount'      =>'حداقل مبلغ خرید',
+        'code'                      =>'کد تخفیف',
+        'amount_type'               =>'نوع تخفیف',
+        'user_id'                   =>'کاربران',
+        'type'                      =>'نوع کوپن',
+
 
     ],
 ];
