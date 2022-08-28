@@ -2,24 +2,65 @@
 
 namespace App\Http\Controllers\Admin\Market;
 
+use App\Models\User;
+use App\Models\Market\Copan;
+use Illuminate\Http\Request;
+use App\Models\Market\Product;
+use App\Models\Market\AmazingSale;
 use App\Http\Controllers\Controller;
+use App\Models\Market\CommonDiscount;
 use App\Http\Requests\Admin\Market\AmazingSaleRequest;
 use App\Http\Requests\Admin\Market\CommonDiscountRequest;
-use App\Models\Market\AmazingSale;
-use App\Models\Market\CommonDiscount;
-use App\Models\Market\Product;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Market\CopanRequest;
 
 class DiscountController extends Controller
 {
     public function copan()
     {
-        return view('admin.market.discount.copan');
+        $copans = Copan::orderBy('created_at','desc')->simplePaginate(15);
+        return view('admin.market.discount.copan',compact('copans'));
     }
 
     public function copanCreate()
     {
-        return view('admin.market.discount.copan-create');
+        $users = User::all();
+        return view('admin.market.discount.copan-create',compact('users'));
+    }
+
+    public function copanStore(CopanRequest $request)
+    {
+        $inputs = $request->all();
+        $realFormatStartDateTimestamp = substr($request->start_date,0,10);
+        $inputs['start_date'] = date('Y-m-d H:i:s',(int)$realFormatStartDateTimestamp);
+        $realFormatEndDateTimestamp = substr($request->end_date,0,10);
+        $inputs['end_date'] = date('Y-m-d H:i:s',(int)$realFormatEndDateTimestamp);
+        Copan::create($inputs);
+        return redirect()->route('admin.market.discount.copan')->with('swal-success','کوپن جدید شما با موفقیت ثبت شد');
+
+    }
+
+    public function copanEdit(Copan $copan)
+    {
+        $users = User::all();
+        return view('admin.market.discount.copan-edit',compact('copan','users'));
+    }
+
+    public function copanUpdate(CopanRequest $request , Copan $copan)
+    {
+        $inputs = $request->all();
+        $realFormatStartDateTimestamp = substr($request->start_date,0,10);
+        $inputs['start_date'] = date('Y-m-d H:i:s',(int)$realFormatStartDateTimestamp);
+        $realFormatEndDateTimestamp = substr($request->end_date,0,10);
+        $inputs['end_date'] = date('Y-m-d H:i:s',(int)$realFormatEndDateTimestamp);
+        $copan->update($inputs);
+        return redirect()->route('admin.market.discount.copan')->with('swal-success','کوپن  شما با موفقیت ویرایش شد');
+
+    }
+
+    public function copanDestroy(Copan $copan)
+    {
+         $copan->delete();
+         return redirect()->route('admin.market.discount.copan')->with('swal-success','کوپن شما با موفقیت حذف شد');
     }
 
     public function commonDiscount()
