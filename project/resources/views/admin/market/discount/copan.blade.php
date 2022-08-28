@@ -21,9 +21,7 @@
                 </section>
 
                 <section class="d-flex justify-content-between align-items-center mt-4 mb-3 pb-2 border-bottom">
-                    <a href="{{ route('admin.market.discount.copan.create') }}" class="btn btn-info btn-sm"> ایجاد کوپن
-                        تخفیف
-                        جدید</a>
+                    <a href="{{ route('admin.market.discount.copan.create') }}" class="btn btn-info btn-sm"> ایجاد کوپن تخفیف جدید</a>
                     <div>
                         <input type="text" class="form-control form-control-sm max-width-16-rem" placeholder="جستجو">
                     </div>
@@ -35,7 +33,8 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">کد کوپن </th>
-                                <th scope="col">درصد تخفیف </th>
+                                <th scope="col">میزان تخفیف </th>
+                                <th scope="col">نوع تخفیف </th>
                                 <th scope="col">سقف تخفیف </th>
                                 <th scope="col">نوع کوپن </th>
                                 <th scope="col">تاریخ شروع</th>
@@ -45,28 +44,39 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($copans as $copan)
                             <tr>
-                                <th>1</th>
-                                <td>ass25fg </td>
-                                <td>15% </td>
-                                <td>26000 تومان </td>
-                                <td> عمومی </td>
-                                <td> 24 اردیبهشت 1401 </td>
-                                <td> 31 اردیبهشت 1401 </td>
+                                <th>{{ $loop->iteration }}</th>
+                                <td>{{ $copan->code }} </td>
+                                <td>{{ $copan->amount}}</td>
+                                <td>{{ $copan->amount_type == 0 ? 'درصدی' : 'عددی' }} </td>
+                                <th>{{ $copan->discount_ceiling ?? '-' }} </th>
+                                <td> {{ $copan->type == 0 ? 'عمومی' : 'خصوصی' }} </td>
+                                <td>{{ jalaliDate($copan->start_date) }}</td>
+                                <td>{{ jalaliDate($copan->end_date) }}</td>
                                 <td class="width-16-rem text-left">
-                                    <button type="submit" class="btn btn-primary btn-sm">
+                                    <a href="{{ route('admin.market.discount.copan.edit', $copan->id) }}" class="btn btn-primary btn-sm">
                                         <i class="fas fa-edit"></i> ویرایش
-                                    </button>
+                                    </a>
 
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i> حذف
-                                    </button>
+                                    <form action="{{ route('admin.market.discount.copan.destroy',$copan->id) }}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger btn-sm delete">
+                                            <i class="fas fa-trash-alt"></i> حذف
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </section>
             </section>
         </section>
     </div>
+@endsection
+
+@section('script')
+  @include('admin.alerts.sweetalert.confirm-delete',['className'=>'delete'])
 @endsection
