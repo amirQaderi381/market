@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User\Role;
+use App\Models\Market\Order;
 use App\Models\Market\Comment;
 use App\Models\Market\Payment;
 use Laravel\Sanctum\HasApiTokens;
@@ -82,5 +83,10 @@ class User extends Authenticatable
     public function payments()
     {
         return $this->hasMany(Payment::class,'author_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
