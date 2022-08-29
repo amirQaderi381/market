@@ -2,39 +2,51 @@
 
 namespace App\Http\Controllers\Admin\Market;
 
-use App\Http\Controllers\Controller;
+use App\Models\Market\Order;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
     public function all()
     {
-        return view('admin.market.order.index');
+        $orders = Order::orderBy('created_at','desc')->simplePaginate(15);
+        return view('admin.market.order.index',compact('orders'));
     }
 
     public function newOrders()
     {
-        return view('admin.market.order.newOrders');
+        $orders = Order::where('order_status',0)->orderBy('created_at','desc')->simplePaginate(15);
+        foreach($orders as $order)
+        {
+            $order->order_status=1;
+            $result=$order->save();
+        }
+        return view('admin.market.order.index',compact('orders'));
     }
 
     public function sending()
     {
-        return view('admin.market.order.sending');
+        $orders = Order::where('delivery_status',1)->orderBy('created_at','desc')->simplePaginate(15);
+        return view('admin.market.order.index',compact('orders'));
     }
 
     public function unpaid()
     {
-        return view('admin.market.order.unpaid');
+        $orders = Order::where('payment_status',0)->orderBy('created_at','desc')->simplePaginate(15);
+        return view('admin.market.order.index',compact('orders'));
     }
 
     public function canceled()
     {
-        return view('admin.market.order.canceled');
+        $orders = Order::where('order_status',4)->orderBy('created_at','desc')->simplePaginate(15);
+        return view('admin.market.order.index',compact('orders'));
     }
 
     public function returned()
     {
-        return view('admin.market.order.returned');
+        $orders = Order::where('order_status',5)->orderBy('created_at','desc')->simplePaginate(15);
+        return view('admin.market.order.index');
     }
     public function show()
     {
