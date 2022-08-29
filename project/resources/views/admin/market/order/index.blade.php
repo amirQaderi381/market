@@ -75,15 +75,15 @@
                                                 <i class="fas fa-images"></i> مشاهده فاکتور
                                             </a>
                                             <a class="dropdown-item text-right"
-                                                href="{{ route('admin.market.order.changeSendStatus') }}">
+                                                href="{{ route('admin.market.order.changeSendStatus',$order->id) }}">
                                                 <i class="fas fa-list-ul"></i> تفییر وضعیت ارسال
                                             </a>
                                             <a class="dropdown-item text-right"
-                                                href="{{ route('admin.market.order.changeOrderStatus') }}">
+                                                href="{{ route('admin.market.order.changeOrderStatus',$order->id) }}">
                                                 <i class="fas fa-edit"></i> تغییر وضعیت سفارش
                                             </a>
                                             <a class="dropdown-item text-right"
-                                                href="{{ route('admin.market.order.cancelOrder') }}">
+                                                href="{{ route('admin.market.order.cancelOrder',$order->id) }}">
                                                 <i class="fas fa-window-close"></i> باطل کردن سفارش
                                             </a>
                                         </div>
