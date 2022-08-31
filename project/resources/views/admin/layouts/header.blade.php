@@ -36,7 +36,9 @@
                 <span class="ml-2 ml-md-4 position-relative">
                     <span id="header-notification-toggle" class="pointer">
                         <i class="far fa-bell"></i>
-                        <sup class="badge badge-danger">4</sup>
+                        @if ($notifications->count() >= 0)
+                          <sup class="badge badge-danger">{{ $notifications->count() }}</sup>
+                        @endif
                     </span>
 
                     <section class="header-notification rounded">
@@ -47,43 +49,18 @@
                             </span>
                         </section>
                         <ul class="list-group rounded px-0">
+                        @foreach($notifications as $notification)
                             <li class="list-group-item list-group-item-action">
                                 <section class="media">
-                                    <img src="{{ asset('admin_assets/images/avatar-2.jpg') }}" alt="avatar"
-                                        class="notification-img">
                                     <section class="media-body pr-1">
-                                        <h5 class="notification-user">محمد هاشمی</h5>
-                                        <p class="notification-text">این یک متن تستی است</p>
-                                        <p class="notification-time">30 دقیقه پیش</p>
+                                        <p class="notification-text">{{ $notification['data']['message'] }}</p>
+                                        <p class="notification-time">{{ jalaliDate($notification->created_at) }}</p>
                                     </section>
                                 </section>
                             </li>
-                            <li class="list-group-item list-group-item-action">
-                                <section class="media">
-                                    <img src="{{ asset('admin_assets/images/avatar-2.jpg') }}" alt="avatar"
-                                        class="notification-img">
-                                    <section class="media-body pr-1">
-                                        <h5 class="notification-user">محمد هاشمی</h5>
-                                        <p class="notification-text">این یک متن تستی است</p>
-                                        <p class="notification-time">30 دقیقه پیش</p>
-                                    </section>
-                                </section>
-                            </li>
-                            <li class="list-group-item list-group-item-action">
-                                <section class="media">
-                                    <img src="{{ asset('admin_assets/images/avatar-2.jpg') }}" alt="avatar"
-                                        class="notification-img">
-                                    <section class="media-body pr-1">
-                                        <h5 class="notification-user">محمد هاشمی</h5>
-                                        <p class="notification-text">این یک متن تستی است</p>
-                                        <p class="notification-time">30 دقیقه پیش</p>
-                                    </section>
-                                </section>
-                            </li>
+                        @endforeach
                         </ul>
                     </section>
-
-
                 </span>
 
                 <span id="header-comment-toggle" class="ml-2 ml-md-4 position-relative pointer">
@@ -156,3 +133,4 @@
     </section>
 
 </header>
+

@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin\User;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\User\CustomerRequest;
-use App\Http\Services\Image\ImageService;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\NewUserRegistered;
+use App\Http\Services\Image\ImageService;
+use App\Http\Requests\Admin\User\CustomerRequest;
 
 class CustomerController extends Controller
 {
@@ -54,7 +55,12 @@ class CustomerController extends Controller
         $inputs['password'] = Hash::make($request->password);
         $inputs['user_type']=0;
 
-        User::create($inputs);
+        $user=User::create($inputs);
+        $details = [
+            'message' => 'یک کاربر جدید در سایت ثبت نام کرد'
+        ];
+        $adminUser=User::find(1);
+        $adminUser->notify(new NewUserRegistered($details));
         return redirect()->route('admin.user.customer.index')->with('swal-success','مشتری جدید با موفقیت ثبت شد');
     }
 
