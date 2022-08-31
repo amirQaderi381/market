@@ -48,10 +48,17 @@ class OrderController extends Controller
         $orders = Order::where('order_status',5)->orderBy('created_at','desc')->simplePaginate(15);
         return view('admin.market.order.index',compact('orders'));
     }
-    public function show()
+
+    public function show(Order $order)
     {
-        return view('admin.market.order.show');
+        return view('admin.market.order.show',compact('order'));
     }
+
+    public function detail(Order $order)
+    {
+        return view('admin.market.order.detail',compact('order'));
+    }
+
     public function changeSendStatus(Order $order)
     {
         switch ($order->delivery_status) {
