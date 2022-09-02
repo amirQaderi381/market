@@ -470,6 +470,7 @@ Route::namespace('Auth')->group(function(){
     Route::namespace('Customer')->group(function(){
 
         Route::get('/login-register',[LoginRegisterController::class , 'loginRegisterForm'])->name('auth.customer.login-register-form');
+        Route::post('/login-register',[LoginRegisterController::class , 'loginRegister'])->name('auth.customer.login-register');
     });
 });
 
