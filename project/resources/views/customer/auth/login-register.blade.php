@@ -18,8 +18,8 @@
             <section class="login-input-text">
                <input type="text" name="id" >  {{--  id => identifier --}}
                @error('id')
-                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
-                        <strong>{{ $message }}</strong>
+                    <span role="alert">
+                        <p class="text-danger">{{ $message }}</p>
                     </span>
                @enderror
             </section>
