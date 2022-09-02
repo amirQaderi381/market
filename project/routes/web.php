@@ -35,6 +35,7 @@ use App\Http\Controllers\Admin\Content\CommentController as ContentCommentContro
 use App\Http\Controllers\Admin\Market\DiscountController as MarketDiscountController;
 use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Auth\Customer\LoginRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -462,6 +463,14 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
     });
 
     Route::post('/notification/read-all', [NotificationController::class, 'readAll'])->name('admin.notification.readAll');
+});
+
+Route::namespace('Auth')->group(function(){
+
+    Route::namespace('Customer')->group(function(){
+
+        Route::get('/login-register',[LoginRegisterController::class , 'loginRegisterForm'])->name('auth.customer.login-register-form');
+    });
 });
 
 Route::get('/',function(){

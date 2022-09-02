@@ -8,17 +8,17 @@
     <section class="row">
         <section class="col-md-8 pe-1">
             <section id="slideshow" class="owl-carousel owl-theme">
-                <section class="item"><a class="w-100 d-block h-auto text-decoration-none" href="#"><img class="w-100 rounded-2 d-block h-auto" src="assets/images/slideshow/1.jpg" alt=""></a></section>
-                <section class="item"><a class="w-100 d-block h-auto text-decoration-none" href="#"><img class="w-100 rounded-2 d-block h-auto" src="assets/images/slideshow/2.jpg" alt=""></a></section>
-                <section class="item"><a class="w-100 d-block h-auto text-decoration-none" href="#"><img class="w-100 rounded-2 d-block h-auto" src="assets/images/slideshow/3.jpg" alt=""></a></section>
-                <section class="item"><a class="w-100 d-block h-auto text-decoration-none" href="#"><img class="w-100 rounded-2 d-block h-auto" src="assets/images/slideshow/4.jpg" alt=""></a></section>
-                <section class="item"><a class="w-100 d-block h-auto text-decoration-none" href="#"><img class="w-100 rounded-2 d-block h-auto" src="assets/images/slideshow/5.jpg" alt=""></a></section>
-                <section class="item"><a class="w-100 d-block h-auto text-decoration-none" href="#"><img class="w-100 rounded-2 d-block h-auto" src="assets/images/slideshow/6.gif" alt=""></a></section>
+                <section class="item"><a class="w-100 d-block h-auto text-decoration-none" href="#"><img class="w-100 rounded-2 d-block h-auto" src="{{ asset('customer-assets/images/slideshow/1.jpg') }}" alt=""></a></section>
+                <section class="item"><a class="w-100 d-block h-auto text-decoration-none" href="#"><img class="w-100 rounded-2 d-block h-auto" src="{{ asset('customer-assets/images/slideshow/2.jpg') }}" alt=""></a></section>
+                <section class="item"><a class="w-100 d-block h-auto text-decoration-none" href="#"><img class="w-100 rounded-2 d-block h-auto" src="{{ asset('customer-assets/images/slideshow/3.jpg') }}" alt=""></a></section>
+                <section class="item"><a class="w-100 d-block h-auto text-decoration-none" href="#"><img class="w-100 rounded-2 d-block h-auto" src="{{ asset('customer-assets/images/slideshow/4.jpg') }}" alt=""></a></section>
+                <section class="item"><a class="w-100 d-block h-auto text-decoration-none" href="#"><img class="w-100 rounded-2 d-block h-auto" src="{{ asset('customer-assets/images/slideshow/5.jpg') }}" alt=""></a></section>
+                <section class="item"><a class="w-100 d-block h-auto text-decoration-none" href="#"><img class="w-100 rounded-2 d-block h-auto" src="{{ asset('customer-assets/images/slideshow/6.gif') }}" alt=""></a></section>
             </section>
         </section>
         <section class="col-md-4 ps-1">
-            <section class="mb-2"><a href="#" class="d-block"><img class="w-100 rounded-2" src="assets/images/slideshow/12.gif" alt=""></a></section>
-            <section class="mb-2"><a href="#" class="d-block"><img class="w-100 rounded-2" src="assets/images/slideshow/11.jpg" alt=""></a></section>
+            <section class="mb-2"><a href="#" class="d-block"><img class="w-100 rounded-2" src="{{ asset('customer-assets/images/slideshow/12.gif') }}" alt=""></a></section>
+            <section class="mb-2"><a href="#" class="d-block"><img class="w-100 rounded-2" src="{{ asset('customer-assets/images/slideshow/11.jpg') }}" alt=""></a></section>
         </section>
     </section>
 </section>
@@ -53,7 +53,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/21.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/21.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>گوشی موبایل شیائومی مدل POCO X3 Pro M2102J20SG دو ...</h3></section>
@@ -80,7 +80,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/22.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/22.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>گوشی موبایل سامسونگ مدل Galaxy A32 SM-A325F/DS دو ...</h3></section>
@@ -98,7 +98,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/17.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/17.jpg') }}" alt="">
                                             </section>
                                             <section class="product-name"><h3>کیف هندزفری جانتا مدل 141مجموعه 3 عددی</h3></section>
                                             <section class="product-price-wrapper">
@@ -126,7 +126,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/19.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/19.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>گوشی موبایل شیائومی مدل POCO M3 M2010J19CG دو سیم‌...</h3></section>
@@ -144,7 +144,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/20.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/20.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>گوشی موبایل سامسونگ مدل Galaxy A21S SM-A217F/DS دو...</h3></section>
@@ -162,7 +162,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/18.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/18.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>کیف رودوشی چرم جانتا مدل D078</h3></section>
@@ -184,7 +184,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/16.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/16.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>گوشی موبایل سامسونگ مدل Galaxy A12 SM-A125F/DS دو ...</h3></section>
@@ -202,7 +202,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/14.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/14.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>گوشی موبایل شیائومی مدل POCO M3 PRO 5G M2103K19PG ...</h3></section>
@@ -220,7 +220,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/10.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/10.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>مجموعه کتاب من پیش از تو، پس از تو، باز هم من</h3></section>
@@ -238,7 +238,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/11.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/11.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>کتاب سلخ اثر غزاله شکوهی</h3></section>
@@ -256,7 +256,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/13.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/13.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>کتاب تختخوابت را مرتب کن اثر ژنرال ویلیام مک ریون</h3></section>
@@ -284,8 +284,8 @@
     <section class="container-xxl">
         <!-- two column-->
         <section class="row py-4">
-            <section class="col"><img class="d-block rounded-2 w-100" src="assets/images/ads/two-col-1.jpg" alt=""></section>
-            <section class="col"><img class="d-block rounded-2 w-100" src="assets/images/ads/two-col-2.jpg" alt=""></section>
+            <section class="col"><img class="d-block rounded-2 w-100" src="{{ asset('customer-assets/images/ads/two-col-1.jpg') }}" alt=""></section>
+            <section class="col"><img class="d-block rounded-2 w-100" src="{{ asset('customer-assets/images/ads/two-col-2.jpg') }}" alt=""></section>
         </section>
 
     </section>
@@ -321,7 +321,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/2.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/2.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>دستگاه آبمیوه گیری دنویر با کد 1016</h3></section>
@@ -348,7 +348,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/1.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/1.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>کتاب اٍر مرکب اثر دارن هاردی با کد 87</h3></section>
@@ -366,7 +366,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/3.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/3.jpg') }}" alt="">
                                             </section>
                                             <section class="product-name"><h3>پکیج آموزش خطاطی و خوشنویسی با کد 624</h3></section>
                                             <section class="product-price-wrapper">
@@ -390,7 +390,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/4.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/4.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>مجموعه داستان های هزار و یک شب</h3></section>
@@ -412,7 +412,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/5.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/5.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>کتاب اطلاعات عمومی انتشارات فارابی با کد 3087</h3></section>
@@ -430,7 +430,7 @@
                                         <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
                                         <a class="product-link" href="#">
                                             <section class="product-image">
-                                                <img class="" src="assets/images/products/6.jpg" alt="">
+                                                <img class="" src="{{ asset('customer-assets/images/products/6.jpg') }}" alt="">
                                             </section>
                                             <section class="product-colors"></section>
                                             <section class="product-name"><h3>کتاب شیوه گرگ اثر جردن بلفورت</h3></section>
