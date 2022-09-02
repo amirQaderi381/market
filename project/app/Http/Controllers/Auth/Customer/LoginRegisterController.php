@@ -32,7 +32,7 @@ class LoginRegisterController extends Controller
         }
         //check id is phone number or not
 
-        elseif(preg_match('/^(\+98|98|0)9\d{9}$',$inputs['id']))
+        elseif(preg_match('/^(\+98|98|0)9\d{9}$/',$inputs['id']))
         {
             $type = 0; //0=>phone number
 
@@ -48,7 +48,8 @@ class LoginRegisterController extends Controller
                 $newUser['mobile'] = $inputs['id'];
             }
 
-        }else{
+        }
+        else{
 
             $error_message='شناسه ورودی شما نه شماره موبایل است نه ایمیل';
             return redirect()->route('auth.customer.login-register-form')->withErrors(['id'=>$error_message]);
