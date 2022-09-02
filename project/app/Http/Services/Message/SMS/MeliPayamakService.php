@@ -50,6 +50,20 @@ class MeliPayamakService{
 
     }
 
+    public function BaseNumber2()
+    {
+        ini_set("soap.wsdl_cache_enabled", "0");
+        $sms_client = new SoapClient('http://api.payamak-panel.com/post/send.asmx?wsdl', array('encoding'=>'UTF-8'));
+
+        $parameters['username'] = "YourUserName";
+        $parameters['password'] = "YourPassword";
+        $parameters['to'] = "912...";
+        $parameters['bodyId'] = 123;
+        $parameters['text'] ="تست;1234";
+
+        echo $sms_client->SendByBaseNumber2($parameters)->SendByBaseNumber2Result;
+    }
+
     public function getCredit()
     {
         ini_set("soap.wsdl_cache_enabled", "0");
