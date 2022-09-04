@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Config;
 use App\Http\Services\Message\SMS\SmsService;
 use App\Http\Requests\Auth\Customer\LoginRegisterRequest;
+use App\Http\Services\Message\Email\EmailService;
 use App\Http\Services\Message\MessageService;
 
 class LoginRegisterController extends Controller
@@ -92,7 +93,24 @@ class LoginRegisterController extends Controller
             $smsService->setText("مجمموعه آمازون \n کد تایید شما : {$otpCode}");
 
             $messageService = new MessageService($smsService);
-            $messageService->send();
+
+        }elseif($type == 1)
+        {
+            //send email
+
+            $details =[
+                'title'=>'ایمیل فعالسازی',
+                'body'=>"کد تایید شما : $otpCode"
+            ];
+
+            $emailService = new EmailService();
+            $emailService->setSubject('کد تایید احراز هویت');
+            $emailService->setDetails($details);
+            $emailService->setFrom('no-reply@example.com','example');
+            $emailService->setTo($user->email);
+            $messageService = new MessageService($emailService);
         }
+
+        $messageService->send();
     }
 }
