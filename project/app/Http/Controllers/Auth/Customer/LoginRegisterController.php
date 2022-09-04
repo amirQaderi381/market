@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Auth\Customer;
 
+use App\Models\Otp;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
+use App\Http\Services\Message\SMS\SmsService;
 use App\Http\Requests\Auth\Customer\LoginRegisterRequest;
-use App\Models\Otp;
+use App\Http\Services\Message\MessageService;
 
 class LoginRegisterController extends Controller
 {
@@ -76,6 +79,20 @@ class LoginRegisterController extends Controller
 
         Otp::create($otpInputs);
 
+        //send sms or email
 
+        if($type == 0){
+
+            //send sms
+
+            $smsService = new SmsService();
+            $smsService->setFrom(Config::get('sms.otp_from'));
+            $smsService->setTo(["0".$user->mobile]);
+            $smsService->setIsFlash(true);
+            $smsService->setText("مجمموعه آمازون \n کد تایید شما : {$otpCode}");
+
+            $messageService = new MessageService($smsService);
+            $messageService->send();
+        }
     }
 }

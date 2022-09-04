@@ -2,8 +2,18 @@
 
 namespace App\Http\Services\Message\SMS;
 
+use Illuminate\Support\Facades\Config;
+
 class MeliPayamakService{
 
+    private $username;
+    private $password;
+
+    public function __construct()
+    {
+        $this->username = Config::get('sms.username');
+        $this->password = Config::get('sms.password');
+    }
 
     public function AddContact()
     {
@@ -140,24 +150,32 @@ class MeliPayamakService{
         print_r($result);
     }
 
-    public function sendSmsSoapClient()
+    public function sendSmsSoapClient($from , array $to , $text , $isFlash=true)
     {
         ini_set("soap.wsdl_cache_enabled", "0");
         try {
-          $client = new SoapClient('http://api.payamak-panel.com/post/send.asmx?wsdl', array('encoding'=>'UTF-8'));
-          $parameters['username'] = "demo";
-          $parameters['password'] = "demo";
-          $parameters['from'] = "10000.";
-          $parameters['to'] = array("912...");
-          $parameters['text'] ="سلام";
-          $parameters['isflash'] = true;
+          $client = new \SoapClient('http://api.payamak-panel.com/post/send.asmx?wsdl', array('encoding'=>'UTF-8'));
+          $parameters['username'] = $this->username;
+          $parameters['password'] = $this->password;
+          $parameters['from'] = $from;
+          $parameters['to'] = $to;
+          $parameters['text'] = $text;
+          $parameters['isflash'] = $isFlash;
           $parameters['udh'] = "";
           $parameters['recId'] = array(0);
           $parameters['status'] = 0x0;
-          echo $client->GetCredit(array("username"=>"wsdemo","password"=>"wsdemo"))->GetCreditResult;
-          echo $client->SendSms($parameters)->SendSmsResult;
-          echo $status;
-        } catch (SoapFault $ex) {
+          $GetCreditResult= $client->GetCredit(array("username"=>$this->username,"password"=>$this->password))->GetCreditResult;
+          $sendSmsResult= $client->SendSms($parameters)->SendSmsResult;
+          if($GetCreditResult == 0 && $sendSmsResult == 1)
+          {
+            return true;
+
+          }else {
+
+            return false;
+          }
+
+        } catch (\SoapFault $ex) {
           echo $ex->faultstring;
         }
     }
