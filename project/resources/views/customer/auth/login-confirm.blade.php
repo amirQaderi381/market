@@ -21,26 +21,79 @@
             <section class="login-title">
                <p>کد تایید را وارد نمایید</p>
             </section>
-            @if($otpCode->type == 0)
+            @if($otp->type == 0)
             <section class="login-info">
-                <p> کد تایید برای شماره موبایل {{ $otpCode->login_id }}ارسال شد</p>
+                <p> کد تایید برای شماره موبایل {{ $otp->login_id }}ارسال شد</p>
             </section>
-            @elseif ($otpCode->type == 1)
+            @elseif ($otp->type == 1)
             <section class="login-info">
-                <p> کد تایید برای آدرس ایمیل {{ $otpCode->login_id }}ارسال شد</p>
+                <p> کد تایید برای آدرس ایمیل {{ $otp->login_id }}ارسال شد</p>
             </section>
             @endif
             <section class="login-input-text">
-               <input type="text" name="id" >  {{--  id => identifier --}}
-               @error('id')
+               <input type="text" name="otp" >
+               @error('otp')
                     <span role="alert">
                         <p class="text-danger">{{ $message }}</p>
                     </span>
                @enderror
             </section>
             <section class="login-btn d-grid g-2"><button class="btn btn-danger">تایید</button></section>
+
+            <section id="resend-otp" class="d-none">
+                <a href="" class="text-decoration-none">دریافت مجدد کد تایید</a>
+            </section>
+            <section id="timer"></section>
         </section>
      </form>
 </section>
 
+@endsection
+
+@section('script')
+
+@php
+    $timer = ((new \Carbon\Carbon($otp->created_at))->addMinutes(2)->timestamp - \Carbon\Carbon::now()->timestamp)*1000;
+@endphp
+
+<script>
+
+    let resendOtp = $('#resend-otp');
+    let timer = $('#timer');
+
+     // Set the date we're counting down to
+     let countDownDate = new Date().getTime()+{{ $timer }};
+
+     let x = setInterval(() => {
+
+        // Get today's date and time
+        let now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        let distance = countDownDate - now;
+
+        //Time calculations for minutes and seconds
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+        if(minutes == 0)
+        {
+            timer.html('ارسال مجدد کد تایید تا ' + seconds + 'ثانیه دیگر ');
+
+        }else{
+
+            timer.html('ارسال مجدد کد تایید تا ' + minutes + 'دقیقه و ' + seconds + 'ثانیه دیگر ');
+        }
+
+        // If the count down is finished, write some text
+        if(distance < 0)
+        {
+            clearInterval(x);
+            timer.addClass('d-none');
+            resendOtp.removeClass('d-none');
+        }
+
+     }, 1000);
+</script>
 @endsection

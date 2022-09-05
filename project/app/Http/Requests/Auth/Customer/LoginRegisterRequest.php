@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth\Customer;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRegisterRequest extends FormRequest
@@ -23,10 +24,23 @@ class LoginRegisterRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $route = Route::current();
 
-            'id'=>'required|min:11|max:64|regex:/^[a-zA-Z0-9_.@\+]*$/'
-        ];
+        if($route->getName() == 'auth.customer.login-register')
+        {
+            return [
+
+                'id'=>'required|min:11|max:64|regex:/^[a-zA-Z0-9_.@\+]*$/'
+            ];
+
+        }elseif($route->getName() == 'auth.customer.login-confirm')
+        {
+            return [
+
+                'otp'=>'required|min:6|max:6'
+            ];
+        }
+
     }
 
     public function attributes()
