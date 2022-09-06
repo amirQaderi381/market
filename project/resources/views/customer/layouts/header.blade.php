@@ -36,12 +36,12 @@
                 </section>
 
                 <section class="mt-3 mt-md-auto text-end">
-                    <section class="d-inline px-md-3">
+                    @auth
+                     <section class="d-inline px-md-3">
                         <button class="btn btn-link text-decoration-none text-dark dropdown-toggle profile-button" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-user"></i>
                         </button>
 
-                        @auth
                          <section class="dropdown-menu dropdown-menu-end custom-drop-down" aria-labelledby="dropdownMenuButton1">
                             <section><a class="dropdown-item" href="my-profile.html"><i class="fa fa-user-circle"></i>پروفایل کاربری</a></section>
                             <section><a class="dropdown-item" href="my-orders.html"><i class="fa fa-newspaper"></i>سفارشات</a></section>
@@ -50,13 +50,15 @@
                             <section><a class="dropdown-item" href="{{ route('auth.customer.logout') }}"><i class="fa fa-sign-out-alt"></i>خروج</a></section>
 
                          </section>
-                        @endauth
-                        @guest
+
+                     </section>
+                    @endauth
+
+                    @guest
                         <a href="{{ route('auth.customer.login-register-form') }}" class="btn btn-link text-decoration-none text-dark profile-button">
                             <i class="fa fa-user-lock"></i>
                         </a>
-                        @endguest
-                    </section>
+                    @endguest
                     <section class="header-cart d-inline ps-3 border-start position-relative">
                         <a class="btn btn-link position-relative text-dark header-cart-link" href="javascript:void(0)">
                             <i class="fa fa-shopping-cart"></i> <span style="top: 80%;" class="position-absolute start-0 translate-middle badge rounded-pill bg-danger">2</span>
