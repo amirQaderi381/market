@@ -161,4 +161,58 @@ class LoginRegisterController extends Controller
         Auth::login($user);
         return redirect()->route('customer.home');
     }
+
+    public function LoginResendOtp($token)
+    {
+        $otp = Otp::where('token',$token)->where('created_at','<=',Carbon::now()->subMinutes(2))->first();
+
+        if(empty($otp))
+        {
+            return redirect()->route('auth.customer.login-register-form')->withErrors(['id'=>'آدرس وارد شده معتبر نیست']);
+        }
+
+        $otpCode = Rand(111111,999999);
+        $token = Str::random(60);
+        $user = $otp->user()->first();
+
+        $otpInputs = [
+            'token'=>$token,
+            'user_id'=>$user->id,
+            'otp_code'=>$otpCode,
+            'login_id'=>$otp->login_id,
+            'type' => $otp->type,
+        ];
+
+        Otp::create($otpInputs);
+
+        if($otp->type == 0)
+        {
+            $smsService = new SmsService();
+            $smsService->setFrom(Config::get('sms.otp_from'));
+            $smsService->setTo(["0".$user->mobile]);
+            $smsService->setIsFlash(true);
+            $smsService->setText("مجمموعه آمازون \n کد تایید شما : {$otpCode}");
+
+            $messageService = new MessageService($smsService);
+
+        }elseif($otp->type == 1)
+        {
+            $details =[
+                'title'=>'ایمیل فعالسازی',
+                'body'=>"کد تایید شما : $otpCode"
+            ];
+
+            $emailService = new EmailService();
+            $emailService = new EmailService();
+            $emailService->setSubject('کد تایید احراز هویت');
+            $emailService->setDetails($details);
+            $emailService->setFrom('no-reply@example.com','example');
+            $emailService->setTo($otp->login_id);
+            $messageService = new MessageService($emailService);
+
+        }
+
+        $messageService->send();
+        return redirect()->route('auth.customer.login-confirm-form',$token);
+    }
 }
