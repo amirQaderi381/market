@@ -130,7 +130,7 @@ class LoginRegisterController extends Controller
     public function loginConfirm(LoginRegisterRequest $request,$token)
     {
        $inputs = $request->all();
-       $otp = Otp::where('token',$token)->where('used',0)->where('created_at','>=',Carbon::now()->subMinutes(5)->toDateString())->first();
+       $otp = Otp::where('token',$token)->where('used',0)->where('created_at','>=',Carbon::now()->subMinutes(2)->toDateString())->first();
 
        if(empty($otp))
        {
