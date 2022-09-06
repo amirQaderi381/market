@@ -67,7 +67,21 @@ $(document).ready(function(){
         dots:false,
         autoplay:false,
         autoHeight: false,
-        items: 5
+        items: 5,
+        responsive : {
+            // breakpoint from 0 up
+            0 : {
+                items: 1,
+            },
+            // breakpoint from 480 up
+            480 : {
+                items: 2,
+            },
+            // breakpoint from 768 up
+            768 : {
+                items: 5,
+            }
+        }
     });
 
 
@@ -82,7 +96,21 @@ $(document).ready(function(){
         autoplayHoverPause:true,
         animateOut: 'fadeOut',
         animateIn: 'fadeIn',
-        items: 5
+        items: 5,
+        responsive : {
+            // breakpoint from 0 up
+            0 : {
+                items: 1,
+            },
+            // breakpoint from 480 up
+            480 : {
+                items: 2,
+            },
+            // breakpoint from 768 up
+            768 : {
+                items: 5,
+            }
+        }
     });
 
 
