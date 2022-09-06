@@ -38,13 +38,12 @@
                     </section>
                 </section>
                 <section>
+                @auth
                     <section class="d-inline px-3">
                         <button class="btn btn-link text-decoration-none text-dark dropdown-toggle profile-button"
                             type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-user"></i>
                         </button>
-
-                       @auth
 
                         <section class="dropdown-menu dropdown-menu-end custom-drop-down"
                             aria-labelledby="dropdownMenuButton1">
@@ -73,17 +72,15 @@
                             </section>
 
                         </section>
+                    </section>
+                @endauth
 
-                        @endauth
-
-                        @guest
-
-                        <a class="btn btn-link text-decoration-none text-dark profile-button" href="{{ route('auth.customer.login-register-form') }}">
+                    @guest
+                        <a href="{{ route('auth.customer.login-register-form') }}" class="btn btn-link text-decoration-none text-dark profile-button">
                             <i class="fa fa-user-lock"></i>
                         </a>
+                    @endguest
 
-                        @endguest
-                    </section>
                     <section class="header-cart d-inline ps-3 border-start position-relative">
                         <a class="btn btn-link position-relative text-dark header-cart-link" href="cart.html">
                             <i class="fa fa-shopping-cart"></i> <span style="top: 80%;"
