@@ -37,6 +37,7 @@ use App\Http\Controllers\Auth\Customer\LoginRegisterController;
 use App\Http\Controllers\Admin\Content\CommentController as ContentCommentController;
 use App\Http\Controllers\Admin\Market\DiscountController as MarketDiscountController;
 use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
+use App\Http\Controllers\Customer\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -495,9 +496,7 @@ Route::namespace('Auth')->group(function(){
     });
 });
 
-Route::get('/',function(){
- return view('customer.home');
-})->name('customer.home');
+Route::get('/',[HomeController::class , 'home'])->name('customer.home');
 
 Route::middleware([
     'auth:sanctum',
