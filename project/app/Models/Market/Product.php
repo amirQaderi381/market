@@ -5,6 +5,7 @@ namespace App\Models\Market;
 use App\Models\Market\Brand;
 use App\Models\Market\Comment;
 use App\Models\Market\Gallery;
+use App\Models\Market\Guarantee;
 use App\Models\Market\ProductMeta;
 use App\Models\Market\ProductColor;
 use App\Models\Market\ProductCategory;
@@ -61,5 +62,10 @@ class Product extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function guarantees()
+    {
+        return $this->hasMany(Guarantee::class);
     }
 }

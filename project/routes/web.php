@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Admin\User\RoleController;
 use App\Http\Controllers\Admin\Notify\SMSController;
 use App\Http\Controllers\Admin\Content\FAQController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\Admin\Market\DiscountController;
 use App\Http\Controllers\Admin\Market\PropertyController;
 use App\Http\Controllers\Admin\Setting\SettingController;
 use App\Http\Controllers\Admin\User\PermissionController;
+use App\Http\Controllers\Admin\Market\GuaranteeController;
 use App\Http\Controllers\Admin\Notify\EmailFileController;
 use App\Http\Controllers\Admin\Ticket\TicketAdminController;
 use App\Http\Controllers\Admin\Market\ProductColorController;
@@ -37,7 +39,6 @@ use App\Http\Controllers\Auth\Customer\LoginRegisterController;
 use App\Http\Controllers\Admin\Content\CommentController as ContentCommentController;
 use App\Http\Controllers\Admin\Market\DiscountController as MarketDiscountController;
 use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
-use App\Http\Controllers\Customer\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -173,6 +174,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
         //products
 
         Route::prefix('product')->group(function () {
+
             Route::get('/', [ProductController::class, 'index'])->name('admin.market.product.index');
             Route::get('/create', [ProductController::class, 'create'])->name('admin.market.product.create');
             Route::post('/store', [ProductController::class, 'store'])->name('admin.market.product.store');
@@ -182,7 +184,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/status/{product}', [ProductController::class, 'status'])->name('admin.market.product.status');
             Route::get('/marketable/{product}', [ProductController::class, 'marketable'])->name('admin.market.product.marketable');
 
-            //colors
+            //gallery
 
             Route::get('gallery/{product}', [GalleryController::class, 'index'])->name('admin.market.gallery.index');
             Route::get('gallery/{product}/create', [GalleryController::class, 'create'])->name('admin.market.gallery.create');
@@ -190,12 +192,20 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::delete('gallery/destroy/{product}/{gallery}', [GalleryController::class, 'destroy'])->name('admin.market.gallery.destroy');
 
 
-            //gallery
+            //guarantees
 
-            Route::get('/{product}', [ProductColorController::class, 'index'])->name('admin.market.color.index');
-            Route::get('{product}/create', [ProductColorController::class, 'create'])->name('admin.market.color.create');
-            Route::post('{product}/store', [ProductColorController::class, 'store'])->name('admin.market.color.store');
-            Route::delete('/destroy/{product}/{productColor}', [ProductColorController::class, 'destroy'])->name('admin.market.color.destroy');
+            Route::get('guarantee/{product}', [GuaranteeController::class, 'index'])->name('admin.market.guarantee.index');
+            Route::get('guarantee/{product}/create', [GuaranteeController::class, 'create'])->name('admin.market.guarantee.create');
+            Route::post('guarantee/{product}/store', [GuaranteeController::class, 'store'])->name('admin.market.guarantee.store');
+            Route::delete('guarantee/destroy/{product}/{guarantee}', [GuaranteeController::class, 'destroy'])->name('admin.market.guarantee.destroy');
+
+
+            //colors
+
+            Route::get('color/{product}', [ProductColorController::class, 'index'])->name('admin.market.color.index');
+            Route::get('color/{product}/create', [ProductColorController::class, 'create'])->name('admin.market.color.create');
+            Route::post('color/{product}/store', [ProductColorController::class, 'store'])->name('admin.market.color.store');
+            Route::delete('color/destroy/{product}/{productColor}', [ProductColorController::class, 'destroy'])->name('admin.market.color.destroy');
         });
 
         //property
