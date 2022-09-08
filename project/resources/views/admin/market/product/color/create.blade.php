@@ -56,7 +56,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-6 mb-2">
+                            <div class="col mb-2">
                                 <div class="form-group">
                                     <label for="price_increase">افزایش قیمت</label>
                                     <input type="text" name="price_increase" value="{{ old('price_increase') }}"

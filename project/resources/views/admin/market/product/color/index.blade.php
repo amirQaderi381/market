@@ -37,7 +37,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">نام کالا</th>
                                 <th scope="col"> رنگ کالا</th>
-                                <th scope="col"> قیمت افزایشی</th>
+                                <th scope="col">افزایش قیمت</th>
                                 <th class="max-width-16-rem text-center"><i class="fa fa-cogs"></i> تنظیمات</th>
                             </tr>
                         </thead>
