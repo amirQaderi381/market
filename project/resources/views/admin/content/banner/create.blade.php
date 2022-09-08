@@ -97,11 +97,18 @@
                                 @enderror
                             </section>
 
+
                             <section class="col-12 mb-2">
                                 <div class="form-group">
                                     <label for="position">مکان</label>
-                                    <input type="text" class="form-control form-control-sm" name="position"
-                                        value="{{ old('position') }}">
+                                    <select name="position" id="position" class="form-control form-control-sm">
+                                        <option value="">مکان را انتخاب کنید</option>
+                                        @foreach ($positions as $key=>$position)
+                                            <option value="{{ $key }}"
+                                                @if ($key == old('position')) selected @endif>{{$position}}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 @error('position')
                                     <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
