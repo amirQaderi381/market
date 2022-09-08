@@ -45,6 +45,19 @@
 
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
+                                    <label for="color"> رنگ</label>
+                                    <input type="color" name="color" value="{{ old('color') }}"
+                                        class="form-control form-control-sm">
+                                </div>
+                                @error('color')
+                                    <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 mb-2">
+                                <div class="form-group">
                                     <label for="price_increase">افزایش قیمت</label>
                                     <input type="text" name="price_increase" value="{{ old('price_increase') }}"
                                         class="form-control form-control-sm">
