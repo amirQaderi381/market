@@ -51,7 +51,7 @@
                                 <td>{{ $product->name }}</td>
                                 <td>
                                     <img src="{{ asset($product->image['indexArray'][$product->image['currentImage']]) }}" alt=""
-                                        class="max-height-2rem" width="100" height="50">
+                                        class="max-height-2rem" class="w-100">
                                 </td>
                                 <td>{{ $product->price }} تومان</td>
                                 <td>{{ $product->category->name }}</td>
