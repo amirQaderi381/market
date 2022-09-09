@@ -39,6 +39,7 @@ use App\Http\Controllers\Auth\Customer\LoginRegisterController;
 use App\Http\Controllers\Admin\Content\CommentController as ContentCommentController;
 use App\Http\Controllers\Admin\Market\DiscountController as MarketDiscountController;
 use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
+use App\Http\Controllers\Customer\Market\ProductController as MarketProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -507,6 +508,15 @@ Route::namespace('Auth')->group(function(){
 });
 
 Route::get('/',[HomeController::class , 'home'])->name('customer.home');
+
+Route::namespace('customer')->group(function(){
+
+    Route::namespace('market')->group(function(){
+
+        Route::get('/product/{product:slug}',[MarketProductController::class , 'product'])->name('customer.market.product');
+        Route::post('/add-comment/product/{product:slug}',[MarketProductController::class , 'addComment'])->name('customer.market.add-comment');
+    });
+});
 
 Route::middleware([
     'auth:sanctum',

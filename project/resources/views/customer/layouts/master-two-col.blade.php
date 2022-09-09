@@ -14,7 +14,7 @@
 
     <main id="main-body-one-col" class="main-body">
 
-    @yield('content')
+       @yield('content')
 
     </main>
 
