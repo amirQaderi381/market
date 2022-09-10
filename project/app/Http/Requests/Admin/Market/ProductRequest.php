@@ -28,7 +28,7 @@ class ProductRequest extends FormRequest
             return [
 
                 'name'=>'required|min:2|max:120|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
-                'introduction' => 'required|max:1000|min:5',
+                'introduction' => 'required|min:5',
                 'weight' => 'required|max:1000|min:1|numeric',
                 'length' => 'required|max:1000|min:1|numeric',
                 'width' => 'required|max:1000|min:1|numeric',
