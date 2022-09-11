@@ -6,7 +6,10 @@
 </head>
 <body>
 
+
+
     @include('customer.layouts.header')
+
 
     <section class="container-xxl body-container">
         @yield('customer.layouts.sidebar')
@@ -25,5 +28,9 @@
 
     @include('customer.layouts.script')
     @yield('script')
+
+    @include('customer.alerts.sweetalert.success')
+    @include('customer.alerts.sweetalert.error')
+
 </body>
 </html>

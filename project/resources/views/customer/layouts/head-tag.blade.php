@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{ asset('customer-assets/fontawesome/css/all.min.css') }}">
 <link rel="stylesheet" href="{{ asset('customer-assets/plugins/owlcarousel/assets/owl.carousel.min.css') }}">
 <link rel="stylesheet" href="{{ asset('customer-assets/plugins/owlcarousel/assets/owl.theme.default.min.css') }}">
+<link rel="stylesheet" href="{{ asset('customer-assets/sweetalert/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('customer-assets/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('customer-assets/css/cart.css') }}">
 <link rel="stylesheet" href="{{ asset('customer-assets/css/address.css') }}">

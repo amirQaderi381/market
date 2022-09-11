@@ -23,7 +23,7 @@ class Comment extends Model
         return $this->belongsTo($this,'parent_id');
     }
 
-    public function children()
+    public function answers()
     {
         return $this->hasMany($this,'parent_id');
     }
