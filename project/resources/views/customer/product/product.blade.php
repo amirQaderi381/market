@@ -89,19 +89,23 @@
 
                                     @if ($colors->count() !== 0)
                                         <p>
-                                            <span>رنگ انتخاب شده :<span id="selected_color_name">{{ $colors->first()->color_name }}</span></span>
+                                            <span>رنگ انتخاب شده :<span
+                                                    id="selected_color_name">{{ $colors->first()->color_name }}</span></span>
                                         </p>
                                         <p>
                                             @foreach ($colors as $key => $color)
+                                                <label for="{{ 'color_' . $color->id }}"
+                                                    style="background-color: {{ $color->color ?? '#ffff' }};"
+                                                    class="product-info-colors me-1" data-bs-toggle="tooltip"
+                                                    data-bs-placement="bottom" title="{{ $color->color_name }}">
 
-                                            <label for="{{ 'color_'.$color->id }}" style="background-color: {{ $color->color ?? '#ffff' }};"
-                                                class="product-info-colors me-1" data-bs-toggle="tooltip"
-                                                data-bs-placement="bottom" title="{{ $color->color_name }}">
+                                                </label>
 
-                                            </label>
-
-                                            <input type="radio" class="d-none" name="color" value="{{ $color->id }}" id="{{ 'color_'.$color->id }}" data-color-name='{{ $color->color_name }}' data-product-color-price='{{ $color->price_increase }}'  @if($key == 0) checked @endif>
-
+                                                <input type="radio" class="d-none" name="color"
+                                                    value="{{ $color->id }}" id="{{ 'color_' . $color->id }}"
+                                                    data-color-name='{{ $color->color_name }}'
+                                                    data-product-color-price='{{ $color->price_increase }}'
+                                                    @if ($key == 0) checked @endif>
                                             @endforeach
 
                                         </p>
@@ -113,15 +117,18 @@
                                     @endphp
 
                                     @if ($guarantees->count() !== 0)
-                                            <p>
-                                                <i class="fa fa-shield-alt cart-product-selected-warranty me-1"></i>
-                                                گارانتی :
-                                                <select name="guarantee" id="guarantee">
-                                                    @foreach ($guarantees as $key => $guarantee)
-                                                      <option value="{{ $guarantee->id }}" data-product-guarantee-price='{{ $guarantee->price_increase }}' @if($key == 0) selected @endif >{{ $guarantee->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </p>
+                                        <p>
+                                            <i class="fa fa-shield-alt cart-product-selected-warranty me-1"></i>
+                                            گارانتی :
+                                            <select name="guarantee" id="guarantee">
+                                                @foreach ($guarantees as $key => $guarantee)
+                                                    <option value="{{ $guarantee->id }}"
+                                                        data-product-guarantee-price='{{ $guarantee->price_increase }}'
+                                                        @if ($key == 0) selected @endif>
+                                                        {{ $guarantee->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </p>
                                     @endif
 
 
@@ -138,7 +145,8 @@
                                     <section>
                                         <section class="cart-product-number d-inline-block ">
                                             <button class="cart-number cart-number-down" type="button">-</button>
-                                            <input type="number" id="number" min="1" max="5" step="1" value="1" readonly="readonly">
+                                            <input type="number" id="number" min="1" max="5"
+                                                step="1" value="1" readonly="readonly">
                                             <button class="cart-number cart-number-up" type="button">+</button>
                                         </section>
                                     </section>
@@ -160,22 +168,27 @@
                             <section class="content-wrapper bg-white p-3 rounded-2 cart-total-price">
                                 <section class="d-flex justify-content-between align-items-center">
                                     <p class="text-muted">قیمت کالا</p>
-                                    <p class="text-muted"><span id="product-price" data-product-original-price='{{ $product->price }}'>{{ priceFormat($product->price) }}</span><span class="small">تومان</span></p>
+                                    <p class="text-muted"><span id="product-price"
+                                            data-product-original-price='{{ $product->price }}'>{{ priceFormat($product->price) }}</span><span
+                                            class="small">تومان</span></p>
                                 </section>
 
                                 @if (!empty($product->activeAmazingSales()))
                                     <section class="d-flex justify-content-between align-items-center">
                                         <p class="text-muted">تخفیف کالا</p>
-                                        <p class="text-danger fw-bolder" id="product-discount-price" data-product-discount-price="{{ ($product->price * $product->activeAmazingSales()->percentage) / 100 }}">
+                                        <p class="text-danger fw-bolder" id="product-discount-price"
+                                            data-product-discount-price="{{ ($product->price * $product->activeAmazingSales()->percentage) / 100 }}">
                                             {{ priceFormat(($product->price * $product->activeAmazingSales()->percentage) / 100) }}
-                                            <span class="small">تومان</span></p>
+                                            <span class="small">تومان</span>
+                                        </p>
                                     </section>
                                 @endif
 
                                 <section class="border-bottom mb-3"></section>
 
                                 <section class="d-flex justify-content-end align-items-center">
-                                    <p class="fw-bolder"><span id="final-price"></span> <span class="small">تومان</span></p>
+                                    <p class="fw-bolder"><span id="final-price"></span> <span class="small">تومان</span>
+                                    </p>
                                 </section>
 
 
@@ -337,7 +350,8 @@
                                     @foreach ($product->values as $value)
                                         <tr>
                                             <td>{{ $value->attribute->name }}</td>
-                                            <td>{{ json_decode($value->value)->value . ' ' . $value->attribute->unit }}</td>
+                                            <td>{{ json_decode($value->value)->value . ' ' . $value->attribute->unit }}
+                                            </td>
                                         </tr>
                                     @endforeach
 
@@ -479,14 +493,15 @@
                                                         @endif
                                                     </section>
                                                 </section>
-                                                <section class="product-comment-body @if($commentAnswer->answers()->count() > 0) border-bottom @endif" >
+                                                <section
+                                                    class="product-comment-body @if ($commentAnswer->answers()->count() > 0) border-bottom @endif">
                                                     {!! $commentAnswer->body !!}
                                                 </section>
                                             </section>
                                         @endforeach
 
                                     </section>
-                                    @empty
+                                @empty
                                     <p class="my-2">دیدگاهی برای این محصول وجود ندارد</p>
                                 @endforelse
 
@@ -504,26 +519,25 @@
 
 @section('script')
     <script>
-          $(document).ready(function(){
+        $(document).ready(function() {
 
             bill();
 
-            $("input[name='color']").change(function(){
+            $("input[name='color']").change(function() {
 
                 bill();
             })
 
-            $("#guarantee").change(function(){
+            $("#guarantee").change(function() {
 
                 bill();
             })
 
-            $('.cart-number').click(function(){
-                   bill();
+            $('.cart-number').click(function() {
+                bill();
             })
 
-            function bill()
-            {
+            function bill() {
                 //price computing
                 let product_original_price = parseFloat($('#product-price').attr('data-product-original-price'));
                 let selected_color_price = 0;
@@ -531,37 +545,46 @@
                 let product_discount_price = 0;
                 let number = 1;
 
-                if($('input[name="color"]:checked').length !== 0)
-                {
+                if ($('input[name="color"]:checked').length !== 0) {
                     let selected_color = $('input[name="color"]:checked');
                     $('#selected_color_name').html(selected_color.attr('data-color-name'));
 
                     selected_color_price = parseFloat(selected_color.attr('data-product-color-price'));
                 }
 
-                if($('#guarantee option:selected').length !== 0)
-                {
-                    selected_guarantee_price = parseFloat($('#guarantee option:selected').attr('data-product-guarantee-price'));
+                if ($('#guarantee option:selected').length !== 0) {
+                    selected_guarantee_price = parseFloat($('#guarantee option:selected').attr(
+                        'data-product-guarantee-price'));
                 }
 
-                if($('#product-discount-price').length !== 0)
-                {
-                    product_discount_price = parseFloat($('#product-discount-price').attr('data-product-discount-price'))
+                if ($('#product-discount-price').length !== 0) {
+                    product_discount_price = parseFloat($('#product-discount-price').attr(
+                        'data-product-discount-price'))
                 }
 
-                if($('#number').val() > 0)
-                {
-                  number = parseFloat($('#number').val());
+                if ($('#number').val() > 0) {
+                    number = parseFloat($('#number').val());
                 }
 
-                  //final price
+                //final price
 
-                  let product_price = product_original_price + selected_color_price + selected_guarantee_price;
-                  let final_price = number * (product_price - product_discount_price);
+                let product_price = product_original_price + selected_color_price + selected_guarantee_price;
+                let final_price = number * (product_price - product_discount_price);
 
-                  $('#final-price').html(final_price)
+                $('#final-price').html(toPersianNumber(final_price))
 
             }
-          });
+
+            function toPersianNumber(number)
+            {
+                const persianDigits= ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+
+                //add comma
+                number = new Intl.NumberFormat().format(number);
+
+                //convert to persian
+                return number.toString().replace(/\d/g, x => persianDigits[x]);
+            }
+        });
     </script>
 @endsection
