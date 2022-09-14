@@ -81,7 +81,7 @@ class Product extends Model
         return $this->hasMany(AmazingSale::class);
     }
 
-    public function activeAmazingSale()
+    public function activeAmazingSales()
     {
         return $this->amazingSales()->where('start_date','<',Carbon::now())->where('end_date','>',Carbon::now())->first();
     }
