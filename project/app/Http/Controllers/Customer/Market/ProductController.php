@@ -28,4 +28,28 @@ class ProductController extends Controller
        Comment::create($inputs);
        return redirect()->route('customer.market.product',$product)->with('swal-success','دیدگاه شما با موفقیت ثبت شد');
     }
+
+    public function addToFavorite(Product $product)
+    {
+        if(Auth::check())
+        {
+            $product->users()->toggle([Auth::user()->id]);
+
+            if($product->users->contains(Auth::user()->id))
+            {
+                return response()->json(['status'=>1]);
+
+            }else{
+
+                return response()->json(['status'=>2]);
+            }
+
+        }else{
+
+            return response()->json(['status'=>3]);
+        }
+    }
+
+
+
 }

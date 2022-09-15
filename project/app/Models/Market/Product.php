@@ -2,6 +2,7 @@
 
 namespace App\Models\Market;
 
+use App\Models\User;
 use App\Models\Market\Brand;
 use App\Models\Market\Comment;
 use App\Models\Market\Gallery;
@@ -89,5 +90,10 @@ class Product extends Model
     public function values()
     {
         return $this->hasMany(CategoryValue::class,'product_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 }

@@ -120,7 +120,7 @@
                                         <p>
                                             <i class="fa fa-shield-alt cart-product-selected-warranty me-1"></i>
                                             گارانتی :
-                                            <select name="guarantee" id="guarantee">
+                                            <select class="form-select form-select-sm mt-2"  name="guarantee" id="guarantee">
                                                 @foreach ($guarantees as $key => $guarantee)
                                                     <option value="{{ $guarantee->id }}"
                                                         data-product-guarantee-price='{{ $guarantee->price_increase }}'
@@ -263,16 +263,9 @@
                                                             {{ priceFormat($relatedProduct->price) }} تومان</section>
                                                     </section>
                                                     <section class="product-colors">
-                                                        <section class="product-colors-item"
-                                                            style="background-color: yellow;"></section>
-                                                        <section class="product-colors-item"
-                                                            style="background-color: green;"></section>
-                                                        <section class="product-colors-item"
-                                                            style="background-color: white;"></section>
-                                                        <section class="product-colors-item"
-                                                            style="background-color: blue;"></section>
-                                                        <section class="product-colors-item"
-                                                            style="background-color: red;"></section>
+                                                        @foreach($relatedProduct->colors as $color)
+                                                        <section class="product-colors-item" style="background-color: {{ $color->color }};"></section>
+                                                       @endforeach
                                                     </section>
                                                 </a>
                                             </section>
