@@ -176,11 +176,36 @@
                                     <section class="lazyload-item-wrapper">
                                         <section class="product">
                                             <section class="product-add-to-cart"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به سبد خرید"><i class="fa fa-cart-plus"></i></a></section>
+                                            @guest
+
                                             <section class="product-add-to-favorite">
-                                                <a class="add-to-favorite" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی">
+                                                <button class="btn btn-light btn-sm text-decoration-none" data-url="{{ route('customer.market.add-to-favorite', $mostVisitedProduct) }}" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی">
                                                     <i class="fa fa-heart"></i>
-                                                </a>
+                                                </button>
                                             </section>
+                                            @endguest
+
+                                            @auth
+
+                                               @if($offerProduct->users->contains(Auth::user()->id))
+
+                                                    <section class="product-add-to-favorite">
+                                                        <button class="btn btn-light btn-sm text-decoration-none" data-url="{{ route('customer.market.add-to-favorite', $offerProduct) }}" data-bs-toggle="tooltip" data-bs-placement="left" title="حذف از علاقه مندی">
+                                                            <i class="fa fa-heart text-danger"></i>
+                                                        </button>
+                                                    </section>
+
+                                                @else
+
+                                                <section class="product-add-to-favorite">
+                                                    <button class="btn btn-light btn-sm text-decoration-none" data-url="{{ route('customer.market.add-to-favorite', $offerProduct) }}" data-bs-toggle="tooltip" data-bs-placement="left" title="حذف از علاقه مندی">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                </section>
+
+                                                @endif
+
+                                            @endauth
                                             <a class="product-link" href="{{ route('customer.market.product',$offerProduct) }}">
                                                 <section class="product-image">
                                                     <img class="" src="{{ $offerProduct->image['indexArray']['medium'] }}" alt="{{ $offerProduct->name }}">
@@ -296,25 +321,31 @@
                     {
                         $(element).children().first().removeClass('text-danger');
                         $(element).attr('data-bs-original-title', 'افزودن به علاقه مندی ها');
-                        Toast('کالا با موفقیت از لیست علاه مندی ها حذف شد','danger')
+                        Toast('کالا با موفقیت از لیست علاه مندی ها حذف شد')
 
                     }else if(result.status == 3)
                     {
-                        Toast('برای افزودن کالا به لیست علاقه مندی ها ابتدا وارد حساب کاربری خود شوید','info');
+                        Toast('برای افزودن کالا به لیست علاقه مندی ها ابتدا باید وارد حساب کاربری خود شوید');
                     }
                 }
             })
         })
 
-        function Toast(message,color='success') {
-                let ToastTag = '<section class="toast" data-delay="2600">\n' +
-                    '<section class="toast-body py-3 d-flex bg-'+color+' text-white">\n' +
-                    '<strong class="ml-auto">' + message + '</strong>\n' +
-                    '</section>\n' +
-                    '</section>\n';
+        function Toast(message) {
+                let ToastTag = '<div class="toast"  data-delay="7000" role="alert" aria-live="assertive" aria-atomic="true">\n' +
+                    '<div class="toast-header">' +
+                    '<strong class="me-auto">فروشگاه</strong>' +
+                    '<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>' +
+                    '</div>'+
+                    '<div class="toast-body">'+
+                    '<strong class="ml-auto">'+
+                    message
+                    ' </strong>'+
+                    ' </strong>'+
+                    ' </section>'+
 
                 $('.toast-wrapper').append(ToastTag);
-                $('.toast').toast('show').delay(2600).queue(function() {
+                $('.toast').toast('show').delay(7000).queue(function() {
                     $(this).remove();
                 })
         };

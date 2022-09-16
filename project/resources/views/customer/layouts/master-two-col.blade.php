@@ -25,12 +25,12 @@
     @include('customer.layouts.footer')
 
 
-
     @include('customer.layouts.script')
     @yield('script')
 
-    @include('customer.alerts.sweetalert.success')
-    @include('customer.alerts.sweetalert.error')
+    <section class="toast-wrapper flex-row-reverse">
+        @include('customer.alerts.toast.success')
+    </section>
 
 </body>
 </html>

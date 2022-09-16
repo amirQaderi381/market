@@ -26,7 +26,7 @@ class ProductController extends Controller
        $inputs['commentable_id'] = $product->id;
        $inputs['commentable_type'] = Product::class;
        Comment::create($inputs);
-       return redirect()->route('customer.market.product',$product)->with('swal-success','دیدگاه شما با موفقیت ثبت شد');
+       return redirect()->route('customer.market.product',$product)->with('toast-success','دیدگاه شما با موفقیت ثبت شد');
     }
 
     public function addToFavorite(Product $product)
