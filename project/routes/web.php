@@ -33,13 +33,14 @@ use App\Http\Controllers\Admin\Notify\EmailFileController;
 use App\Http\Controllers\Admin\Ticket\TicketAdminController;
 use App\Http\Controllers\Admin\Market\ProductColorController;
 use App\Http\Controllers\Admin\Market\PropertyValueController;
+use App\Http\Controllers\Customer\SalesProcess\CartController;
 use App\Http\Controllers\Admin\Ticket\TicketCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketPriorityController;
 use App\Http\Controllers\Auth\Customer\LoginRegisterController;
 use App\Http\Controllers\Admin\Content\CommentController as ContentCommentController;
 use App\Http\Controllers\Admin\Market\DiscountController as MarketDiscountController;
-use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
 use App\Http\Controllers\Customer\Market\ProductController as MarketProductController;
+use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -509,6 +510,7 @@ Route::namespace('Auth')->group(function(){
 
 Route::get('/',[HomeController::class , 'home'])->name('customer.home');
 
+
 Route::namespace('customer')->group(function(){
 
     Route::namespace('market')->group(function(){
@@ -516,6 +518,14 @@ Route::namespace('customer')->group(function(){
         Route::get('/product/{product:slug}',[MarketProductController::class , 'product'])->name('customer.market.product');
         Route::post('/add-comment/product/{product:slug}',[MarketProductController::class , 'addComment'])->name('customer.market.add-comment');
         Route::get('/add-to-favorite/product/{product:slug}',[MarketProductController::class , 'addToFavorite'])->name('customer.market.add-to-favorite');
+    });
+
+    Route::namespace('salesProcess')->group(function(){
+
+        Route::get('/cart',[CartController::class , 'cart'])->name('customer.salesProcess.cart');
+        Route::post('/cart',[CartController::class , 'updateCart'])->name('customer.salesProcess.update-cart');
+        Route::post('/add-to-cart/{product:slug}',[CartController::class , 'addToCart'])->name('customer.salesProcess.add-to-cart');
+        Route::post('/remove-from-cart/{cartItem}',[CartController::class , 'removeFromCart'])->name('customer.salesProcess.remove-from-cart');
     });
 });
 

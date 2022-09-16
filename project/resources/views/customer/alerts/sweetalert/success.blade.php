@@ -8,5 +8,7 @@
                 confirmButtonText: 'باشه'
             })
         })
+
+
     </script>
 @endif

@@ -3,9 +3,9 @@
         $(document).ready(function() {
             Swal.fire({
                 icon: 'error',
-                title: 'موفقیت',
-                text: {{session('swal-error')}},
-                confirmButtonText:'باشه'
+                title: 'خطا',
+                text: '{{ session('swal-error') }}',
+                confirmButtonText: 'باشه'
             })
         })
     </script>

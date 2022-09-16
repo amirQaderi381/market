@@ -82,6 +82,9 @@
                                 </section>
                                 <section class="product-info">
 
+                                <form id="add-to-cart" action="{{ route('customer.salesProcess.add-to-cart',$product) }}" method="post">
+                                    @csrf
+
                                     @php
                                         $colors = $product->colors()->get();
 
@@ -89,8 +92,7 @@
 
                                     @if ($colors->count() !== 0)
                                         <p>
-                                            <span>رنگ انتخاب شده :<span
-                                                    id="selected_color_name">{{ $colors->first()->color_name }}</span></span>
+                                            <span>رنگ انتخاب شده :<span id="selected_color_name">{{ $colors->first()->color_name }}</span></span>
                                         </p>
                                         <p>
                                             @foreach ($colors as $key => $color)
@@ -171,7 +173,7 @@
                                     <section>
                                         <section class="cart-product-number d-inline-block ">
                                             <button class="cart-number cart-number-down" type="button">-</button>
-                                            <input type="number" id="number" min="1" max="5"
+                                            <input type="number" name="number" id="number" min="1" max="5"
                                                 step="1" value="1" readonly="readonly">
                                             <button class="cart-number cart-number-up" type="button">+</button>
                                         </section>
@@ -184,7 +186,10 @@
                                         پرداخت این سفارش صورت میگیرد. پس از ثبت سفارش کالا بر اساس نحوه ارسال که شما انتخاب
                                         کرده اید کالا برای شما در مدت زمان مذکور ارسال می گردد.
                                     </p>
+
+                                </form>
                                 </section>
+
                             </section>
 
                         </section>
@@ -220,11 +225,9 @@
 
                                 <section class="">
                                     @if ($product->marketable_number > 0)
-                                        <a id="next-level" href="#" class="btn btn-danger d-block">افزودن به سبد
-                                            خرید</a>
+                                        <button id="next-level" class="btn btn-danger d-block w-100" onclick="document.getElementById('add-to-cart').submit();">افزودن به سبد خرید</button>
                                     @else
-                                        <a id="next-level" href="#" class="btn btn-secondary disabled d-block">محصول
-                                            ناموجود می باشد</a>
+                                        <a id="next-level" href="#" class="btn btn-secondary disabled d-block">محصول ناموجود می باشد</a>
                                     @endif
 
                                 </section>
