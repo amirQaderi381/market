@@ -142,7 +142,7 @@
                                     <p>
                                         @guest
                                         <section class="product-add-to-favorite position-relative" style="top:0;left:0">
-                                            <button class="btn btn-light btn-sm text-decoration-none" data-url="{{ route('customer.market.add-to-favorite', $product) }}" data-bs-toggle="tooltip" data-bs-placement="left">
+                                            <button type="button" class="btn btn-light btn-sm text-decoration-none" data-url="{{ route('customer.market.add-to-favorite', $product) }}" data-bs-toggle="tooltip" data-bs-placement="left">
                                                 <i class="fa fa-heart"></i> افزودن به علاقه مندی
                                             </button>
                                         </section>
@@ -152,7 +152,7 @@
                                             @if ($product->users->contains(Auth::user()->id))
 
                                                 <section class="product-add-to-favorite position-relative" style="top:0;left:0">
-                                                    <button class="btn btn-light btn-sm text-decoration-none" data-url="{{ route('customer.market.add-to-favorite', $product) }}" data-bs-toggle="tooltip" data-bs-placement="left">
+                                                    <button type="button" class="btn btn-light btn-sm text-decoration-none" data-url="{{ route('customer.market.add-to-favorite', $product) }}" data-bs-toggle="tooltip" data-bs-placement="left">
                                                         <i class="fa fa-heart text-danger"></i>
                                                         <span>حذف از علاقه مندی</span>
                                                     </button>
@@ -161,7 +161,7 @@
                                             @else
 
                                             <section class="product-add-to-favorite position-relative" style="top:0;left:0">
-                                                <button class="btn btn-light btn-sm text-decoration-none" data-url="{{ route('customer.market.add-to-favorite', $product) }}" data-bs-toggle="tooltip" data-bs-placement="left">
+                                                <button type="button" class="btn btn-light btn-sm text-decoration-none" data-url="{{ route('customer.market.add-to-favorite', $product) }}" data-bs-toggle="tooltip" data-bs-placement="left">
                                                     <i class="fa fa-heart"></i>
                                                     <span>افزودن به علاقه مندی</span>
                                                 </button>
@@ -695,5 +695,23 @@
                 })
         };
     })
+</script>
+
+<script>
+    //start product introduction, features and comment
+$(document).ready(function() {
+    var s = $("#introduction-features-comments");
+    var pos = s.position();
+    $(window).scroll(function() {
+        var windowpos = $(window).scrollTop();
+
+        if (windowpos >= pos.top) {
+            s.addClass("stick");
+        } else {
+            s.removeClass("stick");
+        }
+    });
+});
+//end product introduction, features and comment
 </script>
 @endsection
