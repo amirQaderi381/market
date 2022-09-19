@@ -563,8 +563,6 @@
     </section>
     <!-- end description, features and comments -->
 
-    <section class="toast-wrapper position-fixed p-4 flex-row-reverse" style="z-index: 909999999;left: 0; top: 3rem; width: 26rem; max-width: 80%;">
-    </section>
 
 @endsection
 
