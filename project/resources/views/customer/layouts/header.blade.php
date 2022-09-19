@@ -80,8 +80,8 @@
                                 @foreach($cartItems as $cartItem)
 
                                 @php
-                                    $totalProductPrice += $cartItem->cartItemProductPrice();
-                                    $totalDiscount += $cartItem->cartItemProductDiscount();
+                                    $totalProductPrice += $cartItem->cartItemProductPrice() * $cartItem->number;
+                                    $totalDiscount += $cartItem->cartItemProductDiscount() * $cartItem->number;
                                     $finalPrice = $totalProductPrice - $totalDiscount;
                                 @endphp
 
