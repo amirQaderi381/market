@@ -37,6 +37,8 @@ use App\Http\Controllers\Customer\SalesProcess\CartController;
 use App\Http\Controllers\Admin\Ticket\TicketCategoryController;
 use App\Http\Controllers\Admin\Ticket\TicketPriorityController;
 use App\Http\Controllers\Auth\Customer\LoginRegisterController;
+use App\Http\Controllers\Customer\SalesProcess\AddressController;
+use App\Http\Controllers\Customer\SalesProcess\ProfileCompletionController;
 use App\Http\Controllers\Admin\Content\CommentController as ContentCommentController;
 use App\Http\Controllers\Admin\Market\DiscountController as MarketDiscountController;
 use App\Http\Controllers\Customer\Market\ProductController as MarketProductController;
@@ -522,10 +524,23 @@ Route::namespace('customer')->group(function(){
 
     Route::namespace('salesProcess')->group(function(){
 
+        //cart
         Route::get('/cart',[CartController::class , 'cart'])->name('customer.salesProcess.cart');
         Route::post('/cart',[CartController::class , 'updateCart'])->name('customer.salesProcess.update-cart');
         Route::post('/add-to-cart/{product:slug}',[CartController::class , 'addToCart'])->name('customer.salesProcess.add-to-cart');
-        Route::post('/remove-from-cart/{cartItem}',[CartController::class , 'removeFromCart'])->name('customer.salesProcess.remove-from-cart');
+        Route::get('/remove-from-cart/{cartItem}',[CartController::class , 'removeFromCart'])->name('customer.salesProcess.remove-from-cart');
+
+
+        //profile-completion
+        Route::get('/profile-completion',[ProfileCompletionController::class , 'profileCompletion'])->name('customer.sales-process.profile-completion');
+        Route::post('/update',[ProfileCompletionController::class , 'update'])->name('customer.sales-process.profile-completion-update');
+
+
+        //address
+
+        Route::get('/address-and-delivery',[AddressController::class , 'addressAndDelivery'])->name('customer.sales-process.address-and-delivery');
+        Route::post('/address',[AddressController::class , 'address'])->name('customer.sales-process.address');
+
     });
 });
 
