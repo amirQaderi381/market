@@ -14,7 +14,7 @@ class CartController extends Controller
     {
         if(Auth::check())
         {
-            $cartItems = CartItem::where('user_id',Auth::user()->id);
+            $cartItems = CartItem::where('user_id',Auth::user()->id)->get();
             $relatedProducts = Product::all();
 
             return view('customer.sales-process.cart',compact('cartItems','relatedProducts'));
@@ -26,8 +26,20 @@ class CartController extends Controller
 
     }
 
-    public function updateCart()
+    public function updateCart(Request $request)
     {
+        $inputs = $request->all();
+        $cartItems = CartItem::Where('user_id',Auth::user()->id)->get();
+        foreach($cartItems as $cartItem)
+        {
+            if(isset($inputs['number'][$cartItem->id]))
+            {
+                $cartItem->update(['number' => $inputs['number'][$cartItem->id]]);
+            }
+        }
+
+        return redirect()->route('customer.sales-process.address-and-delivery');
+
 
     }
 
@@ -91,8 +103,13 @@ class CartController extends Controller
         }
     }
 
-    public function removeFromCart()
+    public function removeFromCart(CartItem $cartItem)
     {
+        if($cartItem->user_id == Auth::user()->id)
+        {
+            $cartItem->delete();
+        }
 
+        return back()->with('swal-success','محصول شما با موفقیت از سبد خرید حذف شد');
     }
 }
