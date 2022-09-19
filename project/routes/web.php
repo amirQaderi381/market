@@ -538,8 +538,12 @@ Route::namespace('customer')->group(function(){
 
         //address
 
+       Route::middleware('profile.completion')->group(function(){
+
         Route::get('/address-and-delivery',[AddressController::class , 'addressAndDelivery'])->name('customer.sales-process.address-and-delivery');
         Route::post('/address',[AddressController::class , 'address'])->name('customer.sales-process.address');
+
+       });
 
     });
 });

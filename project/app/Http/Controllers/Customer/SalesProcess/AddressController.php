@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer\SalesProcess;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Market\CartItem;
 use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
@@ -11,11 +12,10 @@ class AddressController extends Controller
 
     public function addressAndDelivery()
     {
-        //check profile
-        $user = Auth::user();
-        if(empty($user->first_name) || empty($user->last_name) || empty($user->national_code) || empty($user->mobile) || empty($user->email))
+
+        if(empty(CartItem::where('user_id',Auth::user()->id)->count()))
         {
-            return redirect()->route('customer.sales-process.profile-completion');
+            return redirect()->route('customer.salesProcess.cart');
         }
 
 
