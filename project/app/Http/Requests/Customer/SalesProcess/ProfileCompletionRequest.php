@@ -28,8 +28,8 @@ class ProfileCompletionRequest extends FormRequest
 
         'first_name'=>'sometimes|required|min:2|max:120',
         'last_name'=>'sometimes|required|min:2|max:120',
-        'mobile'=>'sometimes|nullable|unique:users,mobile|max:11',
-        'email'=>'sometimes|nullable|email|unique:users,email',
+        'email' => 'sometimes|email|unique:users,email',
+        'mobile' => 'sometimes|min:10|max:13|unique:users,mobile',
         'national_code'=>['sometimes','required','unique:users,national_code',new NationalCode()]
 
         ];
