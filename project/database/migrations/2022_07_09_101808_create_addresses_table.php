@@ -21,9 +21,9 @@ class CreateAddressesTable extends Migration
             $table->text('address');
             $table->integer('no');
             $table->integer('unit');
-            $table->string('recipient_first_name');
-            $table->string('recipient_last_name');
-            $table->string('mobile');
+            $table->string('recipient_first_name')->nullable();
+            $table->string('recipient_last_name')->nullable();
+            $table->string('mobile')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
