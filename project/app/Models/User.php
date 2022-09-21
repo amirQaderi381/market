@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Address;
 use App\Models\User\Role;
 use App\Models\Market\Order;
 use App\Models\Market\Comment;
@@ -89,5 +90,10 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
     }
 }
