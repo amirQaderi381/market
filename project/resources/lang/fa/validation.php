@@ -196,7 +196,12 @@ return [
         'type'                      =>'نوع کوپن',
         'otp'                       =>'کد تایید',
         'url'                       =>'آدرس',
-        'position'                  =>'مکان'
+        'position'                  =>'مکان',
+        'province_id'               =>'استان',
+        'city_id'                   =>'شهر',
+        'no'                        =>'پلاک',
+        'recipient_first_name'      =>'نام گیرنده',
+        'recipient_last_name'      =>'نام خانوادگی گیرنده',
 
 
     ],
