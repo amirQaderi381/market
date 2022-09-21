@@ -542,6 +542,7 @@ Route::namespace('customer')->group(function(){
 
         Route::get('/address-and-delivery',[AddressController::class , 'addressAndDelivery'])->name('customer.sales-process.address-and-delivery');
         Route::post('/address',[AddressController::class , 'address'])->name('customer.sales-process.address');
+        Route::get('/get-cities/{province}',[AddressController::class , 'getCities'])->name('customer.sales-process.get-cities');
 
        });
 
