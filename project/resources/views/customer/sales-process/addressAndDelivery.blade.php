@@ -470,21 +470,46 @@
 
         $('input[type=radio][name=address_id]').click(function() {
 
-            $('input[type=radio][name=delivery_id]').click(function() {
+            let address = $('input[type=radio][name=address_id]').is(':checked');
+            let delivery = $('input[type=radio][name=delivery_id]').is(':checked');
 
-                // show final-price
-                delivery_cost =parseFloat( $(this).data('delivery-cost'));
-                console.log(delivery_cost)
-                $('#selected-delivery-cost').html(toPersianNumber(delivery_cost));
-                let paymentable_price = parseFloat($('#paymentable-price').data('paymentable-price'));
-                $('#paymentable-price').html( toPersianNumber(paymentable_price += delivery_cost));
-
-
+            if(address == true && delivery == true)
+            {
                 //chnage button after selected address and delivery method
-                $('#address-button').addClass('d-none');
-                $('#next-level').removeClass('d-none');
-                $('#next-level').addClass('w-100');
-            });
+                $("#address-button").removeClass("d-block");
+                $("#address-button").addClass("d-none");
+                $("#next-level").removeClass("d-none");
+                $("#next-level").addClass("d-block w-100");
+
+            }
+
+        });
+
+        $('input[type=radio][name=delivery_id]').click(function() {
+
+
+            // show final-price
+            delivery_cost =parseFloat( $(this).data('delivery-cost'));
+            console.log(delivery_cost)
+            $('#selected-delivery-cost').html(toPersianNumber(delivery_cost));
+            let paymentable_price = parseFloat($('#paymentable-price').data('paymentable-price'));
+            $('#paymentable-price').html( toPersianNumber(paymentable_price += delivery_cost));
+
+
+            let address = $('input[type=radio][name=address_id]').is(':checked');
+            let delivery = $('input[type=radio][name=delivery_id]').is(':checked');
+
+
+            if(address == true && delivery == true)
+            {
+                //chnage button after selected address and delivery method
+                $("#address-button").removeClass("d-block");
+                $("#address-button").addClass("d-none");
+                $("#next-level").removeClass("d-none");
+                $("#next-level").addClass("d-block w-100");
+
+            }
+
 
         });
 
