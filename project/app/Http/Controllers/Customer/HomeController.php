@@ -14,7 +14,7 @@ class HomeController extends Controller
 
     public function home()
     {
-        // Auth::loginUsingId(19);
+        Auth::loginUsingId(19);
         $slideShows = Banner::where('position',0)->where('status',1)->get();
         $topBanners = Banner::where('position',1)->where('status',1)->take(2)->get();
         $middleBanners = Banner::where('position',2)->where('status',1)->take(2)->get();

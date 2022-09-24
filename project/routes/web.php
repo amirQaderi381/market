@@ -39,6 +39,7 @@ use App\Http\Controllers\Admin\Ticket\TicketPriorityController;
 use App\Http\Controllers\Auth\Customer\LoginRegisterController;
 use App\Http\Controllers\Customer\SalesProcess\AddressController;
 use App\Http\Controllers\Customer\SalesProcess\ProfileCompletionController;
+use App\Http\Controllers\Customer\SalesProcess\PaymentController as SalesProcessPaymentController;
 use App\Http\Controllers\Admin\Content\CommentController as ContentCommentController;
 use App\Http\Controllers\Admin\Market\DiscountController as MarketDiscountController;
 use App\Http\Controllers\Customer\Market\ProductController as MarketProductController;
@@ -543,8 +544,14 @@ Route::namespace('customer')->group(function(){
         Route::get('/address-and-delivery',[AddressController::class , 'addressAndDelivery'])->name('customer.sales-process.address-and-delivery');
         Route::post('/address',[AddressController::class , 'address'])->name('customer.sales-process.address');
         Route::get('/get-cities/{province}',[AddressController::class , 'getCities'])->name('customer.sales-process.get-cities');
+        Route::put('/update-address/{address}',[AddressController::class , 'updateAddress'])->name('customer.sales-process.update-address');
+        Route::post('/choose-address-and-delivery',[AddressController::class , 'chooseAddressAndDelivery'])->name('customer.sales-process.choose-address-and-delivery');
 
        });
+
+       //payment
+
+       Route::get('/payment',[SalesProcessPaymentController::class , 'payment'])->name('customer.sales-process.payment');
 
     });
 });

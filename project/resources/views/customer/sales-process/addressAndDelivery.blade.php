@@ -24,6 +24,7 @@
                    </section>
 
                    <section class="row mt-4">
+
                     @if ($errors->any())
                      <ul class="alert alert-danger">
                         @foreach ($errors->all() as $error)
@@ -59,8 +60,8 @@
 
                                 @foreach(auth()->user()->addresses as $address)
 
-                                   <input type="radio" name="address" value="1" id="a1"/> <!--checked="checked"-->
-                                   <label for="a1" class="address-wrapper mb-2 p-2">
+                                   <input type="radio" form="myForm" name="address_id" value="{{ $address->id }}" id="{{ $address->id }}"/> <!--checked="checked"-->
+                                   <label for="{{ $address->id }}" class="address-wrapper mb-2 p-2">
                                        <section class="mb-2">
                                            <i class="fa fa-map-marker-alt mx-1"></i>
                                            آدرس : {{ $address->address ?? '-' }}
@@ -73,14 +74,104 @@
                                            <i class="fa fa-mobile-alt mx-1"></i>
                                            موبایل گیرنده :{{ $address->mobile }}
                                        </section>
-                                       <a class="" href="#"><i class="fa fa-edit"></i> ویرایش آدرس</a>
+                                       <a class="" data-bs-toggle="modal" data-bs-target="#edit-address-{{ $address->id }}"><i class="fa fa-edit"></i> ویرایش آدرس</a>
                                        <span class="address-selected">کالاها به این آدرس ارسال می شوند</span>
                                    </label>
+
+                                     <!-- start edit address Modal -->
+                                     <section class="modal fade" id="edit-address-{{ $address->id }}" tabindex="-1" aria-labelledby="add-address-label" aria-hidden="true">
+                                        <section class="modal-dialog">
+                                            <section class="modal-content">
+                                                <section class="modal-header">
+                                                    <h5 class="modal-title" id="add-address-label"><i class="fa fa-plus"></i> ویرایش آدرس</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </section>
+                                                <section class="modal-body">
+                                                    <form class="row" action="{{ route('customer.sales-process.update-address',$address->id) }}" method="post">
+                                                     @csrf
+                                                     @method('put')
+                                                        <section class="col-6 mb-2">
+                                                            <label for="province" class="form-label mb-1">استان</label>
+                                                            <select name="province_id" class="form-select form-select-sm" id="province-{{ $address->id }}">
+                                                                <option selected>استان را انتخاب کنید</option>
+                                                                @foreach($provinces as $province)
+                                                                <option value="{{ $province->id }}" data-url="{{ route('customer.sales-process.get-cities',$province->id) }}" {{ $address->city->province_id == $province->id ? 'selected' : '' }}>{{ $province->name }}</option>
+                                                                @endforeach
+
+                                                            </select>
+                                                        </section>
+
+                                                        <section class="col-6 mb-2">
+                                                            <label for="city" class="form-label mb-1">شهر</label>
+                                                            <select name="city_id" class="form-select form-select-sm" id="city-{{ $address->id }}">
+                                                                <option >شهر را انتخاب کنید</option>
+                                                            </select>
+                                                        </section>
+
+                                                        <section class="col-12 mb-2">
+                                                            <label for="address" class="form-label mb-1">نشانی</label>
+                                                            <textarea name="address" class="form-control form-control-sm" id="address" placeholder="نشانی">{{ $address->address }}</textarea>
+                                                        </section>
+
+                                                        <section class="col-6 mb-2">
+                                                            <label for="postal_code" class="form-label mb-1">کد پستی</label>
+                                                            <input type="text" name="postal_code" value="{{ $address->postal_code }}" class="form-control form-control-sm" id="postal_code" placeholder="کد پستی">
+                                                        </section>
+
+                                                        <section class="col-3 mb-2">
+                                                            <label for="no" class="form-label mb-1">پلاک</label>
+                                                            <input type="text" name="no" value="{{ $address->no }}" class="form-control form-control-sm" id="no" placeholder="پلاک">
+                                                        </section>
+
+                                                        <section class="col-3 mb-2">
+                                                            <label for="unit" class="form-label mb-1">واحد</label>
+                                                            <input type="text" name="unit" value="{{ $address->unit }}" class="form-control form-control-sm" id="unit" placeholder="واحد">
+                                                        </section>
+
+                                                        <section class="border-bottom mt-2 mb-3"></section>
+
+                                                        <section class="col-12 mb-2">
+                                                            <section class="form-check">
+                                                                <input {{ $address->recipient_first_name ? 'checked' : '' }} class="form-check-input" type="checkbox" name="receiver"  id="receiver">
+                                                                <label class="form-check-label" for="receiver">
+                                                                    گیرنده سفارش خودم نیستم (اطلاعات زیر تکمیل شود)
+                                                                </label>
+                                                            </section>
+                                                        </section>
+
+                                                        <section class="col-6 mb-2">
+                                                            <label for="first_name" class="form-label mb-1">نام گیرنده</label>
+                                                            <input type="text" name="recipient_first_name" value="{{ $address->recipient_first_name ? $address->recipient_first_name : ''  }}" class="form-control form-control-sm" id="first_name" placeholder="نام گیرنده">
+                                                        </section>
+
+                                                        <section class="col-6 mb-2">
+                                                            <label for="last_name" class="form-label mb-1">نام خانوادگی گیرنده</label>
+                                                            <input type="text" name="recipient_last_name" value="{{ $address->recipient_last_name ?? $address->recipient_last_name  }}" class="form-control form-control-sm" id="last_name" placeholder="نام خانوادگی گیرنده">
+                                                        </section>
+
+                                                        <section class="col mb-2">
+                                                            <label for="mobile" class="form-label mb-1">شماره موبایل</label>
+                                                            <input type="text" name="mobile" value="{{ $address->mobile ?? $address->mobile  }}" class="form-control form-control-sm" id="mobile" placeholder="شماره موبایل">
+                                                        </section>
+
+                                                        <section class="modal-footer py-1">
+                                                         <button type="submit" class="btn btn-sm btn-primary">ثبت آدرس</button>
+                                                         <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">بستن</button>
+
+                                                     </section>
+                                                    </form>
+                                                </section>
+
+                                            </section>
+                                        </section>
+                                    </section>
+                                    <!-- end add address Modal -->
 
                                 @endforeach
 
                                    <section class="address-add-wrapper">
                                        <button class="address-add-button" type="button" data-bs-toggle="modal" data-bs-target="#add-address" ><i class="fa fa-plus"></i> ایجاد آدرس جدید</button>
+
                                        <!-- start add address Modal -->
                                        <section class="modal fade" id="add-address" tabindex="-1" aria-labelledby="add-address-label" aria-hidden="true">
                                            <section class="modal-dialog">
@@ -168,6 +259,7 @@
                                            </section>
                                        </section>
                                        <!-- end add address Modal -->
+
                                    </section>
 
                                </section>
@@ -196,38 +288,28 @@
                                        </secrion>
                                    </section>
 
-                                   <input type="radio" name="delivery_type" value="1" id="d1"/>
-                                   <label for="d1" class="col-12 col-md-4 delivery-wrapper mb-2 pt-2">
+                                   @foreach($deliveryMethods as $deliveryMethod)
+
+                                   <input type="radio" form="myForm" name="delivery_id" value="{{ $deliveryMethod->id }}" id="delivery-{{ $deliveryMethod->id }}" data-delivery-cost="{{$deliveryMethod->amount }}"/>
+                                   <label for="delivery-{{ $deliveryMethod->id }}" class="col-12 col-md-4 delivery-wrapper mb-2 pt-2">
                                        <section class="mb-2">
                                            <i class="fa fa-shipping-fast mx-1"></i>
-                                           پست پیشتاز
+                                           {{ $deliveryMethod->name }}
                                        </section>
                                        <section class="mb-2">
                                            <i class="fa fa-calendar-alt mx-1"></i>
-                                           تامین کالا از 4 روز کاری آینده
+                                           تامین کالا از {{ $deliveryMethod->delivery_time }} {{ $deliveryMethod->delivery_time_unit }} کاری آینده
                                        </section>
                                    </label>
 
-                                   <input type="radio" name="delivery_type" value="2" id="d2"/>
-                                   <label for="d2" class="col-12 col-md-4 delivery-wrapper mb-2 pt-2">
-                                       <section class="mb-2">
-                                           <i class="fa fa-shipping-fast mx-1"></i>
-                                           تیپاکس
-                                       </section>
-                                       <section class="mb-2">
-                                           <i class="fa fa-calendar-alt mx-1"></i>
-                                           تامین کالا از 2 روز کاری آینده
-                                       </section>
-                                   </label>
-
+                                   @endforeach
 
                                </section>
                            </section>
 
 
-
-
                        </section>
+
                        <section class="col-md-3">
                           @php
                               $totalPrice = 0;
@@ -260,7 +342,7 @@
 
                                <section class="d-flex justify-content-between align-items-center">
                                    <p class="text-muted">هزینه ارسال</p>
-                                   <p class="text-warning">54,000 تومان</p>
+                                   <p class="text-warning"><span id="selected-delivery-cost">۰</span> تومان</p>
                                </section>
 
                                <p class="my-3">
@@ -271,12 +353,16 @@
 
                                <section class="d-flex justify-content-between align-items-center">
                                    <p class="text-muted">مبلغ قابل پرداخت</p>
-                                   <p class="fw-bold">374,000 تومان</p>
+                                   <p class="fw-bold"><span id="paymentable-price" data-paymentable-price="{{ $totalPrice - $totalDiscount }}">{{ priceFormat($totalPrice - $totalDiscount) }}</span> تومان</p>
                                </section>
+
+                               <form action="{{ route('customer.sales-process.choose-address-and-delivery') }}" method="post" id="myForm">
+                                  @csrf
+                              </form>
 
                                <section class="">
                                    <section id="address-button" href="address.html" class="text-warning border border-warning text-center py-2 pointer rounded-2 d-block">آدرس و نحوه ارسال را انتخاب کن</section>
-                                   <a id="next-level" href="payment.html" class="btn btn-danger d-none">ادامه فرآیند خرید</a>
+                                   <button id="next-level" href="payment.html" class="btn btn-danger d-none" onclick="document.getElementById('myForm').submit()">ادامه فرآیند خرید</button>
                                </section>
 
                            </section>
@@ -294,6 +380,7 @@
 
 @section('script')
 <script>
+
     $('#province').change(function(){
 
         let element = $('#province option:selected');
@@ -319,7 +406,101 @@
                 console.log('error')
             }
         })
+    })
+
+
+
+
+    // edit address
+
+    let addresses = {!! auth()->user()->addresses !!};
+
+    // map behave like php foreach
+
+    addresses.map((address)=>{
+
+        let target = `#province-${address.id}`;
+        let selected = `${target} option:selected`;
+
+        ajaxRequest();
+
+
+        $(target).change(function(){
+
+             ajaxRequest();
+
+        });
+
+        function ajaxRequest()
+        {
+            let element = $(selected);
+            let url = element.data('url');
+
+            $.ajax({
+
+               type:'GET',
+               url:url,
+               success:function(response){
+
+                   let cities = response.cities;
+
+                   $(`#city-${address.id}`).empty();
+
+                   cities.map((city)=>{
+                      $(`#city-${address.id}`).append($('<option city == {!! $address->city_id  ? "selected" : "" !!}></option>').val(city.id).text(city.name))
+                   })
+                },
+                error:function()
+                {
+                   console.log('error')
+                }
+           })
+        }
+
+    });
+
+
+</script>
+
+<script>
+    $(document).ready(function(){
+
+        let delivery_price = 0;
+
+
+        $('input[type=radio][name=address_id]').click(function() {
+
+            $('input[type=radio][name=delivery_id]').click(function() {
+
+                // show final-price
+                delivery_cost =parseFloat( $(this).data('delivery-cost'));
+                console.log(delivery_cost)
+                $('#selected-delivery-cost').html(toPersianNumber(delivery_cost));
+                let paymentable_price = parseFloat($('#paymentable-price').data('paymentable-price'));
+                $('#paymentable-price').html( toPersianNumber(paymentable_price += delivery_cost));
+
+
+                //chnage button after selected address and delivery method
+                $('#address-button').addClass('d-none');
+                $('#next-level').removeClass('d-none');
+                $('#next-level').addClass('w-100');
+            });
+
+        });
+
+        function toPersianNumber(number)
+        {
+            const persianDigits= ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+
+            //add comma
+             number = new Intl.NumberFormat().format(number);
+
+            //convert to persian
+            return number.toString().replace(/\d/g, x => persianDigits[x]);
+        }
 
     })
+
 </script>
+
 @endsection
