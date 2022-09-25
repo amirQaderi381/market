@@ -553,6 +553,7 @@ Route::namespace('customer')->group(function(){
        //payment
 
        Route::get('/payment',[SalesProcessPaymentController::class , 'payment'])->name('customer.sales-process.payment');
+       Route::post('/copan-discount',[SalesProcessPaymentController::class , 'copanDiscount'])->name('customer.sales-process.copan-discount');
 
     });
 });
