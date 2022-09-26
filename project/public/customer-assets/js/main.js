@@ -211,7 +211,7 @@ $(document).ready(function() {
             $("#payment-button").removeClass("d-block");
             $("#payment-button").addClass("d-none");
             $("#final-level").removeClass("d-none");
-            $("#final-level").addClass("d-block");
+            $("#final-level").addClass("d-block w-100");
         }
     });
 
