@@ -48,6 +48,10 @@ class DiscountController extends Controller
     public function copanUpdate(CopanRequest $request , Copan $copan)
     {
         $inputs = $request->all();
+        if($inputs['type'] == 0)
+        {
+            $inputs['user_id']=null;
+        }
         $realFormatStartDateTimestamp = substr($request->start_date,0,10);
         $inputs['start_date'] = date('Y-m-d H:i:s',(int)$realFormatStartDateTimestamp);
         $realFormatEndDateTimestamp = substr($request->end_date,0,10);
