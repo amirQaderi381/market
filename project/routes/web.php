@@ -554,6 +554,7 @@ Route::namespace('customer')->group(function(){
 
        Route::get('/payment',[SalesProcessPaymentController::class , 'payment'])->name('customer.sales-process.payment');
        Route::post('/copan-discount',[SalesProcessPaymentController::class , 'copanDiscount'])->name('customer.sales-process.copan-discount');
+       Route::post('/payment-submit',[SalesProcessPaymentController::class , 'paymentSubmit'])->name('customer.sales-process.payment-submit');
 
     });
 });
