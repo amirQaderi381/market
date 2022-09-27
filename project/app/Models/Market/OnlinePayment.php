@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class OnlinePayment extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory;
 
     protected $guarded=['id'];
 

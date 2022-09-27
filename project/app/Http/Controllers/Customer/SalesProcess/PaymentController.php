@@ -9,6 +9,7 @@ use App\Models\Market\Payment;
 use App\Models\Market\CartItem;
 use App\Models\Market\CashPayment;
 use App\Http\Controllers\Controller;
+use App\Http\Services\Payment\PaymentService;
 use App\Models\Market\OnlinePayment;
 use App\Models\Market\OfflinePayment;
 
@@ -82,7 +83,7 @@ class PaymentController extends Controller
 
     }
 
-    public function paymentSubmit(Request $request)
+    public function paymentSubmit(Request $request , PaymentService $paymentService)
     {
         $validate = $request->validate(['payment_type'=>'required']);
 
@@ -138,6 +139,12 @@ class PaymentController extends Controller
             'paymentable_type'=>$targetModel
         ]);
 
+        if($request->payment_type == 1)
+        {
+            $paymentService->zarinpal($order->order_final_amount,$order,$paymented);
+
+        }
+
         $order->update([
 
             'payment_id'=>$payment->id,
@@ -155,5 +162,18 @@ class PaymentController extends Controller
         return redirect()->route('customer.home')->with('toast-success','سفارش شما با موفقیت ثبت شد');
 
 
+    }
+
+    public function paymentCallback(Order $order , OnlinePayment $onlinePayment , PaymentService $paymentService)
+    {
+        $amount = $onlinePayment->amount * 10;
+        $result = $paymentService->zarinpalVerify($amount,$onlinePayment);
+        if($result['success'])
+        {
+            return 'ok';
+        }else
+        {
+            return redirect()->route('customer.home')->with('toast-error','سفارش شما با خطا مواجه شد');
+        }
     }
 }
