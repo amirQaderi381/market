@@ -203,7 +203,7 @@ $(document).ready(function() {
 //start payment
 $(document).ready(function() {
 
-    $('input[name="payment_type"]').change(function(){
+    $('input[name="payment_type"]').click(function(){
 
         var payment_type = $('input[name="payment_type"]').is(":checked");
 

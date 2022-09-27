@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Customer\SalesProcess;
 use App\Models\Market\Copan;
 use App\Models\Market\Order;
 use Illuminate\Http\Request;
+use App\Models\Market\Payment;
 use App\Models\Market\CartItem;
+use App\Models\Market\CashPayment;
 use App\Http\Controllers\Controller;
-
+use App\Models\Market\OnlinePayment;
+use App\Models\Market\OfflinePayment;
 
 class PaymentController extends Controller
 {
@@ -83,23 +86,74 @@ class PaymentController extends Controller
     {
         $validate = $request->validate(['payment_type'=>'required']);
 
+        $user = auth()->user();
+        $cartItems = CartItem::where('user_id',$user->id)->get();
+        $order = Order::where('user_id',$user->id)->where('order_Status',0)->first();
+        $cash_receiver = null;
+
+
         switch ($request->payment_type) {
 
             case 1:
-                dd('online');
-                break;
+
+               $targetModel = OnlinePayment::class;
+               $type = 0;
+               break;
 
             case 2:
-                dd('offline');
-                break;
+
+               $targetModel = OfflinePayment::class;
+               $type = 1;
+               break;
 
             case 3:
-                dd('cash');
+
+                $targetModel = CashPayment::class;
+                $type = 2;
+                $cash_receiver = $request->cash_receiver;
                 break;
 
             default:
                 return back();
                 break;
         }
+
+        $paymented=$targetModel::create([
+
+            'amount'=>$order->order_final_amount,
+            'user_id'=>auth()->user()->id,
+            'pay_date'=>now(),
+            'status'=>1,
+            'cash_receiver'=>$cash_receiver
+        ]);
+
+        $payment=Payment::create([
+
+            'amount'=>$order->order_final_amount,
+            'user_id'=>auth()->user()->id,
+            'pay_date'=>now(),
+            'status'=>1,
+            'type' => $type,
+            'paymentable_id' => $paymented->id,
+            'paymentable_type'=>$targetModel
+        ]);
+
+        $order->update([
+
+            'payment_id'=>$payment->id,
+            'payment_type'=>$type,
+            'payment_status'=>1,
+            'order_status'=>3
+        ]);
+
+
+        foreach($cartItems as $cartItem)
+        {
+            $cartItem->delete();
+        }
+
+        return redirect()->route('customer.home')->with('toast-success','سفارش شما با موفقیت ثبت شد');
+
+
     }
 }

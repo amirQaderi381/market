@@ -23,6 +23,10 @@
 
     @include('customer.layouts.script')
     @yield('script')
+
+    <section class="toast-wrapper flex-row-reverse">
+        @include('customer.alerts.toast.success')
+    </section>
 </body>
 
 </html>

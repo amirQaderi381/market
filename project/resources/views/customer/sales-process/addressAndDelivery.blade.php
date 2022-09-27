@@ -165,7 +165,7 @@
                                             </section>
                                         </section>
                                     </section>
-                                    <!-- end add address Modal -->
+                                    <!-- end edit address Modal -->
 
                                 @endforeach
 

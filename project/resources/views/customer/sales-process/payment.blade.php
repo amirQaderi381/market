@@ -66,6 +66,33 @@
                         </section>
 
 
+                        <!-- start edit address Modal -->
+                        <section class="modal fade" id="cash_payment_modal" tabindex="-1" aria-labelledby="add-address-label" aria-hidden="true">
+                            <section class="modal-dialog">
+                                <section class="modal-content">
+                                    <section class="modal-header">
+                                        <h5 class="modal-title" id="add-address-label"></i>اطلاعات دریافت کننده</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </section>
+                                    <section class="modal-body">
+                                        <section class="input-group input-group-sm">
+                                            <input  type="text" name="cash_receiver" form="paymentForm" class="form-control" placeholder="نام و نام خانوادگی" >
+                                        </section>
+                                    </section>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-sm btn-primary" onclick="document.getElementById('paymentForm').submit()">ثبت</button>
+                                        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">بستن</button>
+                                    </div>
+
+
+                                </section>
+                            </section>
+                        </section>
+                        <!-- end edit address Modal -->
+
+
+
                         <section class="content-wrapper bg-white p-3 rounded-2 mb-4">
 
                             <!-- start vontent header -->
@@ -118,8 +145,8 @@
 
                                     <section class="mb-2"></section>
 
-                                    <input type="radio" name="payment_type" value="3" id="d3"/>
-                                    <label for="d3" class="col-12 col-md-4 payment-wrapper mb-2 pt-2">
+                                    <input type="radio" name="payment_type" value="3"  id="d3"/>
+                                    <label for="d3" class="col-12 col-md-4 payment-wrapper mb-2 pt-2" id="cash_payment" data-bs-toggle="modal" data-bs-target="#cash_payment_modal">
                                         <section class="mb-2">
                                             <i class="fa fa-money-check mx-1"></i>
                                             پرداخت در محل
@@ -174,7 +201,7 @@
                                 <p class="text-warning">54,000 تومان</p>
                             </section>
 
-                            @if($order->commonDiscount)
+                            @if (isset($order->commonDiscount))
 
                                 <section class="border-bottom mb-3"></section>
 
@@ -195,7 +222,7 @@
 
                             @endif
 
-                            @if($order->copan && $order->copan->end_date > now())
+                            @if(isset($order->copan)  && $order->copan->end_date > now())
 
                                 <section class="border-bottom mb-3"></section>
 
@@ -224,7 +251,7 @@
 
                             <section class="d-flex justify-content-between align-items-center">
                                 <p class="text-muted">مبلغ قابل پرداخت</p>
-                                <p class="fw-bold">{{priceFormat( $order->order_final_amount) }} تومان</p>
+                                <p class="fw-bold">{{priceFormat( $order->order_final_amount ?? 0) }} تومان</p>
                             </section>
 
                             <section class="">
@@ -242,4 +269,22 @@
 </section>
 <!-- end cart -->
 
+@endsection
+
+@section('script')
+{{-- <script>
+    $(function(){
+        $('#cash_payment').click(function(event){
+
+            var newDiv = document.createElement('div');
+            newDiv.innerHTML = `
+            <section class="input-group input-group-sm">
+                <input type="text" name="cash_receiver" class="form-control" form="payment_submit" placeholder="نام و نام خانوادگی دریافت کننده" >
+            </section>
+            `;
+            document.getElementsByClassName('content-wrapper')[1].appendChild(newDiv);
+
+        })
+    })
+</script> --}}
 @endsection
