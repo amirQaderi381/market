@@ -23,7 +23,7 @@ class PaymentService
         $zarinpal = new zarinpal($merchentID,$client,$lang,$sandbox,$zarinpalGate,$zarinpalGatePSP);
         $payment = [
             'callback_url' => route('customer.sales-process.payment-call-back',[$order,$onlinePayment]),
-            'amount' =>(int)$amount * 10,
+            'amount' =>(int)$amount*10,
             'description' => 'the order',
         ];
 
@@ -52,7 +52,7 @@ class PaymentService
     public function zarinpalVerify($amount,$onlinePayment)
     {
         $authority = $_GET['Authority'];
-        $data = ['merchent_id' => Config::get('payment.zarinpal_api_key'), 'authority' => $authority, 'amount' => (int)$amount * 10];
+        $data = ['merchant_id' => Config::get('payment.zarinpal_api_key'), 'authority' => $authority, 'amount' => (int)$amount];
         $jsonData = json_encode($data);
         $ch = curl_init('https://api.zarinpal.com/pg/v4/payment/verify.json');
         curl_setopt($ch, CURLOPT_USERAGENT, 'ZarinPal Rest Api v4');

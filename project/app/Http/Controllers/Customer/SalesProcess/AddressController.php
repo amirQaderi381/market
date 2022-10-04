@@ -115,9 +115,11 @@ class AddressController extends Controller
                 $finalPrice = $totalFinalPrice;
             }
 
+            $inputs['common_discount_id'] = $commonDiscount->id;
+
         }else{
 
-            $commonDiscount->id == null;
+           // $commonDiscount->id == null;
             $finalPrice = $totalFinalPrice;
             $commonDiscountPercentageAmount = 0;
         }
@@ -127,7 +129,7 @@ class AddressController extends Controller
         $inputs['user_id'] = $user->id;
         $inputs['order_final_amount'] = $finalPrice;
         $inputs['order_discount_amount'] = $totalFinalDiscountPriceWithNumbers;
-        $inputs['common_discount_id'] = $commonDiscount->id;
+     //   $inputs['common_discount_id'] = $commonDiscount->id;
         $inputs['order_common_discount_amount'] = $commonDiscountPercentageAmount;
         $inputs['order_total_products_discount_amount'] = $inputs['order_discount_amount'] + $inputs['order_common_discount_amount'];
 

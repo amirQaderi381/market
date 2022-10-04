@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 use App\Models\Market\Payment;
 use App\Models\Market\CartItem;
 use App\Models\Market\CashPayment;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Services\Payment\PaymentService;
 use App\Models\Market\OnlinePayment;
 use App\Models\Market\OfflinePayment;
+use App\Http\Services\Payment\PaymentService;
 
 class PaymentController extends Controller
 {
@@ -168,12 +169,43 @@ class PaymentController extends Controller
     {
         $amount = $onlinePayment->amount * 10;
         $result = $paymentService->zarinpalVerify($amount,$onlinePayment);
-        if($result['success'])
-        {
-            return 'ok';
-        }else
-        {
-            return redirect()->route('customer.home')->with('toast-error','سفارش شما با خطا مواجه شد');
-        }
+        $cartItems = CartItem::where('user_id',auth()->user()->id)->get();
+
+            try {
+
+                DB::beginTransaction();
+
+                foreach($cartItems as $cartItem)
+                {
+                  $cartItem->delete();
+                }
+
+                if ($result['success']) {
+
+                  $order->update(
+                    ['order_status' => 3]
+                  );
+
+                  DB::commit();
+
+                  return redirect()->route('customer.home')->with('toast-success', 'پرداخت با موفقیت انجام شد');
+                }
+
+                $order->update(
+                  ['order_status' => 2]
+                );
+
+                DB::commit();
+
+               return redirect()->route('customer.home')->with('toast-error', 'پرداخت ناموفق بود');
+
+
+
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+                DB::rollBack();
+            }
+
+
     }
 }
