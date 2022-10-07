@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Market\OnlinePayment;
 use App\Models\Market\OfflinePayment;
 use App\Http\Services\Payment\PaymentService;
+use App\Models\Market\OrderItem;
 
 class PaymentController extends Controller
 {
@@ -100,18 +101,21 @@ class PaymentController extends Controller
 
                $targetModel = OnlinePayment::class;
                $type = 0;
+               $paymentType=0;
                break;
 
             case 2:
 
                $targetModel = OfflinePayment::class;
                $type = 1;
+               $paymentType=1;
                break;
 
             case 3:
 
                 $targetModel = CashPayment::class;
                 $type = 2;
+                $paymentType=2;
                 $cash_receiver = $request->cash_receiver;
                 break;
 
@@ -120,47 +124,79 @@ class PaymentController extends Controller
                 break;
         }
 
-        $paymented=$targetModel::create([
+        return DB::transaction(function() use($targetModel,$order,$cash_receiver,$type,$request,$paymentType,$paymentService,$cartItems) {
 
-            'amount'=>$order->order_final_amount,
-            'user_id'=>auth()->user()->id,
-            'pay_date'=>now(),
-            'status'=>1,
-            'cash_receiver'=>$cash_receiver
-        ]);
+            $paymented=$targetModel::create([
 
-        $payment=Payment::create([
+                'amount'=>$order->order_final_amount,
+                'user_id'=>auth()->user()->id,
+                'pay_date'=>now(),
+                'status'=>1,
+                'cash_receiver'=>$cash_receiver
+            ]);
 
-            'amount'=>$order->order_final_amount,
-            'user_id'=>auth()->user()->id,
-            'pay_date'=>now(),
-            'status'=>1,
-            'type' => $type,
-            'paymentable_id' => $paymented->id,
-            'paymentable_type'=>$targetModel
-        ]);
+            $payment=Payment::create([
 
-        if($request->payment_type == 1)
-        {
-            $paymentService->zarinpal($order->order_final_amount,$order,$paymented);
+                'amount'=>$order->order_final_amount,
+                'user_id'=>auth()->user()->id,
+                'pay_date'=>now(),
+                'status'=>1,
+                'type' => $type,
+                'paymentable_id' => $paymented->id,
+                'paymentable_type'=>$targetModel
+            ]);
 
-        }
+            if($request->payment_type == 1)
+            {
+                $order->update(
+                    ['payment_type' => $paymentType]
+                );
 
-        $order->update([
+                $paymentService->zarinpal($order->order_final_amount,$order,$paymented);
 
-            'payment_id'=>$payment->id,
-            'payment_type'=>$type,
-            'payment_status'=>1,
-            'order_status'=>3
-        ]);
+            }else
+            {
+                $order->update([
+
+                    'payment_id'=>$payment->id,
+                    'payment_type'=>$paymentType,
+                    'payment_status'=>1,
+                    'order_status'=>3
+                ]);
 
 
-        foreach($cartItems as $cartItem)
-        {
-            $cartItem->delete();
-        }
+                foreach($cartItems as $cartItem)
+                {
+                    OrderItem::create([
 
-        return redirect()->route('customer.home')->with('toast-success','سفارش شما با موفقیت ثبت شد');
+                        'order_id'=>$order->id,
+                        'product_id'=>$cartItem->product_id,
+                        'product'=>$cartItem->product,
+                        'amazing_sale_id'=>$cartItem->product->activeAmazingSales()->id ?? null,
+                        'amazing_sale_object'=>$cartItem->product->activeAmazingSales() ?? null,
+                        'amazing_sale_discount_amount'=>$order->order_discount_amount ?? 0,
+                        'number'=>$cartItem->number,
+                        'final_product_price'=>$cartItem->cartItemProductPrice() - (empty($cartItem->product->activeAmazingSales()) ? 0 :
+                        $cartItem->cartItemProductPrice() * ($cartItem->product->activeAmazingSales()->percentage / 100)),
+
+                        'final_total_price'=>$cartItem->cartItemProductPrice() - (empty($cartItem->product->activeAmazingSales()) ? 0 :
+                        $cartItem->cartItemProductPrice() * ($cartItem->product->activeAmazingSales()->percentage / 100))* ($cartItem->number),
+
+                        'color_id' => $cartItem->color_id,
+                        'guarantee_id' => $cartItem->guarantee_id,
+
+                    ]);
+
+                    $cartItem->delete();
+                }
+
+                return redirect()->route('customer.home')->with('toast-success','سفارش شما با موفقیت ثبت شد');
+            }
+        });
+
+
+
+
 
 
     }
@@ -177,6 +213,26 @@ class PaymentController extends Controller
 
                 foreach($cartItems as $cartItem)
                 {
+                    OrderItem::create([
+
+                        'order_id'=>$order->id,
+                        'product_id'=>$cartItem->product_id,
+                        'product'=>$cartItem->product,
+                        'amazing_sale_id'=>$cartItem->product->activeAmazingSales()->id ?? null,
+                        'amazing_sale_object'=>$cartItem->product->activeAmazingSales() ?? null,
+                        'amazing_sale_discount_amount'=>$order->order_discount_amount ?? 0,
+                        'number'=>$cartItem->number,
+                        'final_product_price'=>$cartItem->cartItemProductPrice() - (empty($cartItem->product->activeAmazingSales()) ? 0 :
+                        $cartItem->cartItemProductPrice() * ($cartItem->product->activeAmazingSales()->percentage / 100)),
+
+                        'final_total_price'=>$cartItem->cartItemProductPrice() - (empty($cartItem->product->activeAmazingSales()) ? 0 :
+                        $cartItem->cartItemProductPrice() * ($cartItem->product->activeAmazingSales()->percentage / 100))* ($cartItem->number),
+
+                        'color_id' => $cartItem->color_id,
+                        'guarantee_id' => $cartItem->guarantee_id,
+
+                    ]);
+
                   $cartItem->delete();
                 }
 
