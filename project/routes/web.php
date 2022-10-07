@@ -44,6 +44,7 @@ use App\Http\Controllers\Admin\Content\CommentController as ContentCommentContro
 use App\Http\Controllers\Admin\Market\DiscountController as MarketDiscountController;
 use App\Http\Controllers\Customer\Market\ProductController as MarketProductController;
 use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
+use App\Http\Controllers\Customer\Profile\OrderController as ProfileOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -556,6 +557,12 @@ Route::namespace('customer')->group(function(){
        Route::post('/copan-discount',[SalesProcessPaymentController::class , 'copanDiscount'])->name('customer.sales-process.copan-discount');
        Route::post('/payment-submit',[SalesProcessPaymentController::class , 'paymentSubmit'])->name('customer.sales-process.payment-submit');
        Route::any('/payment-call-back/{order}/{onlinePayment}',[SalesProcessPaymentController::class , 'paymentCallback'])->name('customer.sales-process.payment-call-back');
+
+    });
+
+    Route::namespace('profile')->group(function(){
+
+        Route::get('/orders',[ProfileOrderController::class , 'orders'])->name('customer.profile.orders');
 
     });
 });
