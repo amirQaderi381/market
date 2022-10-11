@@ -7,6 +7,7 @@ use App\Models\User\Role;
 use App\Models\Market\Order;
 use App\Models\Market\Comment;
 use App\Models\Market\Payment;
+use App\Models\Market\Product;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Ticket\TicketAdmin;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -95,5 +96,10 @@ class User extends Authenticatable
     public function addresses()
     {
         return $this->hasMany(Address::class);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
     }
 }

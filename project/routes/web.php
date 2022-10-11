@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\Market\GuaranteeController;
 use App\Http\Controllers\Admin\Notify\EmailFileController;
 use App\Http\Controllers\Admin\Ticket\TicketAdminController;
 use App\Http\Controllers\Admin\Market\ProductColorController;
+use App\Http\Controllers\Customer\Profile\FavoriteController;
 use App\Http\Controllers\Admin\Market\PropertyValueController;
 use App\Http\Controllers\Customer\SalesProcess\CartController;
 use App\Http\Controllers\Admin\Ticket\TicketCategoryController;
@@ -39,12 +40,12 @@ use App\Http\Controllers\Admin\Ticket\TicketPriorityController;
 use App\Http\Controllers\Auth\Customer\LoginRegisterController;
 use App\Http\Controllers\Customer\SalesProcess\AddressController;
 use App\Http\Controllers\Customer\SalesProcess\ProfileCompletionController;
-use App\Http\Controllers\Customer\SalesProcess\PaymentController as SalesProcessPaymentController;
+use App\Http\Controllers\Customer\Profile\OrderController as ProfileOrderController;
 use App\Http\Controllers\Admin\Content\CommentController as ContentCommentController;
 use App\Http\Controllers\Admin\Market\DiscountController as MarketDiscountController;
 use App\Http\Controllers\Customer\Market\ProductController as MarketProductController;
 use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
-use App\Http\Controllers\Customer\Profile\OrderController as ProfileOrderController;
+use App\Http\Controllers\Customer\SalesProcess\PaymentController as SalesProcessPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -563,7 +564,8 @@ Route::namespace('customer')->group(function(){
     Route::namespace('profile')->group(function(){
 
         Route::get('/orders',[ProfileOrderController::class , 'orders'])->name('customer.profile.orders');
-
+        Route::get('/my-favorite',[FavoriteController::class , 'myFavorite'])->name('customer.profile.my-favorite');
+        Route::get('/my-favorite/delete/{product}',[FavoriteController::class , 'delete'])->name('customer.profile.delete');
     });
 });
 
