@@ -65,7 +65,7 @@ function priceFormat($price)
 
 function validateNationalCode($nationalCode)
 {
-    $nationalCode = trim(' .');
+    $nationalCode = trim($nationalCode, ' .');
     $nationalCode = convertArabicToEnglish($nationalCode);
     $nationalCode = convertPersianToEnglish($nationalCode);
 

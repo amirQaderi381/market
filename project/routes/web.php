@@ -45,6 +45,7 @@ use App\Http\Controllers\Admin\Content\CommentController as ContentCommentContro
 use App\Http\Controllers\Admin\Market\DiscountController as MarketDiscountController;
 use App\Http\Controllers\Customer\Market\ProductController as MarketProductController;
 use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
+use App\Http\Controllers\Customer\Profile\ProfileController;
 use App\Http\Controllers\Customer\SalesProcess\PaymentController as SalesProcessPaymentController;
 
 /*
@@ -566,6 +567,8 @@ Route::namespace('customer')->group(function(){
         Route::get('/orders',[ProfileOrderController::class , 'orders'])->name('customer.profile.orders');
         Route::get('/my-favorite',[FavoriteController::class , 'myFavorite'])->name('customer.profile.my-favorite');
         Route::get('/my-favorite/delete/{product}',[FavoriteController::class , 'delete'])->name('customer.profile.delete');
+        Route::get('/profile',[ProfileController::class , 'profile'])->name('customer.profile.profile');
+        Route::put('/profile/update',[ProfileController::class , 'update'])->name('customer.profile.profile.update');
     });
 });
 
