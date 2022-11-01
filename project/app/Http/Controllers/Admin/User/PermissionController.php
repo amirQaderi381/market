@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\User\PermissionRequest;
+use App\Models\User\Permission;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
@@ -14,7 +16,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        $permissions = Permission::all();
+        return view('admin.user.permission.index',compact('permissions'));
     }
 
     /**
@@ -24,7 +27,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.permission.create');
     }
 
     /**
@@ -33,9 +36,11 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PermissionRequest $request)
     {
-        //
+        $inputs = $request->all();
+        Permission::create($inputs);
+        return redirect()->route('admin.user.permission.index')->with('swal-success', 'دسترسی جدید با موفقیت ثبت شد');
     }
 
     /**
@@ -55,9 +60,9 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Permission $permission)
     {
-        //
+        return view('admin.user.permission.edit',compact('permission'));
     }
 
     /**
@@ -67,9 +72,11 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PermissionRequest $request, Permission $permission)
     {
-        //
+        $inputs = $request->all();
+        $permission->update($inputs);
+        return redirect()->route('admin.user.permission.index')->with('swal-success', 'دسترسی  شما با موفقیت ویرایش شد');
     }
 
     /**
@@ -78,8 +85,9 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+        return redirect()->route('admin.user.permission.index')->with('swal-success', ' دسترسی  شما با موفقیت حذف شد');
     }
 }

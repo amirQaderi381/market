@@ -10,6 +10,7 @@ use App\Models\Market\Payment;
 use App\Models\Market\Product;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Ticket\TicketAdmin;
+use App\Models\User\Permission;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -76,6 +77,11 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
     }
 
     public function comments()

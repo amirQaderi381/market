@@ -45,6 +45,7 @@ use App\Http\Controllers\Admin\Content\CommentController as ContentCommentContro
 use App\Http\Controllers\Admin\Market\DiscountController as MarketDiscountController;
 use App\Http\Controllers\Customer\Market\ProductController as MarketProductController;
 use App\Http\Controllers\Admin\Content\CategoryController as ContentCategoryController;
+use App\Http\Controllers\Customer\Profile\AddressController as ProfileAddressController;
 use App\Http\Controllers\Customer\Profile\ProfileController;
 use App\Http\Controllers\Customer\SalesProcess\PaymentController as SalesProcessPaymentController;
 
@@ -395,9 +396,9 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/', [PermissionController::class, 'index'])->name('admin.user.permission.index');
             Route::get('/create', [PermissionController::class, 'create'])->name('admin.user.permission.create');
             Route::post('/store', [PermissionController::class, 'store'])->name('admin.user.permission.store');
-            Route::get('/edit/{id}', [PermissionController::class, 'edit'])->name('admin.user.permission.edit');
-            Route::put('/update/{id}', [PermissionController::class, 'update'])->name('admin.user.permission.update');
-            Route::delete('/destroy/{id}', [PermissionController::class, 'destroy'])->name('admin.user.permission.destroy');
+            Route::get('/edit/{permission}', [PermissionController::class, 'edit'])->name('admin.user.permission.edit');
+            Route::put('/update/{permission}', [PermissionController::class, 'update'])->name('admin.user.permission.update');
+            Route::delete('/destroy/{permission}', [PermissionController::class, 'destroy'])->name('admin.user.permission.destroy');
         });
     });
 
@@ -569,6 +570,7 @@ Route::namespace('customer')->group(function(){
         Route::get('/my-favorite/delete/{product}',[FavoriteController::class , 'delete'])->name('customer.profile.delete');
         Route::get('/profile',[ProfileController::class , 'profile'])->name('customer.profile.profile');
         Route::put('/profile/update',[ProfileController::class , 'update'])->name('customer.profile.profile.update');
+        Route::get('/my-addresses',[ProfileAddressController::class , 'index'])->name('customer.profile.my-addresses');
     });
 });
 

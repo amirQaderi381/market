@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Content\PostRequest;
 use App\Http\Services\Image\ImageService;
 use App\Models\Content\PostCategory;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -100,6 +101,29 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post , ImageService $imageService)
     {
+        // if(Gate::denies('update-post',$post))
+        // {
+        //     abort(403);
+        // }
+
+        // $response=Gate::inspect('update-post',$post);
+
+        // if(!$response->allowed())
+        // {
+        //    abort(403,$response->message());
+
+        // }
+
+        // Gate::authorize('update-post',$post);
+
+
+        // if($request->user()->cannot('update-post',$post))
+        // {
+        //     abort(403);
+        // }
+
+        // $this->authorize('update-post',$post);
+
         $inputs = $request->all();
         if($request->hasFile('image'))
         {
