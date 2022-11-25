@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Content\PostCategoryRequest;
 use App\Http\Services\Image\ImageService;
 use App\Models\Content\PostCategory;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -18,8 +16,16 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $postCategories = PostCategory::orderBy('created_at', 'desc')->simplePaginate(15);
-        return view('admin.content.category.index', compact('postCategories'));
+        $user = auth()->user();
+        if($user->can('سوپر ادمین'))
+        {
+            $postCategories = PostCategory::orderBy('created_at', 'desc')->simplePaginate(15);
+            return view('admin.content.category.index', compact('postCategories'));
+
+        }else{
+            abort(403);
+        }
+
     }
 
     /**
