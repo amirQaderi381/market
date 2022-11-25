@@ -40,6 +40,7 @@
                                 <th>نام</th>
                                 <th>نام خانوادگی</th>
                                 <th>نقش</th>
+                                <th>سطوح دسترسی</th>
                                 <th>فعال سازی</th>
                                 <th>وضعیت</th>
                                 <th class="max-width-16-rem text-center"><i class="fa fa-cogs"></i> تنظیمات</th>
@@ -53,13 +54,35 @@
                                     <td>{{ $admin->mobile }} </td>
                                     <td>{{ $admin->first_name }} </td>
                                     <td>{{ $admin->last_name }} </td>
-                                    <td>سوپر ادمین </td>
+                                    <td>
+                                        @forelse ($admin->roles as $role)
+                                            <div>
+                                                {{ $role->name }}
+                                            </div>
+                                        @empty
+                                            <div class="text-danger">
+                                                نقشی یافت نشد
+                                            </div>
+                                        @endforelse
+                                    </td>
+
+                                    <td>
+                                        @forelse ($admin->permissions as $permission)
+                                            <div>
+                                                {{ $permission->name }}
+                                            </div>
+                                        @empty
+                                            <div class="text-danger">
+                                                سطوح دسترسی یافت نشد
+                                            </div>
+                                        @endforelse
+                                    </td>
                                     <td>
                                         <label>
                                             <input id="{{ $admin->id }}-activation"
                                                 onchange="changeActivation({{ $admin->id }})"
                                                 data-url="{{ route('admin.user.admin-user.activation', $admin->id) }}"
-                                                type="checkbox" @if ($admin->status === 1) checked @endif>
+                                                type="checkbox" @if ($admin->activation === 1) checked @endif>
                                         </label>
                                     </td>
                                     <td>
@@ -70,17 +93,24 @@
                                         </label>
                                     </td>
                                     <td class="width-22-rem text-left">
-                                        <a href="#" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> نقش</a>
-                                        <a href="{{ route('admin.user.admin-user.edit',$admin->id) }}" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-edit"></i>  ویرایش
+                                        <a href="{{ route('admin.user.admin-user.permissions', $admin->id) }}"
+                                            class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> سطوح دسترسی
                                         </a>
-                                       <form action="{{ route('admin.user.admin-user.destroy',$admin->id) }}" method="post" class="d-inline">
-                                        @csrf
-                                        {{ method_field('delete') }}
-                                        <button class="btn btn-danger btn-sm delete" type="submit">
-                                            <i class="fa fa-trash-alt"></i>حذف
-                                        </button>
-                                       </form>
+                                        <a href="{{ route('admin.user.admin-user.roles', $admin->id) }}"
+                                            class="btn btn-info btn-sm"><i class="fa fa-edit"></i> نقش
+                                        </a>
+                                        <a href="{{ route('admin.user.admin-user.edit', $admin->id) }}"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fa fa-edit"></i> ویرایش
+                                        </a>
+                                        <form action="{{ route('admin.user.admin-user.destroy', $admin->id) }}"
+                                            method="post" class="d-inline">
+                                            @csrf
+                                            {{ method_field('delete') }}
+                                            <button class="btn btn-danger btn-sm delete" type="submit">
+                                                <i class="fa fa-trash-alt"></i>حذف
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
