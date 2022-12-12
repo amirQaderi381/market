@@ -9,6 +9,11 @@ use App\Models\Content\PostCategory;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('role:super-admin')->only(['edit']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,15 +21,15 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        if($user->can('سوپر ادمین'))
-        {
+        // $user = auth()->user();
+        // if($user->can('سوپر ادمین'))
+        // {
             $postCategories = PostCategory::orderBy('created_at', 'desc')->simplePaginate(15);
             return view('admin.content.category.index', compact('postCategories'));
 
-        }else{
-            abort(403);
-        }
+        // }else{
+        //     abort(403);
+        // }
 
     }
 
