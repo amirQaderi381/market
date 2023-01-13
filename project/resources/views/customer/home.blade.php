@@ -59,7 +59,7 @@
                                 <section class="item">
                                     <section class="lazyload-item-wrapper">
                                         <section class="product">
-                                            {{-- <section class="product-add-to-cart"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به سبد خرید"><i class="fa fa-cart-plus"></i></a></section> --}}
+                                            <section class="product-add-to-cart"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به سبد خرید"><i class="fa fa-cart-plus"></i></a></section>
                                             @guest
 
                                             <section class="product-add-to-favorite">
@@ -97,11 +97,15 @@
                                                 <section class="product-colors"></section>
                                                 <section class="product-name"><h3>{{Str::limit($mostVisitedProduct->name, 27, '...') }}</h3></section>
                                                 <section class="product-price-wrapper">
-                                                    {{-- <section class="product-discount">
-                                                        <span class="product-old-price">6,895,000 </span>
-                                                        <span class="product-discount-amount">10%</span>
-                                                    </section> --}}
-                                                    <section class="product-price">{{ priceFormat($mostVisitedProduct->price) }} تومان</section>
+                                                 
+                                                    @if($commonDiscount)
+                                                    <section class="product-discount">
+                                                        <span class="product-old-price">{{priceFormat($mostVisitedProduct->price)}} </span>
+                                                        <span class="product-discount-amount">{{$commonDiscount->percentage}}%</span>
+                                                    </section>
+                                                    @endif
+
+                                                    <section class="product-price">{{ priceFormat($mostVisitedProduct->price - ($mostVisitedProduct->price * ($commonDiscount->percentage / 100) )) }} تومان</section>
                                                 </section>
                                                 <section class="product-colors">
                                                     @foreach($mostVisitedProduct->colors as $color)
@@ -285,6 +289,7 @@
                         </section>
                     </section>
                 </section>
+
             </section>
         </section>
     </section>

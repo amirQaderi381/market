@@ -5,6 +5,7 @@ namespace App\Models\Market;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Market\Product;
 
 class CommonDiscount extends Model
 {
@@ -13,6 +14,5 @@ class CommonDiscount extends Model
     protected $table = 'common_discount';
 
     protected $fillable=['title','percentage','discount_ceiling','minimal_order_amount','status','start_date','end_date'];
-
 
 }

@@ -9,6 +9,7 @@ use App\Models\Market\Gallery;
 use Illuminate\Support\Carbon;
 use App\Models\Market\Guarantee;
 use App\Models\Market\AmazingSale;
+use App\Models\Market\CommonDiscount;
 use App\Models\Market\ProductMeta;
 use App\Models\Market\ProductColor;
 use App\Models\Market\ProductCategory;

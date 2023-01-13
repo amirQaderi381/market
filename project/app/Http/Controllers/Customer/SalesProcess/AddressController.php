@@ -32,7 +32,7 @@ class AddressController extends Controller
         }
 
 
-        return view('customer.sales-process.addressAndDelivery',compact('cartItems','provinces','deliveryMethods'));
+        return view('customer.sales-process.address-and-delivery',compact('cartItems','provinces','deliveryMethods'));
 
     }
 
