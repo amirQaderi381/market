@@ -103,9 +103,10 @@
                                                         <span class="product-old-price">{{priceFormat($mostVisitedProduct->price)}} </span>
                                                         <span class="product-discount-amount">{{$commonDiscount->percentage}}%</span>
                                                     </section>
+                                                    <section class="product-price">{{ priceFormat($mostVisitedProduct->price - ($mostVisitedProduct->price * ($commonDiscount->percentage / 100) )) }} تومان</section>
                                                     @endif
 
-                                                    <section class="product-price">{{ priceFormat($mostVisitedProduct->price - ($mostVisitedProduct->price * ($commonDiscount->percentage / 100) )) }} تومان</section>
+                                                    
                                                 </section>
                                                 <section class="product-colors">
                                                     @foreach($mostVisitedProduct->colors as $color)
